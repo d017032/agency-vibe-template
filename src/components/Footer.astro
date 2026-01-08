@@ -1,0 +1,27 @@
+---
+import data from '../data/business.json';
+const year = new Date().getFullYear();
+---
+
+<footer class="py-12 px-6 border-t border-[var(--border)] bg-[var(--bg-color)]">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="flex flex-col items-center md:items-start">
+      <span class="text-xl font-bold text-[var(--text-primary)] tracking-tight">
+        {data.brand.name}
+      </span>
+      <p class="text-sm text-[var(--text-secondary)] mt-2">
+        Built with Astro & AI Precision.
+      </p>
+    </div>
+
+    <div class="flex gap-8 text-sm font-medium text-[var(--text-secondary)]">
+      <a href="/" class="hover:text-[var(--accent)] transition-colors">Home</a>
+      <a href="/about" class="hover:text-[var(--accent)] transition-colors">About</a>
+      <a href="/contact" class="hover:text-[var(--accent)] transition-colors">Contact</a>
+    </div>
+
+    <div class="text-sm text-[var(--text-secondary)]">
+      © {year} All rights reserved.
+    </div>
+  </div>
+</footer>

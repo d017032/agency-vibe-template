@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Update your existing vibe-system.css */
+
+[data-vibe="dark-neo"] {
+  --bg-color: #0a0a0a;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --accent: #6366f1;
+  --border: #27272a;
+  --radius: 0.75rem;
+  /* Modern Font */
+  --font-main: 'Inter', sans-serif;
+}
+
+[data-vibe="clean-light"] {
+  --bg-color: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --accent: #0ea5e9;
+  --border: #e5e7eb;
+  --radius: 0.375rem;
+  /* Elegant Font */
+  --font-main: 'Playfair Display', serif;
+}
+
+[data-vibe="studio-mono"] {
+  --bg-color: #f4f4f5; /* Soft off-white */
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+  --accent: #f97316; /* Bold Orange */
+  --border: #09090b; /* Thick black borders */
+  --radius: 0px;    /* Sharp industrial corners */
+  --font-main: 'JetBrains Mono', monospace;
+}
+
+/* Add a specific tweak for this vibe's buttons */
+[data-vibe="studio-mono"] .bg-\[var\(--accent\)\] {
+  box-shadow: 4px 4px 0px 0px #09090b;
+  border: 2px solid #09090b;
+}
+
+[data-vibe="studio-mono"] .bg-\[var\(--accent\)\]:hover {
+  box-shadow: 2px 2px 0px 0px #09090b;
+  transform: translate(2px, 2px);
+}
+
+[data-vibe="zen-nature"] {
+  --bg-color: #fdfbf7;      /* Warm Cream */
+  --text-primary: #2d3436;  /* Charcoal Green */
+  --text-secondary: #636e72;
+  --accent: #556b2f;        /* Olive/Sage Green */
+  --border: #e0eadd;        /* Soft leaf-green border */
+  --radius: 2rem;           /* Very rounded, pill-like shapes */
+  --font-main: 'Outfit', sans-serif;
+}
+
+/* Specific button tweak for Zen Vibe */
+[data-vibe="zen-nature"] .bg-\[var\(--accent\)\] {
+  box-shadow: 0 10px 15px -3px rgba(85, 107, 47, 0.2);
+  letter-spacing: 0.02em;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-main); /* Apply the variable globally */
+}
+
+/* Optional: Make headings extra bold for the Neo vibe */
+[data-vibe="dark-neo"] h1, [data-vibe="dark-neo"] h2 {
+  letter-spacing: -0.05em;
+}

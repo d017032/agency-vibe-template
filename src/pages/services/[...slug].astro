@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+
+// 1. Generate a new path for every service file
+export async function getStaticPaths() {
+  const serviceEntries = await getCollection('services');
+  return serviceEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+// 2. Get the data for the specific service being viewed
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title}>
+  <main class="py-20 px-6 max-w-4xl mx-auto">
+    <header class="mb-12 border-b border-[var(--border)] pb-8">
+      <h1 class="text-5xl font-extrabold mb-4 text-[var(--text-primary)]">
+        {entry.data.title}
+      </h1>
+      <p class="text-xl text-[var(--text-secondary)] italic">
+        {entry.data.description}
+      </p>
+    </header>
+
+    <article class="prose prose-invert prose-indigo max-w-none">
+      <Content />
+    </article>
+    
+    <div class="mt-16">
+        <a href="/contact" class="bg-[var(--accent)] text-white px-8 py-4 rounded-[var(--radius)] font-bold">
+            Book this Service
+        </a>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style is:global>
+  /* Quick fix to make Markdown text look good without the Typography plugin */
+  article h1 { @apply text-3xl font-bold mt-8 mb-4 text-[var(--text-primary)]; }
+  article h2 { @apply text-2xl font-bold mt-8 mb-4 text-[var(--text-primary)]; }
+  article p { @apply text-lg text-[var(--text-secondary)] mb-4 leading-relaxed; }
+  article ul { @apply list-disc ml-6 mb-4 text-[var(--text-secondary)]; }
+  article li { @apply mb-2; }
+</style>
