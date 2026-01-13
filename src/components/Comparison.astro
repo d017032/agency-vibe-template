@@ -1,0 +1,55 @@
+---
+const { id, comparison, brand } = Astro.props;
+---
+
+{comparison && comparison.features && (
+  <section id={id} class="py-24 px-6 bg-[var(--bg-color)] scroll-mt-24">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">
+          // THE_DIFFERENCE
+        </span>
+        <h2 class="text-4xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
+          Why {brand.name}
+        </h2>
+      </div>
+
+      <div class="overflow-hidden border border-[var(--border)] rounded-[var(--radius)]">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-[var(--text-primary)] text-[var(--bg-color)]">
+              <th class="p-6 text-[10px] uppercase tracking-widest font-bold">Feature</th>
+              <th class="p-6 text-[10px] uppercase tracking-widest font-bold bg-[var(--accent)] text-[var(--bg-color)]">
+                {brand.name}
+              </th>
+              <th class="p-6 text-[10px] uppercase tracking-widest font-bold opacity-70">Standard Shops</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--border)]">
+            {comparison.features.map((item) => (
+              <tr class="hover:bg-[var(--text-secondary)] hover:bg-opacity-5 transition-colors">
+                <td class="p-6 text-sm font-bold uppercase tracking-tighter text-[var(--text-primary)]">
+                  {item.label}
+                </td>
+                <td class="p-6 text-sm text-[var(--text-primary)] font-medium bg-[var(--accent)]/5">
+                  <span class="flex items-center gap-2">
+                    <span class="text-[var(--accent)] font-bold">✓</span> {item.us}
+                  </span>
+                </td>
+                <td class="p-6 text-sm text-[var(--text-secondary)] opacity-60">
+                  {item.them}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      
+      {comparison.footer_note && (
+        <p class="mt-8 text-center text-[10px] uppercase tracking-[0.2em] text-[var(--text-secondary)] opacity-50">
+          * {comparison.footer_note}
+        </p>
+      )}
+    </div>
+  </section>
+)}

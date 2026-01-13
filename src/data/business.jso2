@@ -1,0 +1,77 @@
+{
+  "settings": {
+    "vibe": "maestro-classic",
+    "primary_color": "#C5A059",
+    "cta_text": "Check Availability",
+    "cta_link": "/contact",
+    "menu": [
+      { "label": "The Atelier", "path": "/" },
+      { "label": "The Experience", "path": "/about" },
+      { "label": "Inquire", "path": "/contact" }
+    ]
+  },
+  "brand": {
+    "name": "AstroIsland Fine Art",
+    "logo_text": "AstroIsland",
+    "objection_handle": "Featured in Vogue | 48-Hour Preview Guarantee"
+  },
+  "hero": {
+    "headline": "Documenting the Quiet Art of Human Connection",
+    "subtext": "Fine-art wedding photography for couples who value presence over posing. Timeless imagery delivered with modern speed.",
+    "image": {
+      "src": "hero-main.jpg", 
+      "alt": "Elegant black and white wedding portrait"
+    }
+  },
+  "features": [
+    {
+      "title": "Natural Aesthetic",
+      "description": "True-to-life editing that preserves the genuine atmosphere of your celebration.",
+      "icon_slug": "eye"
+    },
+    {
+      "title": "The 48-Hour Preview",
+      "description": "Relive the magic while it's still fresh. Your curated preview arrives before your honeymoon.",
+      "icon_slug": "zap"
+    },
+    {
+      "title": "Unobtrusive Presence",
+      "description": "Capturing the story from the inside out, without the 'movie set' distractions.",
+      "icon_slug": "heart"
+    }
+  ],
+  "processSteps": [
+    { "title": "Curation Call", "description": "We discuss your vision and the 'unmissable' moments unique to your story." },
+    { "title": "The Celebration", "description": "A seamless, stress-free experience where your only job is to be fully present." },
+    { "title": "The Archive", "description": "A bespoke digital collection delivered via a private, high-speed gallery." }
+  ],
+  "testimonials": [
+    {
+      "quote": "Choosing AstroIsland was the best decision we made. The photos are art, but the experience was even better.",
+      "author": "Julianne Moore",
+      "role": "Bride, Oct 2025"
+    },
+    {
+      "quote": "The 48-hour preview blew us away. We were looking at our highlights while still on our flight to Italy.",
+      "author": "David Chen",
+      "role": "Groom, Sept 2025"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Do you travel for destination weddings?",
+      "answer": "Absolutely. We specialize in destination celebrations and handle all travel logistics internally."
+    }
+  ],
+  "contact": {
+  "phone": "555.987.6543",
+  "location": "Paris / London / New York",
+  "email": "studio@astroisland.com"
+},
+"gallery": [
+  { "src": "/images/shot-1.jpg", "alt": "Bridal Portrait" },
+  { "src": "/images/shot-2.jpg", "alt": "Sunset Ceremony" },
+  { "src": "/images/shot-3.jpg", "alt": "The Rings" },
+  { "src": "/images/shot-4.jpg", "alt": "Reception Dance" }
+]
+}

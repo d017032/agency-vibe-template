@@ -1,9 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import Gallery from '../components/Gallery.astro'; // Import the new component
 import Features from '../components/Features.astro';
 import Process from '../components/Process.astro'; // NEW
 import Testimonials from '../components/Testimonials.astro';
+import Comparison from '../components/Comparison.astro';
+import BentoAbout from '../components/BentoAbout.astro';
+import Investment from '../components/Investment.astro';
+import FAQ from '../components/FAQ.astro';
+import Contact from '../components/Contact.astro';
 import data from '../data/business.json';
 ---
 
@@ -13,10 +19,27 @@ import data from '../data/business.json';
     hero={data.hero} 
     settings={data.settings} 
   />
-  
-  <Features features={data.features} />
+  <BentoAbout brand={data.brand} hero={data.hero} /> 
+  <Comparison comparison={data.comparison} brand={data.brand} />
+  <Features id="features" features={data.features} />
 
-  <Process steps={data.processSteps} />
-  
-  <Testimonials testimonials={data.testimonials} />
+  <Process id="process" steps={data.processSteps} />
+  <Gallery gallery={data.gallery} />
+  <Investment investment={data.investment} />
+  <Testimonials 
+      id="testimonials" 
+      testimonials={data.testimonials} 
+      headline="Loved by the Local Pack" 
+    />
+    <FAQ 
+       id="faqs" 
+       faqs={data.faqs} 
+        headline="The Details" 
+     />
+     <Contact 
+       id="contact" 
+       brand={data.brand} 
+       contact={data.contact} 
+       settings={data.settings} 
+      />
 </Layout>

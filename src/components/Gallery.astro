@@ -1,0 +1,31 @@
+---
+// We pass the gallery data in as a prop
+const { gallery } = Astro.props;
+---
+
+{gallery && gallery.length > 0 && (
+  <section class="py-24 px-6 bg-[var(--bg-color)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-12">
+        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-2 block">// VISUAL_ARCHIVE</span>
+        <h2 class="text-4xl font-black uppercase tracking-tighter text-[var(--text-primary)]">Selected Works</h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[250px] md:auto-rows-[350px]">
+        {gallery.map((img, index) => (
+          <div class={`overflow-hidden rounded-[var(--radius)] group border border-[var(--border)]
+            ${index === 0 ? 'col-span-2 row-span-2' : ''} 
+            ${index === 3 ? 'col-span-2 row-span-1' : ''}`}>
+            
+            <img 
+              src={img.src} 
+              alt={img.alt || "Portfolio Image"} 
+              class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

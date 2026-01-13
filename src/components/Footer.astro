@@ -1,20 +1,19 @@
 ---
 import data from '../data/business.json';
-const year = new Date().getFullYear();
 const { brand, settings, contact } = data;
+const year = new Date().getFullYear();
 ---
 
 <footer class="py-16 px-6 border-t border-[var(--border)] bg-[var(--bg-color)]">
   <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start text-center md:text-left">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
       
       <div class="flex flex-col gap-3">
         <span class="text-xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
           {brand.name}
         </span>
-        <p class="text-xs uppercase tracking-widest text-[var(--text-secondary)] opacity-70 leading-relaxed">
-          High-Performance Digital Architecture.<br/> 
-          Built with AI Precision.
+        <p class="text-xs uppercase tracking-widest text-[var(--text-secondary)] opacity-70">
+          {brand.objection_handle}
         </p>
       </div>
 
@@ -32,8 +31,16 @@ const { brand, settings, contact } = data;
       <div class="flex flex-col gap-4">
          <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--accent)]">Connect</span>
          <div class="text-sm text-[var(--text-secondary)] flex flex-col gap-2 uppercase tracking-tighter">
-            <span>{contact?.location || "Global Operations"}</span>
-            <span class="font-bold text-[var(--text-primary)]">{contact?.phone}</span>
+            <span>{contact.location}</span>
+            <a href={`tel:${contact.phone}`} class="font-bold text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
+              {contact.phone}
+            </a>
+            
+            {contact.email && (
+              <a href={`mailto:${contact.email}`} class="lowercase tracking-normal hover:text-[var(--accent)] transition-colors opacity-80">
+                {contact.email}
+              </a>
+            )}
          </div>
       </div>
 
@@ -41,11 +48,10 @@ const { brand, settings, contact } = data;
 
     <div class="mt-16 pt-8 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="text-[10px] uppercase tracking-[0.2em] text-[var(--text-secondary)] opacity-50">
-        © {year} {brand.name}. All rights reserved.
+        © {year} {brand.name}.
       </div>
-      
-      <div class="text-[9px] font-mono uppercase tracking-[0.2em] text-[var(--accent)]">
-        // System Status: Optimized
+      <div class="text-[9px] font-mono uppercase tracking-[0.5em] text-[var(--accent)]">
+        // Identity Engine v1.0
       </div>
     </div>
   </div>

@@ -1,0 +1,1664 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+public/
+  favicon.svg
+src/
+  assets/
+    client/
+      hero-main.jpg
+  components/
+    BentoAbout.astro
+    Comparison.astro
+    Contact.astro
+    FAQ.astro
+    FeatureImage.astro
+    Features.astro
+    Fonts.astro
+    Footer.astro
+    Gallery.astro
+    Hero.astro
+    Investment.astro
+    Navbar.astro
+    Process.astro
+    Testimonials.astro
+  content/
+    services/
+      web-design.md
+    config.ts
+  data/
+    business.jso1
+    business.jso2
+    business.json
+  layouts/
+    Layout.astro
+  pages/
+    services/
+      [...slug].astro
+    index.astro
+    success.astro
+  styles/
+    vibe-system.css
+  PROCESS.md
+.gitignore
+astro.config.mjs
+Contact.astro
+netlify.toml
+package.json
+PROCESS.md
+README.md
+tailwind.config.mjs
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="src/components/BentoAbout.astro">
+---
+const { brand, hero } = Astro.props;
+---
+
+<section id="about" class="py-24 px-6 bg-[var(--bg-color)]">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[200px]">
+      
+      <div class="md:col-span-8 md:row-span-2 p-8 md:p-12 bg-[var(--border)] bg-opacity-30 rounded-[var(--radius)] flex flex-col justify-end relative overflow-hidden group">
+        <div class="relative z-10">
+            <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">// THE_ORIGIN</span>
+            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter text-[var(--text-primary)] mb-6 leading-none">
+                {brand.name}
+            </h2>
+            <p class="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed max-w-xl">
+                {hero.subtext}
+            </p>
+        </div>
+        <span class="absolute -bottom-10 -right-10 text-[15rem] font-black opacity-5 select-none pointer-events-none text-[var(--text-primary)]">
+            {brand.name.charAt(0)}
+        </span>
+      </div>
+
+      <div class="md:col-span-4 md:row-span-1 p-8 bg-[var(--accent)] text-[var(--bg-color)] rounded-[var(--radius)] flex flex-col justify-center text-center">
+        <span class="text-[10px] uppercase tracking-widest font-bold opacity-80 mb-2">Our Promise</span>
+        <p class="text-xl font-black uppercase tracking-tighter leading-tight">
+            {brand.objection_handle}
+        </p>
+      </div>
+
+      <div class="md:col-span-4 md:row-span-2 bg-[var(--border)] rounded-[var(--radius)] overflow-hidden relative">
+        <img 
+            src={hero.image.src} 
+            alt={hero.image.alt} 
+            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+        />
+        <div class="absolute bottom-4 left-4">
+             <span class="bg-[var(--bg-color)] text-[var(--text-primary)] px-3 py-1 text-[8px] font-bold uppercase tracking-widest rounded-full">Authenticity Verified</span>
+        </div>
+      </div>
+
+      <div class="md:col-span-4 md:row-span-1 border border-[var(--border)] rounded-[var(--radius)] flex items-center justify-center p-8">
+        <div class="text-center">
+            <p class="text-4xl font-black text-[var(--text-primary)] tracking-tighter mb-1">2026</p>
+            <p class="text-[10px] uppercase tracking-widest text-[var(--text-secondary)] font-bold">Standard Set</p>
+        </div>
+      </div>
+
+       <div class="md:col-span-4 md:row-span-1 border border-[var(--border)] rounded-[var(--radius)] flex flex-col justify-center p-8 bg-[var(--text-primary)] text-[var(--bg-color)]">
+         <span class="text-[10px] uppercase tracking-widest font-bold opacity-50 mb-2">Availability</span>
+         <p class="text-sm font-bold uppercase tracking-tight italic">Currently accepting commissions for Q3/Q4.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+</file>
+
+<file path="src/components/Comparison.astro">
+---
+const { id, comparison, brand } = Astro.props;
+---
+
+{comparison && comparison.features && (
+  <section id={id} class="py-24 px-6 bg-[var(--bg-color)] scroll-mt-24">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">
+          // THE_DIFFERENCE
+        </span>
+        <h2 class="text-4xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
+          Why {brand.name}
+        </h2>
+      </div>
+
+      <div class="overflow-hidden border border-[var(--border)] rounded-[var(--radius)]">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-[var(--text-primary)] text-[var(--bg-color)]">
+              <th class="p-6 text-[10px] uppercase tracking-widest font-bold">Feature</th>
+              <th class="p-6 text-[10px] uppercase tracking-widest font-bold bg-[var(--accent)] text-[var(--bg-color)]">
+                {brand.name}
+              </th>
+              <th class="p-6 text-[10px] uppercase tracking-widest font-bold opacity-70">Standard Shops</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--border)]">
+            {comparison.features.map((item) => (
+              <tr class="hover:bg-[var(--text-secondary)] hover:bg-opacity-5 transition-colors">
+                <td class="p-6 text-sm font-bold uppercase tracking-tighter text-[var(--text-primary)]">
+                  {item.label}
+                </td>
+                <td class="p-6 text-sm text-[var(--text-primary)] font-medium bg-[var(--accent)]/5">
+                  <span class="flex items-center gap-2">
+                    <span class="text-[var(--accent)] font-bold">✓</span> {item.us}
+                  </span>
+                </td>
+                <td class="p-6 text-sm text-[var(--text-secondary)] opacity-60">
+                  {item.them}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      
+      {comparison.footer_note && (
+        <p class="mt-8 text-center text-[10px] uppercase tracking-[0.2em] text-[var(--text-secondary)] opacity-50">
+          * {comparison.footer_note}
+        </p>
+      )}
+    </div>
+  </section>
+)}
+</file>
+
+<file path="src/components/Contact.astro">
+---
+const { id, brand, contact, settings } = Astro.props;
+---
+
+<section id={id} class="py-24 px-6 bg-[var(--text-primary)] text-[var(--bg-color)] scroll-mt-24">
+  <div class="container mx-auto max-w-6xl">
+    <div class="grid md:grid-cols-2 gap-16 items-center"> <div class="space-y-8">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">
+            // ESTABLISH_CONTACT
+          </span>
+          <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">
+            Ready to <span class="text-[var(--accent)]">Restore</span> the Balance?
+          </h2>
+          <p class="text-[var(--bg-color)] opacity-70 max-w-md leading-relaxed">
+            {brand.objection_handle}
+          </p>
+        </div>
+
+        <div class="space-y-6 font-mono text-xs tracking-[0.2em]">
+          <div class="flex items-center gap-4">
+            <span class="w-8 h-px bg-[var(--accent)]"></span>
+            <span class="text-[var(--accent)]">PH //</span> {contact.phone}
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="w-8 h-px bg-[var(--accent)]"></span>
+            <span class="text-[var(--accent)]">LOC //</span> {contact.location}
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="w-8 h-px bg-[var(--accent)]"></span>
+            <span class="text-[var(--accent)]">EM //</span> {contact.email}
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-[var(--bg-color)] p-8 md:p-12 rounded-[var(--radius)] shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-4 opacity-5 font-mono text-[60px] font-black select-none pointer-events-none text-[var(--text-primary)]">
+          MSG
+        </div>
+
+        <form 
+          name="contact" 
+          method="POST" 
+          action="/success"
+          data-netlify="true" 
+          class="flex flex-col gap-6 relative z-10"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+
+          <div class="flex flex-col gap-2">
+            <label class="text-[9px] font-mono uppercase tracking-widest text-[var(--text-secondary)]">Owner Name</label>
+            <input 
+              type="text" 
+              name="name" 
+              placeholder="REQUIRED" 
+              class="w-full bg-transparent border-b border-[var(--border)] py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] transition-colors placeholder:opacity-20" 
+              required 
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label class="text-[9px] font-mono uppercase tracking-widest text-[var(--text-secondary)]">Email Address</label>
+            <input 
+              type="email" 
+              name="email" 
+              placeholder="EMAIL@DOMAIN.COM" 
+              class="w-full bg-transparent border-b border-[var(--border)] py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] transition-colors placeholder:opacity-20" 
+              required 
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label class="text-[9px] font-mono uppercase tracking-widest text-[var(--text-secondary)]">Pup Details & Needs</label>
+            <textarea 
+              name="message" 
+              rows="4" 
+              placeholder="HOW CAN WE HELP?" 
+              class="w-full bg-transparent border-b border-[var(--border)] py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] transition-colors placeholder:opacity-20 resize-none"
+            ></textarea>
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full bg-[var(--accent)] text-[var(--bg-color)] py-5 font-bold uppercase tracking-[0.3em] text-[10px] hover:brightness-110 transition-all mt-4"
+          >
+            {settings.cta_text}
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+</file>
+
+<file path="src/components/Gallery.astro">
+---
+// We pass the gallery data in as a prop
+const { gallery } = Astro.props;
+---
+
+{gallery && gallery.length > 0 && (
+  <section class="py-24 px-6 bg-[var(--bg-color)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-12">
+        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-2 block">// VISUAL_ARCHIVE</span>
+        <h2 class="text-4xl font-black uppercase tracking-tighter text-[var(--text-primary)]">Selected Works</h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[250px] md:auto-rows-[350px]">
+        {gallery.map((img, index) => (
+          <div class={`overflow-hidden rounded-[var(--radius)] group border border-[var(--border)]
+            ${index === 0 ? 'col-span-2 row-span-2' : ''} 
+            ${index === 3 ? 'col-span-2 row-span-1' : ''}`}>
+            
+            <img 
+              src={img.src} 
+              alt={img.alt || "Portfolio Image"} 
+              class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+</file>
+
+<file path="src/components/Investment.astro">
+---
+const { investment } = Astro.props;
+---
+
+{investment && investment.length > 0 && (
+  <section class="py-24 px-6 bg-[var(--bg-color)] border-t border-[var(--border)]">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">// THE_INVESTMENT</span>
+        <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[var(--text-primary)]">Commission Tiers</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {investment.map((tier) => (
+          <div class="flex flex-col p-8 border border-[var(--border)] rounded-[var(--radius)] bg-[var(--bg-color)] hover:border-[var(--accent)] transition-colors group">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-[var(--accent)] mb-2">{tier.name}</h3>
+            <div class="text-4xl font-black text-[var(--text-primary)] mb-6 tracking-tighter">
+              {tier.price}
+              <span class="text-sm font-normal opacity-40"> {tier.unit || ""}</span>
+            </div>
+            
+            <ul class="flex-grow space-y-4 mb-10">
+              {tier.features.map((feature) => (
+                <li class="text-sm text-[var(--text-secondary)] flex items-start gap-3">
+                  <span class="text-[var(--accent)] mt-1">→</span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+
+            <a href="/contact" class="w-full text-center py-4 border border-[var(--text-primary)] text-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] text-[10px] font-bold uppercase tracking-[0.2em] rounded-[var(--radius)] transition-all">
+              {tier.cta || "Inquire Now"}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+</file>
+
+<file path="src/data/business.jso1">
+{
+"settings": {
+    "vibe": "maestro-classic",
+    "primary_color": "#ff5f1f",
+    "cta_text": "Schedule Pickup",
+    "cta_link": "/contact",
+    "menu": [
+      { "label": "Home", "path": "/" },
+      { "label": "About", "path": "/about" },
+      { "label": "Contact", "path": "/contact" }
+    ]
+  },
+  "brand": {
+    "name": "AstroIsland Media",
+    "logo_text": "AstroIsland",
+    "objection_handle": "No-Code Maintenance — You own the site, we handle the tech."
+  },
+  "hero": {
+    "headline": "Modern Static Sites Built with AI Precision",
+    "subtext": "100/100 Lighthouse scores. Built for your business in hours, not weeks.",
+    "image": {
+      "src": "hero-main.jpg", 
+      "alt": "Modern tech workspace showcasing speed"
+    }
+  },
+  "features": [
+    {
+      "title": "Hyper-Fast",
+      "description": "Static generation means zero lag for your users and instant page loads.",
+      "icon_slug": "zap",
+      "img_name": "feature-speed.jpg"
+    },
+    {
+      "title": "AI Optimized",
+      "description": "Components built with v0 and optimized for modern web standards.",
+      "icon_slug": "cpu",
+      "img_name": "feature-ai.jpg"
+    },
+    {
+      "title": "SEO Ready",
+      "description": "Semantic HTML that search engines love, out of the box.",
+      "icon_slug": "search",
+      "img_name": "feature-seo.jpg"
+    }
+  ],
+  "processSteps": [
+    {
+      "title": "Strategy Session",
+      "description": "We define your 'Vibe' and business goals via our AI intake process."
+    },
+    {
+      "title": "AI Build Phase",
+      "description": "Our engine generates your custom components and optimized copy in hours."
+    },
+    {
+      "title": "Global Deployment",
+      "description": "Your site goes live on a global CDN with a perfect 100/100 performance score."
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "The speed of this site is incredible. Our conversion rate doubled within a week of launching.",
+      "author": "Sarah Jenkins",
+      "role": "CEO, TechFlow",
+      "avatar": "user-1.jpg"
+    },
+    {
+      "quote": "Finally, a website that actually looks modern and doesn't take 10 seconds to load.",
+      "author": "Marcus Thorne",
+      "role": "Founder, Thorne Digital",
+      "avatar": "user-2.jpg"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Do I need to pay for monthly hosting?",
+      "answer": "Nope. Because these are static sites, we host them on global CDNs that are free for standard business traffic."
+    },
+    {
+      "question": "Can I update the content myself?",
+      "answer": "Yes! We provide a 'Source Vault' service where you can request data updates that go live instantly."
+    }
+  ]
+}
+</file>
+
+<file path="src/data/business.jso2">
+{
+  "settings": {
+    "vibe": "maestro-classic",
+    "primary_color": "#C5A059",
+    "cta_text": "Check Availability",
+    "cta_link": "/contact",
+    "menu": [
+      { "label": "The Atelier", "path": "/" },
+      { "label": "The Experience", "path": "/about" },
+      { "label": "Inquire", "path": "/contact" }
+    ]
+  },
+  "brand": {
+    "name": "AstroIsland Fine Art",
+    "logo_text": "AstroIsland",
+    "objection_handle": "Featured in Vogue | 48-Hour Preview Guarantee"
+  },
+  "hero": {
+    "headline": "Documenting the Quiet Art of Human Connection",
+    "subtext": "Fine-art wedding photography for couples who value presence over posing. Timeless imagery delivered with modern speed.",
+    "image": {
+      "src": "hero-main.jpg", 
+      "alt": "Elegant black and white wedding portrait"
+    }
+  },
+  "features": [
+    {
+      "title": "Natural Aesthetic",
+      "description": "True-to-life editing that preserves the genuine atmosphere of your celebration.",
+      "icon_slug": "eye"
+    },
+    {
+      "title": "The 48-Hour Preview",
+      "description": "Relive the magic while it's still fresh. Your curated preview arrives before your honeymoon.",
+      "icon_slug": "zap"
+    },
+    {
+      "title": "Unobtrusive Presence",
+      "description": "Capturing the story from the inside out, without the 'movie set' distractions.",
+      "icon_slug": "heart"
+    }
+  ],
+  "processSteps": [
+    { "title": "Curation Call", "description": "We discuss your vision and the 'unmissable' moments unique to your story." },
+    { "title": "The Celebration", "description": "A seamless, stress-free experience where your only job is to be fully present." },
+    { "title": "The Archive", "description": "A bespoke digital collection delivered via a private, high-speed gallery." }
+  ],
+  "testimonials": [
+    {
+      "quote": "Choosing AstroIsland was the best decision we made. The photos are art, but the experience was even better.",
+      "author": "Julianne Moore",
+      "role": "Bride, Oct 2025"
+    },
+    {
+      "quote": "The 48-hour preview blew us away. We were looking at our highlights while still on our flight to Italy.",
+      "author": "David Chen",
+      "role": "Groom, Sept 2025"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Do you travel for destination weddings?",
+      "answer": "Absolutely. We specialize in destination celebrations and handle all travel logistics internally."
+    }
+  ],
+  "contact": {
+  "phone": "555.987.6543",
+  "location": "Paris / London / New York",
+  "email": "studio@astroisland.com"
+},
+"gallery": [
+  { "src": "/images/shot-1.jpg", "alt": "Bridal Portrait" },
+  { "src": "/images/shot-2.jpg", "alt": "Sunset Ceremony" },
+  { "src": "/images/shot-3.jpg", "alt": "The Rings" },
+  { "src": "/images/shot-4.jpg", "alt": "Reception Dance" }
+]
+}
+</file>
+
+<file path="Contact.astro">
+
+</file>
+
+<file path="public/favicon.svg">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
+    <path d="M50.4 78.5a75.1 75.1 0 0 0-28.5 6.9l24.2-65.7c.7-2 1.9-3.2 3.4-3.2h29c1.5 0 2.7 1.2 3.4 3.2l24.2 65.7s-11.6-7-28.5-7L67 45.5c-.4-1.7-1.6-2.8-2.9-2.8-1.3 0-2.5 1.1-2.9 2.7L50.4 78.5Zm-1.1 28.2Zm-4.2-20.2c-2 6.6-.6 15.8 4.2 20.2a17.5 17.5 0 0 1 .2-.7 5.5 5.5 0 0 1 5.7-4.5c2.8.1 4.3 1.5 4.7 4.7.2 1.1.2 2.3.2 3.5v.4c0 2.7.7 5.2 2.2 7.4a13 13 0 0 0 5.7 4.9v-.3l-.2-.3c-1.8-5.6-.5-9.5 4.4-12.8l1.5-1a73 73 0 0 0 3.2-2.2 16 16 0 0 0 6.8-11.4c.3-2 .1-4-.6-6l-.8.6-1.6 1a37 37 0 0 1-22.4 2.7c-5-.7-9.7-2-13.2-6.2Z" />
+    <style>
+        path { fill: #000; }
+        @media (prefers-color-scheme: dark) {
+            path { fill: #FFF; }
+        }
+    </style>
+</svg>
+</file>
+
+<file path="src/components/FAQ.astro">
+---
+const { id, faqs, headline = "Common Questions" } = Astro.props;
+---
+
+<section id={id} class="py-24 px-6 bg-[var(--bg-color)] border-t border-[var(--border)] scroll-mt-24">
+  <div class="container mx-auto">
+    <div class="flex flex-col md:flex-row gap-12">
+      
+      <div class="md:w-1/3">
+        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">
+          // KNOWLEDGE_BASE
+        </span>
+        <h2 class="text-4xl font-black uppercase tracking-tighter text-[var(--text-primary)] sticky top-32">
+          {headline}
+        </h2>
+      </div>
+
+      <div class="md:w-2/3 space-y-12">
+        {faqs && faqs.map((faq) => (
+          <div class="group">
+            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-4 flex items-start gap-4 uppercase tracking-tight">
+              <span class="text-[var(--accent)] opacity-40 font-mono text-sm mt-1">Q.</span>
+              {faq.question}
+            </h3>
+            <div class="pl-8 border-l-2 border-[var(--border)] group-hover:border-[var(--accent)] transition-colors duration-500">
+              <p class="text-[var(--text-secondary)] leading-relaxed text-sm max-w-2xl">
+                {faq.answer}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+    </div>
+  </div>
+</section>
+</file>
+
+<file path="src/components/FeatureImage.astro">
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: string;
+  alt: string;
+  className?: string;
+}
+
+const { src, alt, className } = Astro.props;
+
+// Scans your client folder for images
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/client/*.{jpeg,jpg,png,gif,webp}');
+
+const path = `/src/assets/client/${src}`;
+const imageExists = images[path];
+---
+
+{imageExists ? (
+  <Image 
+    src={images[path]()} 
+    alt={alt} 
+    class={className}
+    format="webp"
+    quality="high"
+  />
+) : (
+  <div class={`bg-slate-800/50 flex flex-col items-center justify-center border-2 border-dashed border-slate-700 ${className}`}>
+    <span class="text-slate-500 text-xs italic">Missing: {src}</span>
+  </div>
+)}
+</file>
+
+<file path="src/components/Fonts.astro">
+---
+/* Optimized Google Fonts Bundle - The "Quartet" */
+const fontURL = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Inter:wght@400;700;800&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;500;800&display=swap";
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href={fontURL} rel="stylesheet">
+</file>
+
+<file path="src/components/Hero.astro">
+---
+const { brand, hero, settings } = Astro.props;
+
+// Use a fallback if the image is the placeholder "hero-main.jpg" or missing
+const hasImage = hero.image && hero.image.src && hero.image.src !== "hero-main.jpg";
+---
+
+<section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[var(--bg-color)]">
+  
+  <div class="absolute inset-0 z-0">
+    {hasImage ? (
+      <img src={hero.image.src} alt={hero.image.alt} class="w-full h-full object-cover opacity-30" />
+    ) : (
+      <div class="w-full h-full opacity-10 bg-gradient-to-br from-[var(--accent)] to-transparent"></div>
+    )}
+  </div>
+
+  <div class="container relative z-10 px-6 mx-auto text-center">
+    <p class="mb-6 text-sm font-bold tracking-[0.3em] uppercase text-[var(--accent)]">
+      {brand.name}
+    </p>
+    
+    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9] text-[var(--text-primary)] mb-6">
+        {hero.headline}
+      </h1>
+
+    <p class="max-w-2xl mx-auto mb-12 text-xl md:text-2xl text-[var(--text-secondary)] leading-relaxed">
+      {hero.subtext}
+    </p>
+
+    <div class="flex flex-col items-center gap-8">
+      <a href={settings.cta_link} class="bg-[var(--accent)] px-12 py-5 text-xs font-bold uppercase tracking-[0.2em] transition-all rounded-[var(--radius)] inline-block">
+        {settings.cta_text}
+      </a>
+      
+      {brand.objection_handle && (
+        <span class="text-[10px] uppercase tracking-[0.25em] opacity-50 flex items-center gap-4 text-[var(--text-primary)]">
+          <span class="w-8 h-[1px] bg-[var(--accent)] opacity-40"></span>
+          {brand.objection_handle}
+          <span class="w-8 h-[1px] bg-[var(--accent)] opacity-40"></span>
+        </span>
+      )}
+    </div>
+  </div>
+</section>
+</file>
+
+<file path="src/components/Process.astro">
+---
+// Destructure 'id' along with 'steps' from Astro.props
+const { id, steps } = Astro.props;
+---
+
+<section id={id} class="py-24 bg-[var(--bg-color)] border-t border-[var(--border)] scroll-mt-24">
+  <div class="container px-6 mx-auto">
+    
+    <div class="mb-16">
+      <h2 class="text-3xl md:text-5xl font-light uppercase tracking-tighter text-[var(--text-primary)]">
+        The <span class="text-[var(--accent)] font-bold">Process</span>
+      </h2>
+    </div>
+
+    <div class="grid gap-12 md:grid-cols-3">
+      {steps && steps.map((step, index) => (
+        <div class="relative group">
+          <div class="flex items-center gap-4 mb-6">
+            <span class="text-4xl font-black text-[var(--accent)] opacity-20 group-hover:opacity-100 transition-opacity duration-500">
+              0{index + 1}
+            </span>
+            <div class="h-px w-full bg-[var(--border)] group-hover:bg-[var(--accent)] transition-colors duration-500"></div>
+          </div>
+          
+          <h3 class="mb-4 text-xl font-bold uppercase tracking-widest text-[var(--text-primary)]">
+            {step.title}
+          </h3>
+          
+          <p class="text-[var(--text-secondary)] leading-relaxed text-sm max-w-xs">
+            {step.description}
+          </p>
+          
+          <div class="mt-8 text-[9px] font-mono tracking-[0.4em] text-[var(--text-secondary)] opacity-30">
+            // STATUS: OPTIMIZED
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+</file>
+
+<file path="src/components/Testimonials.astro">
+---
+// Destructure the props passed from index.astro
+const { id, testimonials, headline } = Astro.props;
+---
+
+<section id={id} class="py-24 px-6 bg-[var(--bg-color)] scroll-mt-24">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 tracking-tight text-[var(--text-primary)]">
+      {headline}
+    </h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* CRITICAL CHECK: 
+         Use 'testimonials' (the prop name), not 'data.testimonials' 
+      */}
+      {testimonials && testimonials.map((t) => (
+        <div class="p-8 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--bg-color)] relative">
+          <p class="text-lg italic text-[var(--text-secondary)] mb-8">
+            "{t.quote}"
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-[var(--accent)] flex items-center justify-center font-bold text-[var(--bg-color)]">
+                {t.author.charAt(0).toUpperCase()}
+            </div>
+            <div>
+                <h4 class="font-bold text-[var(--text-primary)]">{t.author}</h4>
+                <p class="text-sm text-[var(--text-secondary)]">{t.role}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+</file>
+
+<file path="src/content/services/web-design.md">
+---
+title: "Custom Web Design"
+description: "High-performance static sites built for speed."
+icon: "layout"
+---
+# Why Choose Our Web Design?
+We don't use clunky builders. We use **Astro and Tailwind** to ensure your site scores a 100 on Lighthouse.
+
+- Mobile First
+- SEO Optimized
+- AI Assisted Design
+</file>
+
+<file path="src/content/config.ts">
+import { defineCollection, z } from 'astro:content';
+
+const services = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    icon: z.string().default('zap'),
+  }),
+});
+
+export const collections = { services };
+</file>
+
+<file path="src/pages/services/[...slug].astro">
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+
+// 1. Generate a new path for every service file
+export async function getStaticPaths() {
+  const serviceEntries = await getCollection('services');
+  return serviceEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+// 2. Get the data for the specific service being viewed
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title}>
+  <main class="py-20 px-6 max-w-4xl mx-auto">
+    <header class="mb-12 border-b border-[var(--border)] pb-8">
+      <h1 class="text-5xl font-extrabold mb-4 text-[var(--text-primary)]">
+        {entry.data.title}
+      </h1>
+      <p class="text-xl text-[var(--text-secondary)] italic">
+        {entry.data.description}
+      </p>
+    </header>
+
+    <article class="prose prose-invert prose-indigo max-w-none">
+      <Content />
+    </article>
+    
+    <div class="mt-16">
+        <a href="/contact" class="bg-[var(--accent)] text-white px-8 py-4 rounded-[var(--radius)] font-bold">
+            Book this Service
+        </a>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style is:global>
+  /* Quick fix to make Markdown text look good without the Typography plugin */
+  article h1 { @apply text-3xl font-bold mt-8 mb-4 text-[var(--text-primary)]; }
+  article h2 { @apply text-2xl font-bold mt-8 mb-4 text-[var(--text-primary)]; }
+  article p { @apply text-lg text-[var(--text-secondary)] mb-4 leading-relaxed; }
+  article ul { @apply list-disc ml-6 mb-4 text-[var(--text-secondary)]; }
+  article li { @apply mb-2; }
+</style>
+</file>
+
+<file path="src/pages/success.astro">
+---
+import Layout from '../layouts/Layout.astro';
+import data from '../data/business.json';
+---
+
+<Layout title={`Message Received | ${data.brand.name}`}>
+  <main class="flex items-center justify-center min-h-[70vh] px-6">
+    <div class="max-w-md w-full text-center">
+      
+      <div class="mb-8 flex justify-center">
+        <div class="w-20 h-20 rounded-full border-2 border-[var(--accent)] flex items-center justify-center animate-pulse">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+      </div>
+
+      <h1 class="text-4xl font-black uppercase tracking-tighter text-[var(--text-primary)] mb-4">
+        Transmission <span class="text-[var(--accent)]">Received</span>
+      </h1>
+      
+      <p class="text-[var(--text-secondary)] uppercase tracking-[0.2em] text-xs mb-10 leading-relaxed">
+        Your inquiry has been logged in our system. <br/> 
+        Expect a response within 24 business hours.
+      </p>
+
+      <a 
+        href="/" 
+        class="inline-block bg-[var(--accent)] text-[var(--bg-color)] px-10 py-4 rounded-[var(--radius)] text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:scale-105"
+      >
+        Return to Homebase
+      </a>
+      
+      <div class="mt-12 pt-8 border-t border-[var(--border)] opacity-20">
+        <span class="text-[9px] font-mono tracking-[0.5em] text-[var(--text-primary)] uppercase">
+          // ID: {Math.random().toString(36).toUpperCase().substring(2, 10)}
+        </span>
+      </div>
+    </div>
+  </main>
+</Layout>
+</file>
+
+<file path="src/PROCESS.md">
+🚀 Fiverr Gig Delivery Process: AstroIsland Template
+
+1. Project Initialization
+[ ] Update src/data/business.json with client details (Name, Hero, Features).
+
+[ ] Choose a vibe: "dark-neo" or "clean-light".
+
+[ ] Drop client images into src/assets/client/.
+
+[ ] Update src/data/business.json image paths to match filenames exactly.
+
+2. Branding & Content
+[ ] Update brand.name in JSON (affects Title, Header, and Footer).
+
+[ ] Run npm run dev and check for any "Missing Image" placeholders.
+
+[ ] Check color contrast (Ensure var(--accent) is readable on background).
+
+3. Performance & SEO Check
+[ ] Run npm run build locally to ensure no broken image paths.
+
+[ ] Verify FeatureImage.astro is generating .webp versions in the dist folder.
+
+[ ] Check Meta Tags in src/layouts/Layout.astro (Title/Description).
+
+4. Deployment (Netlify)
+[ ] Commit and Push to GitHub: git add . && git commit -m "feat: client update" && git push.
+
+[ ] Verify build success in Netlify Dashboard.
+
+[ ] Forms: Go to Netlify -> Forms and ensure the "contact" form is detected.
+
+[ ] Optimization: Enable "Image Optimization" and "Minification" in Netlify build settings.
+
+5. Delivery to Client
+[ ] Generate Lighthouse Report (Target: 95-100 across the board).
+
+[ ] Send live URL + Lighthouse Screenshot to client.
+
+[ ] (Optional) Provide instructions for Netlify Form notification settings.
+
+Pro Tip for Fiverr:
+When you deliver the order, include the Lighthouse Score screenshot. Clients on Fiverr love seeing that "All Green" circle 100/100; it justifies the price of a modern static site over a slow WordPress site.
+
+Would you like me to help you write a "Technical Specifications" snippet? You can paste it into your Fiverr Gig description to explain why your sites are faster than the competition.
+</file>
+
+<file path=".gitignore">
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+</file>
+
+<file path="astro.config.mjs">
+import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';
+import tailwind from '@astrojs/tailwind'; // <--- Must be here
+
+export default defineConfig({
+  integrations: [
+    react(), 
+    tailwind() // <--- Must be here
+  ],
+});
+</file>
+
+<file path="netlify.toml">
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+</file>
+
+<file path="package.json">
+{
+  "name": "agency-v4",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.16.7",
+    "lucide-react": "^0.562.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "tailwindcss": "^3.4.17"
+  }
+}
+</file>
+
+<file path="PROCESS.md">
+
+</file>
+
+<file path="README.md">
+# Astro Starter Kit: Minimal
+
+```sh
+npm create astro@latest -- --template minimal
+```
+
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+
+## 🚀 Project Structure
+
+Inside of your Astro project, you'll see the following folders and files:
+
+```text
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
+
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+
+Any static assets, like images, can be placed in the `public/` directory.
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+</file>
+
+<file path="tailwind.config.mjs">
+/** @type {import('tailwindcss').Config} */
+export default {
+    // This tells Tailwind to scan your Astro and React files for classes
+    content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+    theme: {
+      extend: {
+        // Your Vibe System handles colors, but you can add custom logic here later
+      },
+    },
+    plugins: [],
+  }
+</file>
+
+<file path="tsconfig.json">
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
+}
+</file>
+
+<file path="src/components/Features.astro">
+---
+const { id, features } = Astro.props;
+---
+<section id={id} class="py-24 px-6 bg-[var(--bg-color)] scroll-mt-24">
+  <div class="container mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      {features && features.map((feature) => (
+        <div class="group border-l border-[var(--border)] pl-6 hover:border-[var(--accent)] transition-colors duration-500">
+          <div class="text-[var(--accent)] text-[10px] font-mono mb-4 tracking-widest uppercase">
+            // {feature.icon_slug || "SERVICE_MODULE"}
+          </div>
+          <h3 class="text-xl font-bold uppercase tracking-tight mb-4 text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
+            {feature.title}
+          </h3>
+          <p class="text-[var(--text-secondary)] text-sm leading-relaxed max-w-sm">
+            {feature.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+</file>
+
+<file path="src/components/Footer.astro">
+---
+import data from '../data/business.json';
+const { brand, settings, contact } = data;
+const year = new Date().getFullYear();
+---
+
+<footer class="py-16 px-6 border-t border-[var(--border)] bg-[var(--bg-color)]">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+      
+      <div class="flex flex-col gap-3">
+        <span class="text-xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
+          {brand.name}
+        </span>
+        <p class="text-xs uppercase tracking-widest text-[var(--text-secondary)] opacity-70">
+          {brand.objection_handle}
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--accent)]">Navigation</span>
+        <div class="flex flex-col gap-2">
+          {settings.menu.map((item) => (
+            <a href={item.path} class="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors uppercase tracking-widest font-medium">
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4">
+         <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--accent)]">Connect</span>
+         <div class="text-sm text-[var(--text-secondary)] flex flex-col gap-2 uppercase tracking-tighter">
+            <span>{contact.location}</span>
+            <a href={`tel:${contact.phone}`} class="font-bold text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
+              {contact.phone}
+            </a>
+            
+            {contact.email && (
+              <a href={`mailto:${contact.email}`} class="lowercase tracking-normal hover:text-[var(--accent)] transition-colors opacity-80">
+                {contact.email}
+              </a>
+            )}
+         </div>
+      </div>
+
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-[10px] uppercase tracking-[0.2em] text-[var(--text-secondary)] opacity-50">
+        © {year} {brand.name}.
+      </div>
+      <div class="text-[9px] font-mono uppercase tracking-[0.5em] text-[var(--accent)]">
+        // Identity Engine v1.0
+      </div>
+    </div>
+  </div>
+</footer>
+</file>
+
+<file path="src/components/Navbar.astro">
+---
+const { brand, settings } = Astro.props;
+---
+
+<nav class="sticky top-0 z-[100] w-full border-b border-[var(--border)] bg-[var(--bg-color)]">
+  <div class="container mx-auto px-6 py-4 flex items-center justify-between relative z-[120]">
+    <a href="#top" class="text-xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
+      {brand.logo_text}
+    </a>
+
+    <button id="menu-toggle" class="md:hidden text-[var(--text-primary)] relative z-[130] p-2" aria-label="Toggle Menu">
+      <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path id="menu-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  </div>
+
+  <div 
+    id="mobile-menu" 
+    class="hidden fixed inset-0 w-full h-screen flex-col justify-center items-center z-[110] bg-white text-black"
+  >
+    <div class="absolute inset-0 bg-[var(--bg-color)] z-[-1] min-h-full min-w-full"></div>
+
+    <div class="flex flex-col gap-8 text-center relative z-10">
+      {settings.menu.map((item) => (
+        <a href={item.path} class="mobile-link text-4xl font-black uppercase tracking-tighter text-black">
+          {item.label}
+        </a>
+      ))}
+      <a href={settings.cta_link} class="mobile-link mt-4 px-10 py-5 bg-black text-white text-xs font-bold uppercase tracking-[0.4em] rounded-full">
+        {settings.cta_text}
+      </a>
+    </div>
+  </div>
+</nav>
+</file>
+
+<file path="src/data/business.json">
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "settings": {
+    "vibe": "zenith-earth", 
+    "primary_color": "#4A5D4E",
+    "cta_text": "Book a Free Meet & Greet",
+    "cta_link": "#contact",
+    "menu": [
+      { "label": "Services", "path": "#features" },
+      { "label": "Our Process", "path": "#process" },
+      { "label": "FAQs", "path": "#faqs" },
+      { "label": "Contact", "path": "#contact" }
+    ]
+  },
+  "brand": {
+    "name": "Dog Tired",
+    "logo_text": "Dog Tired",
+    "objection_handle": "We provide the reliability of a professional agency with the heart of a neighbor—always on time, always on call."
+  },
+  "hero": {
+    "headline": "A Restored Home Starts with a Contented Canine.",
+    "subtext": "Reliable, heart-centered dog walking that channels your pet's energy into calm, preserving your home and their happiness.",
+    "image": {
+      "src": "hero-main.jpg",
+      "alt": "A peaceful dog resting in a warm, sunlit home after an outdoor adventure."
+    }
+  },
+  "features": [
+    {
+      "title": "Real-Time Updates",
+      "description": "Direct text updates after every visit so you know exactly how your pup is doing.",
+      "icon_slug": "message-circle"
+    },
+    {
+      "title": "Habit Mapping",
+      "description": "We take the time to learn your dog's unique personality and triggers for a stress-free walk.",
+      "icon_slug": "map"
+    },
+    {
+      "title": "Always Reachable",
+      "description": "You have our direct number. Call for any reason—your pet's safety is our priority.",
+      "icon_slug": "phone-call"
+    }
+  ],
+  "processSteps": [
+    {
+      "title": "The Meet & Greet",
+      "description": "We visit your home to meet you and your dog, ensuring a perfect vibe and comfort level."
+    },
+    {
+      "title": "The Adventure",
+      "description": "We execute the walk according to your dog's specific energy needs and habits."
+    },
+    {
+      "title": "The Peace of Mind",
+      "description": "You receive a text confirmation and a calm, happy dog waiting for you when you get home."
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "I finally stopped worrying about my carpets and started enjoying my dog again.",
+      "author": "Sarah J.",
+      "role": "Local Pet Owner"
+    }
+  ],
+  "faqs": [
+  {
+    "question": "Are you available for last-minute walks?",
+    "answer": "Yes! Because you have my direct number, you can text for availability anytime. We try our best to accommodate short-notice requests."
+  },
+  {
+    "question": "What happens if it rains?",
+    "answer": "We walk rain or shine. If it's particularly messy, we'll ensure your pup is towelled off and comfortable before we leave."
+  }
+],
+  "contact": {
+    "phone": "555-0123",
+    "location": "Local Service Area",
+    "email": "hello@dogtired.com"
+  },
+  "gallery": [
+    {
+      "src": "walk-1.jpg",
+      "alt": "Happy dog on a trail walk."
+    },
+    {
+      "src": "walk-2.jpg",
+      "alt": "Calm dog resting after exercise."
+    }
+  ]
+}
+</file>
+
+<file path="src/layouts/Layout.astro">
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro'; // 1. IMPORT IT
+import data from '../data/business.json';
+import '../styles/vibe-system.css';
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title || data.brand.name}</title>
+</head>
+<body data-vibe={data.settings.vibe} class="bg-[var(--bg-color)] text-[var(--text-primary)] font-[var(--font-main)] flex flex-col min-h-screen">
+    
+    <Navbar brand={data.brand} settings={data.settings} />
+
+    <main class="flex-grow">
+        <slot />
+    </main>
+
+    <Footer /> </body>
+</html>
+</file>
+
+<file path="src/pages/index.astro">
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Gallery from '../components/Gallery.astro'; // Import the new component
+import Features from '../components/Features.astro';
+import Process from '../components/Process.astro'; // NEW
+import Testimonials from '../components/Testimonials.astro';
+import Comparison from '../components/Comparison.astro';
+import BentoAbout from '../components/BentoAbout.astro';
+import Investment from '../components/Investment.astro';
+import FAQ from '../components/FAQ.astro';
+import Contact from '../components/Contact.astro';
+import data from '../data/business.json';
+---
+
+<Layout>
+  <Hero 
+    brand={data.brand} 
+    hero={data.hero} 
+    settings={data.settings} 
+  />
+  <BentoAbout brand={data.brand} hero={data.hero} /> 
+  <Comparison comparison={data.comparison} brand={data.brand} />
+  <Features id="features" features={data.features} />
+
+  <Process id="process" steps={data.processSteps} />
+  <Gallery gallery={data.gallery} />
+  <Investment investment={data.investment} />
+  <Testimonials 
+      id="testimonials" 
+      testimonials={data.testimonials} 
+      headline="Loved by the Local Pack" 
+    />
+    <FAQ 
+       id="faqs" 
+       faqs={data.faqs} 
+        headline="The Details" 
+     />
+     <Contact 
+       id="contact" 
+       brand={data.brand} 
+       contact={data.contact} 
+       settings={data.settings} 
+      />
+</Layout>
+</file>
+
+<file path="src/styles/vibe-system.css">
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Update your existing vibe-system.css */
+[data-vibe="dark-neo"] {
+  --bg-color: #050505;      /* Deep obsidian */
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --accent: #6366f1;        /* Electric Indigo */
+  --border: #1f1f23;
+  --radius: 12px;
+  --font-main: 'Inter', sans-serif;
+}
+
+/* --- RECOVERY & POLISH --- */
+
+/* Fix the invisible H1 - Solid color first, then optional gradient */
+[data-vibe="dark-neo"] h1 {
+  color: #ffffff; 
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+/* This adds the 'Neo' look without making text disappear */
+[data-vibe="dark-neo"] .bg-\[var\(--accent\)\] {
+  background-color: var(--accent);
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-vibe="dark-neo"] .bg-\[var\(--accent\)\]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(99, 102, 241, 0.6);
+}
+
+/* Glass effect for cards and nav */
+[data-vibe="dark-neo"] .border {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-vibe="clean-light"] {
+  --bg-color: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --accent: #0ea5e9;
+  --border: #e5e7eb;
+  --radius: 0.375rem;
+  /* Elegant Font */
+  --font-main: 'Playfair Display', serif;
+}
+
+[data-vibe="studio-mono"] {
+  --bg-color: #f4f4f5; /* Soft off-white */
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+  --accent: #f97316; /* Bold Orange */
+  --border: #09090b; /* Thick black borders */
+  --radius: 0px;    /* Sharp industrial corners */
+  --font-main: 'JetBrains Mono', monospace;
+}
+
+/* Add a specific tweak for this vibe's buttons */
+[data-vibe="studio-mono"] .bg-\[var\(--accent\)\] {
+  box-shadow: 4px 4px 0px 0px #09090b;
+  border: 2px solid #09090b;
+}
+
+[data-vibe="studio-mono"] .bg-\[var\(--accent\)\]:hover {
+  box-shadow: 2px 2px 0px 0px #09090b;
+  transform: translate(2px, 2px);
+}
+
+[data-vibe="maestro-dark"] {
+  --bg-color: #0d0d0d;      /* Midnight Onyx */
+  --text-primary: #f4f1ea;  /* Warm Ivory (easier on eyes than pure white) */
+  --text-secondary: #a0a0a0;
+  --accent: #c0a080;        /* Champagne Gold (replaces the red for better dark contrast) */
+  --border: #262626;        /* Subtle charcoal borders */
+  --radius: 0px;
+  --font-main: 'Cormorant Garamond', serif;
+}
+
+/* Specific Polish for Maestro Dark */
+[data-vibe="maestro-dark"] h1, 
+[data-vibe="maestro-dark"] h2 {
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-primary);
+}
+
+/* Elegant Gold Outline Button */
+[data-vibe="maestro-dark"] .bg-\[var\(--accent\)\] {
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+[data-vibe="maestro-dark"] .bg-\[var\(--accent\)\]:hover {
+  background-color: var(--accent);
+  color: #000000;
+  box-shadow: 0 0 20px rgba(192, 160, 128, 0.2);
+}
+
+[data-vibe="maestro-classic"] {
+  --bg-color: #fcfcfc;      /* Pristine Paper */
+  --text-primary: #1a1a1a;  /* Deep Ink */
+  --text-secondary: #5e5e5e;
+  --accent: #8b0000;        /* Deep Rosso Corsa (Violin Varnish Red) */
+  --border: #d1d1d1;        /* Hairline borders */
+  --radius: 0px;            /* Traditional sharp edges */
+  --font-main: 'Cormorant Garamond', serif;
+}
+
+/* Custom Polish for Maestro Vibe */
+[data-vibe="maestro-classic"] h1, 
+[data-vibe="maestro-classic"] h2 {
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+[data-vibe="maestro-classic"] .bg-\[var\(--accent\)\] {
+  background-color: transparent;
+  border: 1px solid var(--text-primary);
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: all 0.4s ease;
+}
+
+[data-vibe="maestro-classic"] .bg-\[var\(--accent\)\]:hover {
+  background-color: var(--text-primary);
+  color: var(--bg-color);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: sans-serif;
+}
+
+/* --- RUGGED INDUSTRIAL VIBE --- */
+[data-vibe="rugged-industrial"] {
+  --bg-color: #111111;      /* Deep Charcoal */
+  --text-primary: #f4f4f4;  /* Off-White */
+  --text-secondary: #a1a1aa;
+  --accent: #ff5f1f;        /* Safety Orange */
+  --border: #27272a;        /* Subtle Zinc Border */
+  --radius: 4px;            /* Tough, nearly square edges */
+  --font-main: 'JetBrains Mono', monospace;
+}
+
+/* Custom Polish for Rugged Vibe */
+[data-vibe="c"] h1, 
+[data-vibe="rugged-industrial"] h2 {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.05em; /* Tight, heavy impact */
+  font-style: italic;      /* Aggressive forward motion */
+}
+
+/* Heavy "Caution" Button Style */
+[data-vibe="rugged-industrial"] .bg-\[var\(--accent\)\] {
+  background-color: var(--accent);
+  color: #000000;
+  box-shadow: 4px 4px 0px 0px #ffffff; /* Hard white offset shadow */
+  border: 1px solid #000000;
+}
+
+[data-vibe="rugged-industrial"] .bg-\[var\(--accent\)\]:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #ffffff;
+}
+
+/* --- STUDIO MONO VIBE --- */
+[data-vibe="studio-mono"] {
+  --bg-color: #050505;      /* True Black */
+  --text-primary: #ffffff;  /* Pure White */
+  --text-secondary: #888888;
+  --accent: #00f0ff;        /* Electric Cyan */
+  --border: #1a1a1a;        /* Dark Grey Border */
+  --radius: 0px;            /* Sharp, clinical corners */
+  --font-main: 'Inter', sans-serif; /* Clean Neo-Grotesk */
+}
+
+/* Studio Mono Specific Polish */
+[data-vibe="studio-mono"] h1, 
+[data-vibe="studio-mono"] h2 {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  font-family: 'JetBrains Mono', monospace; /* Mono headers for tech feel */
+}
+
+/* Neon Glow Button */
+[data-vibe="studio-mono"] .bg-\[var\(--accent\)\] {
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+}
+
+[data-vibe="studio-mono"] .bg-\[var\(--accent\)\]:hover {
+  background-color: var(--accent);
+  color: #000000;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+}
+
+/* --- ZENITH EARTH VIBE --- */
+[data-vibe="zenith-earth"] {
+  --bg-color: #F9F7F2;      /* Warm Parchment */
+  --text-primary: #2D2926;  /* Soft Charcoal */
+  --text-secondary: #6B665E;
+  --accent: #7D8471;        /* Sage Green */
+  --border: #E5E1D8;
+  --radius: 40px;           /* Ultra-soft, pill-like corners */
+  --font-main: 'Outfit', sans-serif; 
+}
+
+/* Zenith Specific: Soft Depth */
+[data-vibe="zenith-earth"] .rounded-\[var\(--radius\)\] {
+  box-shadow: 0 10px 30px -15px rgba(125, 132, 113, 0.2);
+}
+
+[data-vibe="zenith-earth"] h1, 
+[data-vibe="zenith-earth"] h2 {
+  font-family: 'Fraunces', serif; /* Soft, variable-weight serif */
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  text-transform: none; /* Keep it natural, not shouting */
+}
+
+/* Organic Button Styling */
+[data-vibe="zenith-earth"] .bg-\[var\(--accent\)\] {
+  background-color: var(--accent);
+  color: #ffffff;
+  border-radius: 100px; /* Fully round buttons */
+  transition: transform 0.3s ease;
+}
+
+/* Safety override for the mobile menu */
+#mobile-menu.flex {
+  display: flex !important;
+  background-color: var(--bg-color, #ffffff) !important; /* Uses vibe color, defaults to white */
+}
+
+.mobile-link {
+  color: var(--text-primary, #000000) !important; /* Uses vibe text, defaults to black */
+}
+
+/* Stops the page from scrolling behind the menu */
+body.menu-open {
+  overflow: hidden !important;
+}
+</file>
+
+</files>

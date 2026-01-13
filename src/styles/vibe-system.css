@@ -157,7 +157,7 @@ body {
 }
 
 /* Custom Polish for Rugged Vibe */
-[data-vibe="rugged-industrial"] h1, 
+[data-vibe="c"] h1, 
 [data-vibe="rugged-industrial"] h2 {
   font-weight: 900;
   text-transform: uppercase;
@@ -176,4 +176,85 @@ body {
 [data-vibe="rugged-industrial"] .bg-\[var\(--accent\)\]:hover {
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0px 0px #ffffff;
+}
+
+/* --- STUDIO MONO VIBE --- */
+[data-vibe="studio-mono"] {
+  --bg-color: #050505;      /* True Black */
+  --text-primary: #ffffff;  /* Pure White */
+  --text-secondary: #888888;
+  --accent: #00f0ff;        /* Electric Cyan */
+  --border: #1a1a1a;        /* Dark Grey Border */
+  --radius: 0px;            /* Sharp, clinical corners */
+  --font-main: 'Inter', sans-serif; /* Clean Neo-Grotesk */
+}
+
+/* Studio Mono Specific Polish */
+[data-vibe="studio-mono"] h1, 
+[data-vibe="studio-mono"] h2 {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  font-family: 'JetBrains Mono', monospace; /* Mono headers for tech feel */
+}
+
+/* Neon Glow Button */
+[data-vibe="studio-mono"] .bg-\[var\(--accent\)\] {
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+}
+
+[data-vibe="studio-mono"] .bg-\[var\(--accent\)\]:hover {
+  background-color: var(--accent);
+  color: #000000;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+}
+
+/* --- ZENITH EARTH VIBE --- */
+[data-vibe="zenith-earth"] {
+  --bg-color: #F9F7F2;      /* Warm Parchment */
+  --text-primary: #2D2926;  /* Soft Charcoal */
+  --text-secondary: #6B665E;
+  --accent: #7D8471;        /* Sage Green */
+  --border: #E5E1D8;
+  --radius: 40px;           /* Ultra-soft, pill-like corners */
+  --font-main: 'Outfit', sans-serif; 
+}
+
+/* Zenith Specific: Soft Depth */
+[data-vibe="zenith-earth"] .rounded-\[var\(--radius\)\] {
+  box-shadow: 0 10px 30px -15px rgba(125, 132, 113, 0.2);
+}
+
+[data-vibe="zenith-earth"] h1, 
+[data-vibe="zenith-earth"] h2 {
+  font-family: 'Fraunces', serif; /* Soft, variable-weight serif */
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  text-transform: none; /* Keep it natural, not shouting */
+}
+
+/* Organic Button Styling */
+[data-vibe="zenith-earth"] .bg-\[var\(--accent\)\] {
+  background-color: var(--accent);
+  color: #ffffff;
+  border-radius: 100px; /* Fully round buttons */
+  transition: transform 0.3s ease;
+}
+
+/* Safety override for the mobile menu */
+#mobile-menu.flex {
+  display: flex !important;
+  background-color: var(--bg-color, #ffffff) !important; /* Uses vibe color, defaults to white */
+}
+
+.mobile-link {
+  color: var(--text-primary, #000000) !important; /* Uses vibe text, defaults to black */
+}
+
+/* Stops the page from scrolling behind the menu */
+body.menu-open {
+  overflow: hidden !important;
 }

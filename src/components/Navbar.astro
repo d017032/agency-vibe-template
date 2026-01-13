@@ -2,12 +2,17 @@
 const { brand, settings } = Astro.props;
 ---
 
-<nav class="sticky top-0 z-50 w-full border-b border-[var(--border)] bg-[var(--bg-color)]/80 backdrop-blur-md">
-  <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-    
-    <a href="/" class="text-xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
+<nav class="sticky top-0 z-[100] w-full border-b border-[var(--border)] bg-[var(--bg-color)]">
+  <div class="container mx-auto px-6 py-4 flex items-center justify-between relative z-[120]">
+    <a href="#top" class="text-xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
       {brand.logo_text}
     </a>
+
+    <button id="menu-toggle" class="md:hidden text-[var(--text-primary)] relative z-[130] p-2 focus:outline-none" aria-label="Toggle Menu">
+      <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path id="menu-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
 
     <div class="hidden md:flex items-center gap-8">
       {settings.menu.map((item) => (
@@ -19,32 +24,68 @@ const { brand, settings } = Astro.props;
         {settings.cta_text}
       </a>
     </div>
-
-    <button id="menu-toggle" class="md:hidden text-[var(--text-primary)] focus:outline-none">
-      <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
-      </svg>
-    </button>
   </div>
 
-  <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[var(--bg-color)] border-b border-[var(--border)] p-6 flex flex-col gap-6 animate-in fade-in slide-in-from-top-4">
-    {settings.menu.map((item) => (
-      <a href={item.path} class="text-sm font-bold uppercase tracking-[0.3em] text-[var(--text-primary)]">
-        {item.label}
-      </a>
-    ))}
-    <a href={settings.cta_link} class="w-full text-center py-4 bg-[var(--accent)] text-[var(--bg-color)] text-[10px] font-bold uppercase tracking-[0.3em] rounded-[var(--radius)]">
-      {settings.cta_text}
-    </a>
+  <div 
+    id="mobile-menu" 
+    class="fixed inset-0 w-full h-screen bg-[var(--bg-color)] hidden flex-col justify-center items-center z-[110]"
+  >
+    <div class="absolute inset-0 bg-[var(--bg-color)] z-[-1]"></div>
+
+    <div class="flex flex-col gap-0 text-center relative z-[125] w-full px-12">
+      {settings.menu.map((item) => (
+        <a 
+          href={item.path} 
+          class="mobile-link py-6 text-xl font-bold uppercase tracking-[0.3em] text-[var(--text-primary)] border-b border-[var(--border)] last:border-0 hover:text-[var(--accent)] transition-colors"
+        >
+          {item.label}
+        </a>
+      ))}
+      
+      <div class="mt-12">
+        <a 
+          href={settings.cta_link} 
+          class="mobile-link inline-block px-10 py-5 bg-[var(--accent)] text-[var(--bg-color)] text-[10px] font-bold uppercase tracking-[0.4em] rounded-[var(--radius)] shadow-lg active:scale-95 transition-transform"
+        >
+          {settings.cta_text}
+        </a>
+      </div>
+    </div>
   </div>
 </nav>
 
 <script>
   const btn = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');
+  const iconPath = document.getElementById('menu-path');
+  const links = document.querySelectorAll('.mobile-link');
 
-  btn?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
-    menu?.classList.toggle('flex');
+  function toggleMenu() {
+    const isHidden = menu?.classList.contains('hidden');
+    
+    if (isHidden) {
+      menu?.classList.remove('hidden');
+      menu?.classList.add('flex');
+      // Adding a helper class to body to prevent scrolling background
+      document.body.style.overflow = 'hidden'; 
+      iconPath?.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // Change icon to X
+    } else {
+      menu?.classList.add('hidden');
+      menu?.classList.remove('flex');
+      document.body.style.overflow = ''; // Restore scroll
+      iconPath?.setAttribute('d', 'M4 8h16M4 16h16'); // Change icon to Hamburger
+    }
+  }
+
+  btn?.addEventListener('click', toggleMenu);
+  
+  // Important for SPA: Close menu when a link is clicked
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+      menu?.classList.remove('flex');
+      document.body.style.overflow = '';
+      iconPath?.setAttribute('d', 'M4 8h16M4 16h16');
+    });
   });
 </script>

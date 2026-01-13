@@ -1,84 +1,91 @@
 {
-"settings": {
-    "vibe": "maestro-classic",
-    "primary_color": "#ff5f1f",
-    "cta_text": "Schedule Pickup",
-    "cta_link": "/contact",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "settings": {
+    "vibe": "zenith-earth", 
+    "primary_color": "#4A5D4E",
+    "cta_text": "Book a Free Meet & Greet",
+    "cta_link": "#contact",
     "menu": [
-      { "label": "Home", "path": "/" },
-      { "label": "About", "path": "/about" },
-      { "label": "Contact", "path": "/contact" }
+      { "label": "Services", "path": "#features" },
+      { "label": "Our Process", "path": "#process" },
+      { "label": "FAQs", "path": "#faqs" },
+      { "label": "Contact", "path": "#contact" }
     ]
   },
   "brand": {
-    "name": "AstroIsland Media",
-    "logo_text": "AstroIsland",
-    "objection_handle": "No-Code Maintenance — You own the site, we handle the tech."
+    "name": "Dog Tired",
+    "logo_text": "Dog Tired",
+    "objection_handle": "We provide the reliability of a professional agency with the heart of a neighbor—always on time, always on call."
   },
   "hero": {
-    "headline": "Modern Static Sites Built with AI Precision",
-    "subtext": "100/100 Lighthouse scores. Built for your business in hours, not weeks.",
+    "headline": "A Restored Home Starts with a Contented Canine.",
+    "subtext": "Reliable, heart-centered dog walking that channels your pet's energy into calm, preserving your home and their happiness.",
     "image": {
-      "src": "hero-main.jpg", 
-      "alt": "Modern tech workspace showcasing speed"
+      "src": "hero-main.jpg",
+      "alt": "A peaceful dog resting in a warm, sunlit home after an outdoor adventure."
     }
   },
   "features": [
     {
-      "title": "Hyper-Fast",
-      "description": "Static generation means zero lag for your users and instant page loads.",
-      "icon_slug": "zap",
-      "img_name": "feature-speed.jpg"
+      "title": "Real-Time Updates",
+      "description": "Direct text updates after every visit so you know exactly how your pup is doing.",
+      "icon_slug": "message-circle"
     },
     {
-      "title": "AI Optimized",
-      "description": "Components built with v0 and optimized for modern web standards.",
-      "icon_slug": "cpu",
-      "img_name": "feature-ai.jpg"
+      "title": "Habit Mapping",
+      "description": "We take the time to learn your dog's unique personality and triggers for a stress-free walk.",
+      "icon_slug": "map"
     },
     {
-      "title": "SEO Ready",
-      "description": "Semantic HTML that search engines love, out of the box.",
-      "icon_slug": "search",
-      "img_name": "feature-seo.jpg"
+      "title": "Always Reachable",
+      "description": "You have our direct number. Call for any reason—your pet's safety is our priority.",
+      "icon_slug": "phone-call"
     }
   ],
   "processSteps": [
     {
-      "title": "Strategy Session",
-      "description": "We define your 'Vibe' and business goals via our AI intake process."
+      "title": "The Meet & Greet",
+      "description": "We visit your home to meet you and your dog, ensuring a perfect vibe and comfort level."
     },
     {
-      "title": "AI Build Phase",
-      "description": "Our engine generates your custom components and optimized copy in hours."
+      "title": "The Adventure",
+      "description": "We execute the walk according to your dog's specific energy needs and habits."
     },
     {
-      "title": "Global Deployment",
-      "description": "Your site goes live on a global CDN with a perfect 100/100 performance score."
+      "title": "The Peace of Mind",
+      "description": "You receive a text confirmation and a calm, happy dog waiting for you when you get home."
     }
   ],
   "testimonials": [
     {
-      "quote": "The speed of this site is incredible. Our conversion rate doubled within a week of launching.",
-      "author": "Sarah Jenkins",
-      "role": "CEO, TechFlow",
-      "avatar": "user-1.jpg"
-    },
-    {
-      "quote": "Finally, a website that actually looks modern and doesn't take 10 seconds to load.",
-      "author": "Marcus Thorne",
-      "role": "Founder, Thorne Digital",
-      "avatar": "user-2.jpg"
+      "quote": "I finally stopped worrying about my carpets and started enjoying my dog again.",
+      "author": "Sarah J.",
+      "role": "Local Pet Owner"
     }
   ],
   "faqs": [
+  {
+    "question": "Are you available for last-minute walks?",
+    "answer": "Yes! Because you have my direct number, you can text for availability anytime. We try our best to accommodate short-notice requests."
+  },
+  {
+    "question": "What happens if it rains?",
+    "answer": "We walk rain or shine. If it's particularly messy, we'll ensure your pup is towelled off and comfortable before we leave."
+  }
+],
+  "contact": {
+    "phone": "555-0123",
+    "location": "Local Service Area",
+    "email": "hello@dogtired.com"
+  },
+  "gallery": [
     {
-      "question": "Do I need to pay for monthly hosting?",
-      "answer": "Nope. Because these are static sites, we host them on global CDNs that are free for standard business traffic."
+      "src": "walk-1.jpg",
+      "alt": "Happy dog on a trail walk."
     },
     {
-      "question": "Can I update the content myself?",
-      "answer": "Yes! We provide a 'Source Vault' service where you can request data updates that go live instantly."
+      "src": "walk-2.jpg",
+      "alt": "Calm dog resting after exercise."
     }
   ]
 }
