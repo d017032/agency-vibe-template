@@ -1,0 +1,89 @@
+---
+/* VibeSwitcher: A hidden-ish floating tool for live demos */
+const vibes = [
+  { id: 'zenith-earth', label: 'Zenith Earth', icon: '🌿' },
+  { id: 'classic-heritage', label: 'Classic Heritage', icon: '⚖️' },
+  { id: 'dark-neo', label: 'Dark Neo', icon: '💎' },
+  { id: 'studio-mono', label: 'Studio Mono', icon: '🏁' },
+  { id: 'rugged-industrial', label: 'Rugged Industrial', icon: '🚧' },
+  { id: 'maestro-classic', label: 'Maestro Classic', icon: '🎻' },
+  { id: 'clean-light', label: 'Clean Light', icon: '☁️' }
+];
+---
+
+<div id="vibe-switcher-container" class="fixed bottom-6 left-6 z-[9999] group">
+  <button 
+    id="vibe-master-btn" 
+    class="w-14 h-14 bg-black text-white rounded-full shadow-[0_0_20px_rgba(0,0,0,0.3)] flex items-center justify-center hover:scale-110 transition-all duration-300 border border-white/20 active:scale-90"
+    title="Switch Vibe"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+    </svg>
+  </button>
+
+  <div 
+    id="vibe-menu" 
+    class="absolute bottom-16 left-0 flex flex-col gap-2 p-3 bg-black/90 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl scale-90 opacity-0 pointer-events-none transition-all duration-300 origin-bottom-left"
+  >
+    <p class="text-[9px] font-black uppercase tracking-[0.2em] text-white/40 px-2 pb-1 border-b border-white/5 mb-1">Select Vibe</p>
+    {vibes.map((vibe) => (
+      <button 
+        class="vibe-option flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 text-white transition-colors text-left group/opt"
+        data-vibe-id={vibe.id}
+      >
+        <span class="text-lg">{vibe.icon}</span>
+        <span class="text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">{vibe.label}</span>
+      </button>
+    ))}
+  </div>
+</div>
+
+<style>
+  #vibe-switcher-container.active #vibe-menu {
+    scale: 1;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #vibe-switcher-container.active #vibe-master-btn {
+    background-color: #ffffff;
+    color: #000000;
+  }
+</style>
+
+<script>
+  const container = document.getElementById('vibe-switcher-container');
+  const masterBtn = document.getElementById('vibe-master-btn');
+  const options = document.querySelectorAll('.vibe-option');
+  const html = document.documentElement;
+
+  // Toggle Menu
+  masterBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    container?.classList.toggle('active');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', () => {
+    container?.classList.remove('active');
+  });
+
+  // Switch Logic
+  options.forEach(button => {
+    button.addEventListener('click', () => {
+      const selectedVibe = button.getAttribute('data-vibe-id');
+      if (selectedVibe) {
+        html.setAttribute('data-vibe', selectedVibe);
+        // Persist the vibe for the session so it stays on page reload
+        localStorage.setItem('preferred-vibe', selectedVibe);
+      }
+    });
+  });
+
+  // Initialize from LocalStorage if user previously picked a vibe
+  const savedVibe = localStorage.getItem('preferred-vibe');
+  if (savedVibe) {
+    html.setAttribute('data-vibe', savedVibe);
+  }
+</script>

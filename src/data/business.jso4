@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "settings": {
+    "vibe": "dark-neo",
+    "primary_color": "#6366f1",
+    "cta_text": "Reserve Your Ride",
+    "cta_link": "#contact",
+    "menu": [
+      { "label": "Services", "path": "#features" },
+      { "label": "The Fleet", "path": "#gallery" },
+      { "label": "Pricing", "path": "#investment" },
+      { "label": "FAQ", "path": "#faqs" }
+    ]
+  },
+  "brand": {
+    "name": "Elite Drive Concierge",
+    "logo_text": "EDC",
+    "objection_handle": "While apps leave you waiting on the curb, we provide guaranteed punctuality and executive standards."
+  },
+  "hero": {
+    "headline": "Arrive Before You Get There",
+    "subtext": "Seamless executive transport and airport transfers for professionals who value time and discretion.",
+    "image": {
+      "src": "/images/black-car-service.webp",
+      "alt": "Sleek black executive sedan at night"
+    }
+  },
+  "comparison": {
+    "headline": "Beyond the App",
+    "features": [
+      { "label": "Pre-Scheduled Guarantee", "us": true, "them": false },
+      { "label": "Professional Chauffeurs", "us": true, "them": false },
+      { "label": "WiFi & Refreshments", "us": true, "them": false },
+      { "label": "Flight Monitoring", "us": true, "them": true }
+    ]
+  },
+  "features": [
+    {
+      "title": "Airport Transfers",
+      "description": "Timed perfectly with your flight data to ensure zero wait time upon arrival.",
+      "icon_slug": "plane"
+    },
+    {
+      "title": "Executive Events",
+      "description": "Full-day standby service for corporate meetings and high-stakes events.",
+      "icon_slug": "briefcase"
+    }
+  ],
+  "processSteps": [
+    { "title": "Precision Booking", "description": "Select your vehicle and schedule via our encrypted portal." },
+    { "title": "Driver Sync", "description": "Receive chauffeur details and live tracking 30 minutes before pickup." },
+    { "title": "Premium Arrival", "description": "Enjoy a quiet, climate-controlled cabin with zero-friction checkout." }
+  ],
+  "testimonials": [
+    {
+      "quote": "The only car service I trust for my board members. Punctuality is never a question.",
+      "author": "Mark Stevenson",
+      "role": "CEO, TechFlow"
+    }
+  ],
+  "investment": [
+    {
+      "name": "Business Class",
+      "price": "$85",
+      "description": "Per Hour",
+      "features": ["Late Model Sedan", "Real-time Tracking", "Bottled Water"]
+    },
+    {
+      "name": "First Class",
+      "price": "$150",
+      "description": "Per Hour",
+      "features": ["Luxury SUV", "Meet & Greet Service", "In-car WiFi", "Premium Refreshments"]
+    }
+  ],
+  "faqs": [
+    { "question": "How far in advance should I book?", "answer": "We recommend at least 12 hours, but we can often accommodate within 2 hours." },
+    { "question": "Are your drivers licensed?", "answer": "All chauffeurs undergo rigorous background checks and professional training." }
+  ],
+  "contact": {
+    "phone": "1-800-ELITE-DR",
+    "location": "Downtown Executive District",
+    "email": "bookings@elitedrive.com"
+  },
+  "gallery": [
+    { "src": "/images/fleet-1.webp", "alt": "Luxury Sedan Interior" },
+    { "src": "/images/fleet-2.webp", "alt": "Chauffeur opening door" }
+  ]
+}

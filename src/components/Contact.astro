@@ -1,5 +1,8 @@
 ---
 const { id, brand, contact, settings } = Astro.props;
+
+// Pull the headline from JSON or use a neutral fallback
+const contactHeadline = brand.contact_headline || "Ready to get started?";
 ---
 
 <section id={id} class="py-24 px-6 bg-[var(--text-primary)] text-[var(--bg-color)] scroll-mt-24">
@@ -12,7 +15,7 @@ const { id, brand, contact, settings } = Astro.props;
             // ESTABLISH_CONTACT
           </span>
           <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">
-            Ready to <span class="text-[var(--accent)]">Restore</span> the Balance?
+            {contactHeadline}
           </h2>
           <p class="text-[var(--bg-color)] opacity-70 max-w-md leading-relaxed">
             {brand.objection_handle}
@@ -56,42 +59,48 @@ const { id, brand, contact, settings } = Astro.props;
           class="flex flex-col gap-6 relative z-10"
         >
           <input type="hidden" name="form-name" value="contact" />
-
+        
           <div class="flex flex-col gap-2">
-            <label class="text-[9px] font-mono uppercase tracking-widest text-[var(--text-secondary)]">Owner Name</label>
+            <label class="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--text-secondary)] opacity-80">
+              Full Name
+            </label>
             <input 
               type="text" 
               name="name" 
               placeholder="REQUIRED" 
-              class="w-full bg-transparent border-b border-[var(--border)] py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] transition-colors placeholder:opacity-20" 
+              class="w-full bg-transparent border-b border-[var(--border)] py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] focus:placeholder:opacity-0 transition-all placeholder:opacity-20 text-sm" 
               required 
             />
           </div>
-
+        
           <div class="flex flex-col gap-2">
-            <label class="text-[9px] font-mono uppercase tracking-widest text-[var(--text-secondary)]">Email Address</label>
+            <label class="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--text-secondary)] opacity-80">
+              Email Address
+            </label>
             <input 
               type="email" 
               name="email" 
               placeholder="EMAIL@DOMAIN.COM" 
-              class="w-full bg-transparent border-b border-[var(--border)] py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] transition-colors placeholder:opacity-20" 
+              class="w-full bg-transparent border-b border-[var(--border)] py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] focus:placeholder:opacity-0 transition-all placeholder:opacity-20 text-sm" 
               required 
             />
           </div>
-
+        
           <div class="flex flex-col gap-2">
-            <label class="text-[9px] font-mono uppercase tracking-widest text-[var(--text-secondary)]">Details & Needs</label>
+            <label class="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--text-secondary)] opacity-80">
+              Project Details
+            </label>
             <textarea 
               name="message" 
               rows="4" 
               placeholder="HOW CAN WE HELP?" 
-              class="w-full bg-transparent border-b border-[var(--border)] py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] transition-colors placeholder:opacity-20 resize-none"
+              class="w-full bg-transparent border-b border-[var(--border)] py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] focus:placeholder:opacity-0 transition-all placeholder:opacity-20 resize-none text-sm"
             ></textarea>
           </div>
-
+        
           <button 
             type="submit" 
-            class="w-full bg-[var(--accent)] text-[var(--bg-color)] py-5 font-bold uppercase tracking-[0.3em] text-[10px] hover:brightness-110 transition-all mt-4 rounded-[var(--radius)]"
+            class="w-full bg-[var(--accent)] text-[var(--bg-color)] py-5 font-bold uppercase tracking-[0.3em] text-[10px] hover:brightness-110 active:scale-[0.98] transition-all mt-4 rounded-[var(--radius)]"
           >
             {settings.cta_text}
           </button>

@@ -2,9 +2,10 @@
 const { brand, settings } = Astro.props;
 ---
 
-<nav class="sticky top-0 z-[100] w-full border-b border-[var(--border)] bg-[var(--bg-color)]">
+<nav class="sticky top-0 z-[100] w-full border-b border-[var(--border)] bg-[var(--bg-color)]/80 backdrop-blur-md transition-all duration-300">
   <div class="container mx-auto px-6 py-4 flex items-center justify-between relative z-[120]">
-    <a href="#top" class="text-xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
+    
+    <a href="#top" class="text-xl font-black uppercase tracking-tighter text-[var(--text-primary)] hover:opacity-70 transition-opacity">
       {brand.logo_text}
     </a>
 
@@ -16,7 +17,10 @@ const { brand, settings } = Astro.props;
 
     <div class="hidden md:flex items-center gap-8">
       {settings.menu.map((item) => (
-        <a href={item.path} class="text-xs font-bold uppercase tracking-widest text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">
+        <a 
+          href={item.path} 
+          class="nav-link text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+        >
           {item.label}
         </a>
       ))}
@@ -59,33 +63,53 @@ const { brand, settings } = Astro.props;
   const menu = document.getElementById('mobile-menu');
   const iconPath = document.getElementById('menu-path');
   const links = document.querySelectorAll('.mobile-link');
+  const navLinks = document.querySelectorAll('.nav-link');
 
+  // 1. MENU TOGGLE LOGIC
   function toggleMenu() {
     const isHidden = menu?.classList.contains('hidden');
-    
     if (isHidden) {
       menu?.classList.remove('hidden');
       menu?.classList.add('flex');
-      // Adding a helper class to body to prevent scrolling background
       document.body.style.overflow = 'hidden'; 
-      iconPath?.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // Change icon to X
+      iconPath?.setAttribute('d', 'M6 18L18 6M6 6l12 12');
     } else {
       menu?.classList.add('hidden');
       menu?.classList.remove('flex');
-      document.body.style.overflow = ''; // Restore scroll
-      iconPath?.setAttribute('d', 'M4 8h16M4 16h16'); // Change icon to Hamburger
+      document.body.style.overflow = ''; 
+      iconPath?.setAttribute('d', 'M4 8h16M4 16h16');
     }
   }
 
   btn?.addEventListener('click', toggleMenu);
-  
-  // Important for SPA: Close menu when a link is clicked
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      menu?.classList.add('hidden');
-      menu?.classList.remove('flex');
-      document.body.style.overflow = '';
-      iconPath?.setAttribute('d', 'M4 8h16M4 16h16');
+  links.forEach(link => link.addEventListener('click', toggleMenu));
+
+  // 2. ACTIVE SECTION OBSERVER (The SPA Secret Sauce)
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -70% 0px', // Trigger when section is in the upper middle of view
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('text-[var(--accent)]');
+            link.classList.remove('text-[var(--text-secondary)]');
+          } else {
+            link.classList.remove('text-[var(--accent)]');
+            link.classList.add('text-[var(--text-secondary)]');
+          }
+        });
+      }
     });
+  }, observerOptions);
+
+  // Watch every section on the index page
+  document.querySelectorAll('section[id]').forEach((section) => {
+    observer.observe(section);
   });
 </script>

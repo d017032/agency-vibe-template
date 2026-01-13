@@ -1,5 +1,9 @@
 ---
 const { investment } = Astro.props;
+import data from '../data/business.json';
+
+// Use a dynamic headline from JSON or a default
+const headline = data.brand.investment_headline || "Pricing Tiers";
 ---
 
 {investment && investment.length > 0 && (
@@ -7,20 +11,22 @@ const { investment } = Astro.props;
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16">
         <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">// THE_INVESTMENT</span>
-        <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[var(--text-primary)]">Commission Tiers</h2>
+        <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
+          {headline}
+        </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {investment.map((tier) => (
-          <div class="flex flex-col p-8 border border-[var(--border)] rounded-[var(--radius)] bg-[var(--bg-color)] hover:border-[var(--accent)] transition-colors group">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {investment.map((tier: any) => (
+          <div class="flex flex-col p-8 border border-[var(--border)] rounded-[var(--radius)] bg-[var(--bg-color)] hover:border-[var(--accent)] transition-all duration-300 group hover:-translate-y-1">
             <h3 class="text-xs font-bold uppercase tracking-widest text-[var(--accent)] mb-2">{tier.name}</h3>
             <div class="text-4xl font-black text-[var(--text-primary)] mb-6 tracking-tighter">
               {tier.price}
-              <span class="text-sm font-normal opacity-40"> {tier.unit || ""}</span>
+              <span class="text-sm font-normal opacity-40"> / {tier.description || tier.unit || ""}</span>
             </div>
             
             <ul class="flex-grow space-y-4 mb-10">
-              {tier.features.map((feature) => (
+              {tier.features.map((feature: any) => (
                 <li class="text-sm text-[var(--text-secondary)] flex items-start gap-3">
                   <span class="text-[var(--accent)] mt-1">→</span>
                   {feature}
@@ -28,7 +34,7 @@ const { investment } = Astro.props;
               ))}
             </ul>
 
-            <a href="/contact" class="w-full text-center py-4 border border-[var(--text-primary)] text-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] text-[10px] font-bold uppercase tracking-[0.2em] rounded-[var(--radius)] transition-all">
+            <a href="#contact" class="w-full text-center py-4 border border-[var(--text-primary)] text-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] text-[10px] font-bold uppercase tracking-[0.2em] rounded-[var(--radius)] transition-all">
               {tier.cta || "Inquire Now"}
             </a>
           </div>

@@ -1,91 +1,152 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "settings": {
-    "vibe": "zenith-earth", 
-    "primary_color": "#4A5D4E",
-    "cta_text": "Book a Free Meet & Greet",
-    "cta_link": "#contact",
+    "vibe": "Rugged Industrial",
+    "primary_color": "#1F2933",
+    "cta_text": "Get a Quote",
+    "cta_link": "tel:215-555-5555",
     "menu": [
       { "label": "Services", "path": "#features" },
-      { "label": "Our Process", "path": "#process" },
-      { "label": "FAQs", "path": "#faqs" },
+      { "label": "How It Works", "path": "#process" },
+      { "label": "Pricing", "path": "#investment" },
       { "label": "Contact", "path": "#contact" }
     ]
   },
   "brand": {
-    "name": "Dog Tired",
-    "logo_text": "Dog Tired",
-    "objection_handle": "We provide the reliability of a professional agency with the heart of a neighbor—always on time, always on call."
+  "name": "Joe's Junk Removal",
+  "logo_text": "JJR",
+  "tagline": "Fast. Fair. Gone.",
+  "objection_handle": "Fully insured, honest pricing, and on-time service—your junk removed the right way, with no surprises.",
+  "testimonial_headline": "What Your Neighbors Are Saying",
+  "faq_headline": "Clearing the Air (FAQ)",
+  "contact_headline": "Ready to clear the clutter?",
+  "investment_headline": "Transparent Pricing",
+  "availability_status": "Accepting junk removal routes for Monday-Friday."
   },
   "hero": {
-    "headline": "A Restored Home Starts with a Contented Canine.",
-    "subtext": "Reliable, heart-centered dog walking that channels your pet's energy into calm, preserving your home and their happiness.",
+    "headline": "Junk Gone. No Excuses. No Surprises.",
+    "subtext": "On-time, insured junk removal with honest answers and careful handling—exactly as promised.",
     "image": {
-      "src": "hero-main.jpg",
-      "alt": "A peaceful dog resting in a warm, sunlit home after an outdoor adventure."
+      "src": "/images/hero-junk-removal.jpg",
+      "alt": "Joe standing next to his pickup truck ready for junk removal"
     }
+  },
+  "comparison": {
+    "headline": "The Difference Between a Pro and \"Some Guy With a Truck\"",
+    "features": [
+      { "label": "Fully insured & legitimate", "us": true, "them": false },
+      { "label": "Honest, upfront answers", "us": true, "them": false },
+      { "label": "Shows up when scheduled", "us": true, "them": false }
+    ]
   },
   "features": [
     {
-      "title": "Real-Time Updates",
-      "description": "Direct text updates after every visit so you know exactly how your pup is doing.",
-      "icon_slug": "message-circle"
+      "title": "Honest Pricing",
+      "description": "Clear pricing before the job starts—no surprise charges, no pressure.",
+      "icon_slug": "dollar-sign"
     },
     {
-      "title": "Habit Mapping",
-      "description": "We take the time to learn your dog's unique personality and triggers for a stress-free walk.",
-      "icon_slug": "map"
+      "title": "On-Time Service",
+      "description": "We show up when we say we will, ready to work.",
+      "icon_slug": "clock"
     },
     {
-      "title": "Always Reachable",
-      "description": "You have our direct number. Call for any reason—your pet's safety is our priority.",
-      "icon_slug": "phone-call"
+      "title": "Careful Removal",
+      "description": "Items are removed cleanly with respect for your home or property.",
+      "icon_slug": "shield"
     }
   ],
   "processSteps": [
     {
-      "title": "The Meet & Greet",
-      "description": "We visit your home to meet you and your dog, ensuring a perfect vibe and comfort level."
+      "title": "Call or Text for a Quote",
+      "description": "Tell us what needs to go and get an honest answer upfront."
     },
     {
-      "title": "The Adventure",
-      "description": "We execute the walk according to your dog's specific energy needs and habits."
+      "title": "We Arrive On Time",
+      "description": "Fully insured and ready to work—exactly when scheduled."
     },
     {
-      "title": "The Peace of Mind",
-      "description": "You receive a text confirmation and a calm, happy dog waiting for you when you get home."
+      "title": "Junk Is Removed Cleanly",
+      "description": "Items are hauled away quickly with no mess and no mistakes."
     }
   ],
   "testimonials": [
     {
-      "quote": "I finally stopped worrying about my carpets and started enjoying my dog again.",
-      "author": "Sarah J.",
-      "role": "Local Pet Owner"
+      "quote": "The personalized service ensured that the items I needed to 'go away' were removed quickly and cleanly.",
+      "author": "Satisfied Customer",
+      "role": "Homeowner"
+    }
+  ],
+  "investment": [
+    {
+      "name": "Single Item Pickup",
+      "price": "$100",
+      "description": "Ideal for large appliances or single bulky items.",
+      "features": [
+        "Large appliances and electronics",
+        "Item must be fully disconnected and ready for removal",
+        "Careful handling with no property damage",
+        "Honest confirmation before removal"
+      ]
+    },
+    {
+      "name": "Full Pickup Truck Load",
+      "price": "$250",
+      "description": "Perfect for garages or multiple bulky items.",
+      "features": [
+        "One full pickup truck load",
+        "All items must be ready and accessible",
+        "Efficient, on-time service",
+        "No surprise fees"
+      ]
+    },
+    {
+      "name": "Pickup Truck + Trailer",
+      "price": "$400",
+      "description": "Maximum hauling capacity for large cleanouts.",
+      "features": [
+        "Pickup truck plus trailer",
+        "Ideal for renovations or estate cleanouts",
+        "No unhooking or disassembly of appliances",
+        "Fully insured professional service"
+      ]
     }
   ],
   "faqs": [
-  {
-    "question": "Are you available for last-minute walks?",
-    "answer": "Yes! Because you have my direct number, you can text for availability anytime. We try our best to accommodate short-notice requests."
-  },
-  {
-    "question": "What happens if it rains?",
-    "answer": "We walk rain or shine. If it's particularly messy, we'll ensure your pup is towelled off and comfortable before we leave."
-  }
-],
+    {
+      "question": "Do you take TVs and electronic equipment?",
+      "answer": "Yes, we remove TVs and most electronic equipment as long as they are ready for pickup."
+    },
+    {
+      "question": "Are you insured?",
+      "answer": "Yes, Joe’s Junk Removal is fully insured for your peace of mind."
+    },
+    {
+      "question": "Do you unhook or disconnect appliances?",
+      "answer": "No. All appliances must be fully disconnected and ready for removal before arrival."
+    }
+  ],
   "contact": {
-    "phone": "555-0123",
-    "location": "Local Service Area",
-    "email": "hello@dogtired.com"
+    "phone": "215-555-5555",
+    "location": "Bucks County and Eastern Montgomery County",
+    "email": "joe@example.com"
   },
   "gallery": [
     {
-      "src": "walk-1.jpg",
-      "alt": "Happy dog on a trail walk."
+      "src": "/images/hauling-refrigerator.jpg",
+      "alt": "Joe hauling a refrigerator from a garage"
     },
     {
-      "src": "walk-2.jpg",
-      "alt": "Calm dog resting after exercise."
+      "src": "/images/truck-loaded.jpg",
+      "alt": "Pickup truck loaded with junk"
+    },
+    {
+      "src": "/images/before-after-garage.jpg",
+      "alt": "Before-and-after garage cleanout"
+    },
+    {
+      "src": "/images/joe-with-truck.jpg",
+      "alt": "Joe standing next to his truck in work gear"
     }
   ]
 }

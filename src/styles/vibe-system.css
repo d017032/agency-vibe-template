@@ -2,122 +2,146 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Update your existing vibe-system.css */
+/* --- GLOBAL SPA POLISH --- */
+/* --- PERFECT SCROLL ALIGNMENT --- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* This creates a 'buffer' at the top of every section with an ID */
+section[id], main[id], div[id] {
+  scroll-margin-top: 5rem; /* Matches the approximate height of your Navbar (80px) */
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-main, sans-serif);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Prevents background scroll when mobile menu is open */
+body.menu-open {
+  overflow: hidden !important;
+}
+
+/* --- 1. ZENITH EARTH (Organic/Wellness) --- */
+[data-vibe="zenith-earth"] {
+  --bg-color: #F9F7F2;
+  --text-primary: #2D2926;
+  --text-secondary: #6B665E;
+  --accent: #7D8471;
+  --border: #E5E1D8;
+  --radius: 40px;
+  --font-main: 'Outfit', sans-serif; 
+}
+
+[data-vibe="zenith-earth"] h1, 
+[data-vibe="zenith-earth"] h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  text-transform: none;
+}
+
+[data-vibe="zenith-earth"] .bg-\[var\(--accent\)\] {
+  border-radius: 100px;
+}
+
+/* --- 2. CLASSIC HERITAGE (Professional/Law/Luxury) --- */
+[data-vibe="classic-heritage"] {
+  --bg-color: #ffffff;
+  --text-primary: #1a2a3a;
+  --text-secondary: #5a6a7a;
+  --accent: #c5a059;
+  --border: #d1d5db;
+  --radius: 2px;
+  --font-main: 'Libre Baskerville', serif;
+}
+
+[data-vibe="classic-heritage"] h1, 
+[data-vibe="classic-heritage"] h2 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* --- 3. DARK NEO (Tech Startup/SaaS) --- */
 [data-vibe="dark-neo"] {
-  --bg-color: #050505;      /* Deep obsidian */
+  --bg-color: #050505;
   --text-primary: #ffffff;
   --text-secondary: #a1a1aa;
-  --accent: #6366f1;        /* Electric Indigo */
-  --border: #1f1f23;
+  --accent: #6366f1;
+  --border: rgba(255, 255, 255, 0.08);
   --radius: 12px;
   --font-main: 'Inter', sans-serif;
 }
 
-/* --- RECOVERY & POLISH --- */
-
-/* Fix the invisible H1 - Solid color first, then optional gradient */
 [data-vibe="dark-neo"] h1 {
-  color: #ffffff; 
   font-weight: 800;
   letter-spacing: -0.04em;
-  line-height: 1.1;
 }
 
-/* This adds the 'Neo' look without making text disappear */
 [data-vibe="dark-neo"] .bg-\[var\(--accent\)\] {
-  background-color: var(--accent);
   box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-[data-vibe="dark-neo"] .bg-\[var\(--accent\)\]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 35px rgba(99, 102, 241, 0.6);
-}
-
-/* Glass effect for cards and nav */
-[data-vibe="dark-neo"] .border {
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-[data-vibe="clean-light"] {
-  --bg-color: #ffffff;
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
-  --accent: #0ea5e9;
-  --border: #e5e7eb;
-  --radius: 0.375rem;
-  /* Elegant Font */
-  --font-main: 'Playfair Display', serif;
-}
-
+/* --- 4. STUDIO MONO (Creative/Industrial Tech) --- */
 [data-vibe="studio-mono"] {
-  --bg-color: #f4f4f5; /* Soft off-white */
-  --text-primary: #09090b;
-  --text-secondary: #52525b;
-  --accent: #f97316; /* Bold Orange */
-  --border: #09090b; /* Thick black borders */
-  --radius: 0px;    /* Sharp industrial corners */
+  --bg-color: #050505;
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+  --accent: #00f0ff;
+  --border: #1a1a1a;
+  --radius: 0px;
   --font-main: 'JetBrains Mono', monospace;
 }
 
-/* Add a specific tweak for this vibe's buttons */
+[data-vibe="studio-mono"] h1, 
+[data-vibe="studio-mono"] h2 {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+}
+
 [data-vibe="studio-mono"] .bg-\[var\(--accent\)\] {
-  box-shadow: 4px 4px 0px 0px #09090b;
-  border: 2px solid #09090b;
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
 }
 
-[data-vibe="studio-mono"] .bg-\[var\(--accent\)\]:hover {
-  box-shadow: 2px 2px 0px 0px #09090b;
-  transform: translate(2px, 2px);
+/* --- 5. RUGGED INDUSTRIAL (Trade Services/Gyms) --- */
+[data-vibe="rugged-industrial"] {
+  --bg-color: #111111;
+  --text-primary: #f4f4f4;
+  --text-secondary: #a1a1aa;
+  --accent: #ff5f1f;
+  --border: #27272a;
+  --radius: 4px;
+  --font-main: 'JetBrains Mono', monospace;
 }
 
-[data-vibe="maestro-dark"] {
-  --bg-color: #0d0d0d;      /* Midnight Onyx */
-  --text-primary: #f4f1ea;  /* Warm Ivory (easier on eyes than pure white) */
-  --text-secondary: #a0a0a0;
-  --accent: #c0a080;        /* Champagne Gold (replaces the red for better dark contrast) */
-  --border: #262626;        /* Subtle charcoal borders */
+[data-vibe="rugged-industrial"] h1, 
+[data-vibe="rugged-industrial"] h2 {
+  font-weight: 900;
+  text-transform: uppercase;
+  font-style: italic;
+  letter-spacing: -0.05em;
+}
+
+[data-vibe="rugged-industrial"] .bg-\[var\(--accent\)\] {
+  box-shadow: 4px 4px 0px 0px #ffffff;
+  border: 1px solid #000000;
+}
+
+/* --- 6. MAESTRO CLASSIC (High Art/Fine Dining) --- */
+[data-vibe="maestro-classic"] {
+  --bg-color: #fcfcfc;
+  --text-primary: #1a1a1a;
+  --text-secondary: #5e5e5e;
+  --accent: #8b0000;
+  --border: #d1d1d1;
   --radius: 0px;
   --font-main: 'Cormorant Garamond', serif;
 }
 
-/* Specific Polish for Maestro Dark */
-[data-vibe="maestro-dark"] h1, 
-[data-vibe="maestro-dark"] h2 {
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--text-primary);
-}
-
-/* Elegant Gold Outline Button */
-[data-vibe="maestro-dark"] .bg-\[var\(--accent\)\] {
-  background-color: transparent;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-[data-vibe="maestro-dark"] .bg-\[var\(--accent\)\]:hover {
-  background-color: var(--accent);
-  color: #000000;
-  box-shadow: 0 0 20px rgba(192, 160, 128, 0.2);
-}
-
-[data-vibe="maestro-classic"] {
-  --bg-color: #fcfcfc;      /* Pristine Paper */
-  --text-primary: #1a1a1a;  /* Deep Ink */
-  --text-secondary: #5e5e5e;
-  --accent: #8b0000;        /* Deep Rosso Corsa (Violin Varnish Red) */
-  --border: #d1d1d1;        /* Hairline borders */
-  --radius: 0px;            /* Traditional sharp edges */
-  --font-main: 'Cormorant Garamond', serif;
-}
-
-/* Custom Polish for Maestro Vibe */
 [data-vibe="maestro-classic"] h1, 
 [data-vibe="maestro-classic"] h2 {
   font-weight: 300;
@@ -125,136 +149,24 @@
   letter-spacing: 0.1em;
 }
 
-[data-vibe="maestro-classic"] .bg-\[var\(--accent\)\] {
-  background-color: transparent;
-  border: 1px solid var(--text-primary);
-  color: var(--text-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  transition: all 0.4s ease;
+/* --- 7. CLEAN LIGHT (Lifestyle/Modern Minimalist) --- */
+[data-vibe="clean-light"] {
+  --bg-color: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --accent: #0ea5e9;
+  --border: #e5e7eb;
+  --radius: 0.375rem;
+  --font-main: 'Playfair Display', serif;
 }
 
-[data-vibe="maestro-classic"] .bg-\[var\(--accent\)\]:hover {
-  background-color: var(--text-primary);
-  color: var(--bg-color);
-}
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  font-family: sans-serif;
-}
-
-/* --- RUGGED INDUSTRIAL VIBE --- */
-[data-vibe="rugged-industrial"] {
-  --bg-color: #111111;      /* Deep Charcoal */
-  --text-primary: #f4f4f4;  /* Off-White */
-  --text-secondary: #a1a1aa;
-  --accent: #ff5f1f;        /* Safety Orange */
-  --border: #27272a;        /* Subtle Zinc Border */
-  --radius: 4px;            /* Tough, nearly square edges */
-  --font-main: 'JetBrains Mono', monospace;
-}
-
-/* Custom Polish for Rugged Vibe */
-[data-vibe="c"] h1, 
-[data-vibe="rugged-industrial"] h2 {
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.05em; /* Tight, heavy impact */
-  font-style: italic;      /* Aggressive forward motion */
-}
-
-/* Heavy "Caution" Button Style */
-[data-vibe="rugged-industrial"] .bg-\[var\(--accent\)\] {
-  background-color: var(--accent);
-  color: #000000;
-  box-shadow: 4px 4px 0px 0px #ffffff; /* Hard white offset shadow */
-  border: 1px solid #000000;
-}
-
-[data-vibe="rugged-industrial"] .bg-\[var\(--accent\)\]:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px 0px #ffffff;
-}
-
-/* --- STUDIO MONO VIBE --- */
-[data-vibe="studio-mono"] {
-  --bg-color: #050505;      /* True Black */
-  --text-primary: #ffffff;  /* Pure White */
-  --text-secondary: #888888;
-  --accent: #00f0ff;        /* Electric Cyan */
-  --border: #1a1a1a;        /* Dark Grey Border */
-  --radius: 0px;            /* Sharp, clinical corners */
-  --font-main: 'Inter', sans-serif; /* Clean Neo-Grotesk */
-}
-
-/* Studio Mono Specific Polish */
-[data-vibe="studio-mono"] h1, 
-[data-vibe="studio-mono"] h2 {
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.04em;
-  font-family: 'JetBrains Mono', monospace; /* Mono headers for tech feel */
-}
-
-/* Neon Glow Button */
-[data-vibe="studio-mono"] .bg-\[var\(--accent\)\] {
-  background-color: transparent;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
-}
-
-[data-vibe="studio-mono"] .bg-\[var\(--accent\)\]:hover {
-  background-color: var(--accent);
-  color: #000000;
-  box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
-}
-
-/* --- ZENITH EARTH VIBE --- */
-[data-vibe="zenith-earth"] {
-  --bg-color: #F9F7F2;      /* Warm Parchment */
-  --text-primary: #2D2926;  /* Soft Charcoal */
-  --text-secondary: #6B665E;
-  --accent: #7D8471;        /* Sage Green */
-  --border: #E5E1D8;
-  --radius: 40px;           /* Ultra-soft, pill-like corners */
-  --font-main: 'Outfit', sans-serif; 
-}
-
-/* Zenith Specific: Soft Depth */
-[data-vibe="zenith-earth"] .rounded-\[var\(--radius\)\] {
-  box-shadow: 0 10px 30px -15px rgba(125, 132, 113, 0.2);
-}
-
-[data-vibe="zenith-earth"] h1, 
-[data-vibe="zenith-earth"] h2 {
-  font-family: 'Fraunces', serif; /* Soft, variable-weight serif */
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  text-transform: none; /* Keep it natural, not shouting */
-}
-
-/* Organic Button Styling */
-[data-vibe="zenith-earth"] .bg-\[var\(--accent\)\] {
-  background-color: var(--accent);
-  color: #ffffff;
-  border-radius: 100px; /* Fully round buttons */
-  transition: transform 0.3s ease;
-}
-
-/* Safety override for the mobile menu */
+/* --- MOBILE MENU RECOVERY --- */
+/* Ensures links are visible regardless of vibe-specific text colors */
 #mobile-menu.flex {
   display: flex !important;
-  background-color: var(--bg-color, #ffffff) !important; /* Uses vibe color, defaults to white */
+  background-color: var(--bg-color) !important;
 }
 
 .mobile-link {
-  color: var(--text-primary, #000000) !important; /* Uses vibe text, defaults to black */
-}
-
-/* Stops the page from scrolling behind the menu */
-body.menu-open {
-  overflow: hidden !important;
+  color: var(--text-primary) !important;
 }

@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
-import Gallery from '../components/Gallery.astro'; // Import the new component
+import Gallery from '../components/Gallery.astro';
 import Features from '../components/Features.astro';
-import Process from '../components/Process.astro'; // NEW
+import Process from '../components/Process.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Comparison from '../components/Comparison.astro';
 import BentoAbout from '../components/BentoAbout.astro';
@@ -13,33 +13,55 @@ import Contact from '../components/Contact.astro';
 import data from '../data/business.json';
 ---
 
-<Layout>
+<Layout title={`${data.brand.name} | ${data.brand.tagline}`}>
+  
   <Hero 
     brand={data.brand} 
     hero={data.hero} 
     settings={data.settings} 
   />
-  <BentoAbout brand={data.brand} hero={data.hero} /> 
-  <Comparison comparison={data.comparison} brand={data.brand} />
-  <Features id="features" features={data.features} />
 
-  <Process id="process" steps={data.processSteps} />
-  <Gallery gallery={data.gallery} />
-  <Investment investment={data.investment} />
-  <Testimonials 
-      id="testimonials" 
+  <BentoAbout brand={data.brand} hero={data.hero} /> 
+
+  <div id="comparison">
+    <Comparison comparison={data.comparison} brand={data.brand} />
+  </div>
+
+  <div id="features">
+    <Features features={data.features} />
+  </div>
+
+  <div id="process">
+    <Process steps={data.processSteps} />
+  </div>
+
+  <div id="gallery">
+    <Gallery gallery={data.gallery} />
+  </div>
+
+  <div id="testimonials">
+    <Testimonials 
       testimonials={data.testimonials} 
-      headline="Loved by the Local Pack" 
+      headline={data.brand.testimonial_headline || "What Our Clients Say"} 
     />
+  </div>
+
+  <div id="investment">
+    <Investment investment={data.investment} />
+  </div>
+
+  <div id="faqs">
     <FAQ 
-       id="faqs" 
-       faqs={data.faqs} 
-        headline="The Details" 
-     />
-     <Contact 
-       id="contact" 
-       brand={data.brand} 
-       contact={data.contact} 
-       settings={data.settings} 
-      />
+      faqs={data.faqs} 
+      headline={data.brand.faq_headline || "Frequently Asked Questions"} 
+    />
+  </div>
+
+  <Contact 
+    id="contact" 
+    brand={data.brand} 
+    contact={data.contact} 
+    settings={data.settings} 
+  />
+
 </Layout>

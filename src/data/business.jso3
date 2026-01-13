@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "settings": {
+    "vibe": "classic-heritage", 
+    "primary_color": "#4A5D4E",
+    "cta_text": "Book a Free Meet & Greet",
+    "cta_link": "#contact",
+   "menu": [
+      { "label": "Services", "path": "#features" },
+      { "label": "Process", "path": "#process" },
+      { "label": "Reviews", "path": "#testimonials" },
+      { "label": "FAQ", "path": "#faqs" }
+    ]
+  },
+  "brand": {
+    "name": "Dog Tired",
+    "logo_text": "Dog Tired",
+    "objection_handle": "We provide the reliability of a professional agency with the heart of a neighbor—always on time, always on call."
+  },
+  "hero": {
+    "headline": "A Restored Home Starts with a Contented Canine.",
+    "subtext": "Reliable, heart-centered dog walking that channels your pet's energy into calm, preserving your home and their happiness.",
+    "image": {
+      "src": "hero-main.jpg",
+      "alt": "A peaceful dog resting in a warm, sunlit home after an outdoor adventure."
+    }
+  },
+  "investment": [
+    {
+      "name": "The Basics",
+      "price": "$25",
+      "description": "Per walk",
+      "features": ["30 Minute Walk", "Fresh Water", "Treats Included"]
+    },
+    {
+      "name": "Elite Care",
+      "price": "$60",
+      "description": "Full Service",
+      "features": ["60 Minute Adventure", "Grooming", "Photo Updates", "VIP Priority"]
+    }
+  ],
+  "features": [
+    {
+      "title": "Real-Time Updates",
+      "description": "Direct text updates after every visit so you know exactly how your pup is doing.",
+      "icon_slug": "message-circle"
+    },
+    {
+      "title": "Habit Mapping",
+      "description": "We take the time to learn your dog's unique personality and triggers for a stress-free walk.",
+      "icon_slug": "map"
+    },
+    {
+      "title": "Always Reachable",
+      "description": "You have our direct number. Call for any reason—your pet's safety is our priority.",
+      "icon_slug": "phone-call"
+    }
+  ],
+  "processSteps": [
+    {
+      "title": "The Meet & Greet",
+      "description": "We visit your home to meet you and your dog, ensuring a perfect vibe and comfort level."
+    },
+    {
+      "title": "The Adventure",
+      "description": "We execute the walk according to your dog's specific energy needs and habits."
+    },
+    {
+      "title": "The Peace of Mind",
+      "description": "You receive a text confirmation and a calm, happy dog waiting for you when you get home."
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "I finally stopped worrying about my carpets and started enjoying my dog again.",
+      "author": "Sarah J.",
+      "role": "Local Pet Owner"
+    }
+  ],
+  "faqs": [
+  {
+    "question": "Are you available for last-minute walks?",
+    "answer": "Yes! Because you have my direct number, you can text for availability anytime. We try our best to accommodate short-notice requests."
+  },
+  {
+    "question": "What happens if it rains?",
+    "answer": "We walk rain or shine. If it's particularly messy, we'll ensure your pup is towelled off and comfortable before we leave."
+  }
+],
+  "contact": {
+    "phone": "555-0123",
+    "location": "Local Service Area",
+    "email": "hello@dogtired.com"
+  },
+  "gallery": [
+    {
+      "src": "walk-1.jpg",
+      "alt": "Happy dog on a trail walk."
+    },
+    {
+      "src": "walk-2.jpg",
+      "alt": "Calm dog resting after exercise."
+    }
+  ],
+  "comparison": {
+    "headline": "The Zenith Difference",
+    "features": [
+      { "label": "GPS Tracking", "us": true, "them": false },
+      { "label": "Certified Trainers", "us": true, "them": false },
+      { "label": "Premium Insurance", "us": true, "them": true },
+      { "label": "24/7 Support", "us": true, "them": false }
+    ]
+  }
+}

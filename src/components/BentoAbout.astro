@@ -1,54 +1,59 @@
 ---
 const { brand, hero } = Astro.props;
+
+// Determine if objection handle is long to adjust font size dynamically
+const isLongHandle = brand.objection_handle.length > 100;
 ---
 
 <section id="about" class="py-24 px-6 bg-[var(--bg-color)]">
   <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[200px]">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
       
-      <div class="md:col-span-8 md:row-span-2 p-8 md:p-12 bg-[var(--border)] bg-opacity-30 rounded-[var(--radius)] flex flex-col justify-end relative overflow-hidden group">
+      <div class="md:col-span-8 md:row-span-2 min-h-[400px] p-8 md:p-12 bg-[var(--border)] bg-opacity-20 rounded-[var(--radius)] flex flex-col justify-end relative overflow-hidden group border border-[var(--border)]">
         <div class="relative z-10">
             <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">// THE_ORIGIN</span>
-            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter text-[var(--text-primary)] mb-6 leading-none">
+            <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[var(--text-primary)] mb-6 leading-[0.9]">
                 {brand.name}
             </h2>
             <p class="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed max-w-xl">
                 {hero.subtext}
             </p>
         </div>
-        <span class="absolute -bottom-10 -right-10 text-[15rem] font-black opacity-5 select-none pointer-events-none text-[var(--text-primary)]">
+        <span class="absolute -bottom-10 -right-10 text-[12rem] md:text-[18rem] font-black opacity-[0.03] select-none pointer-events-none text-[var(--text-primary)]">
             {brand.name.charAt(0)}
         </span>
       </div>
 
-      <div class="md:col-span-4 md:row-span-1 p-8 bg-[var(--accent)] text-[var(--bg-color)] rounded-[var(--radius)] flex flex-col justify-center text-center">
-        <span class="text-[10px] uppercase tracking-widest font-bold opacity-80 mb-2">Our Promise</span>
-        <p class="text-xl font-black uppercase tracking-tighter leading-tight">
+      <div class="md:col-span-4 p-8 bg-[var(--accent)] text-[var(--bg-color)] rounded-[var(--radius)] flex flex-col justify-center text-center shadow-xl">
+        <span class="text-[10px] uppercase tracking-widest font-bold opacity-70 mb-3">Our Promise</span>
+        <p class={`${isLongHandle ? 'text-sm' : 'text-lg'} font-bold uppercase tracking-tight leading-snug`}>
             {brand.objection_handle}
         </p>
       </div>
 
-      <div class="md:col-span-4 md:row-span-2 bg-[var(--border)] rounded-[var(--radius)] overflow-hidden relative">
+      <div class="md:col-span-4 md:row-span-2 min-h-[300px] bg-[var(--border)] rounded-[var(--radius)] overflow-hidden relative border border-[var(--border)]">
         <img 
             src={hero.image.src} 
             alt={hero.image.alt} 
-            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 hover:scale-100"
         />
         <div class="absolute bottom-4 left-4">
              <span class="bg-[var(--bg-color)] text-[var(--text-primary)] px-3 py-1 text-[8px] font-bold uppercase tracking-widest rounded-full">Authenticity Verified</span>
         </div>
       </div>
 
-      <div class="md:col-span-4 md:row-span-1 border border-[var(--border)] rounded-[var(--radius)] flex items-center justify-center p-8">
+      <div class="md:col-span-4 p-8 border border-[var(--border)] rounded-[var(--radius)] flex items-center justify-center bg-[var(--bg-color)]">
         <div class="text-center">
-            <p class="text-4xl font-black text-[var(--text-primary)] tracking-tighter mb-1">2026</p>
-            <p class="text-[10px] uppercase tracking-widest text-[var(--text-secondary)] font-bold">Standard Set</p>
+            <p class="text-5xl font-black text-[var(--text-primary)] tracking-tighter mb-1">2026</p>
+            <p class="text-[10px] uppercase tracking-widest text-[var(--text-secondary)] font-bold opacity-60">Standard Set</p>
         </div>
       </div>
 
-       <div class="md:col-span-4 md:row-span-1 border border-[var(--border)] rounded-[var(--radius)] flex flex-col justify-center p-8 bg-[var(--text-primary)] text-[var(--bg-color)]">
-         <span class="text-[10px] uppercase tracking-widest font-bold opacity-50 mb-2">Availability</span>
-         <p class="text-sm font-bold uppercase tracking-tight italic">Currently accepting commissions for Q3/Q4.</p>
+      <div class="md:col-span-4 p-8 border border-[var(--border)] rounded-[var(--radius)] flex flex-col justify-center bg-[var(--text-primary)] text-[var(--bg-color)]">
+         <span class="text-[10px] uppercase tracking-widest font-bold opacity-40 mb-2">Availability</span>
+         <p class="text-xs md:text-sm font-bold uppercase tracking-widest italic">
+           {brand.availability_status || "Currently accepting new commissions for Q1/Q2."}
+         </p>
       </div>
 
     </div>

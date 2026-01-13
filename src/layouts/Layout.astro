@@ -1,27 +1,37 @@
 ---
 import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro'; // 1. IMPORT IT
+import Footer from '../components/Footer.astro';
 import data from '../data/business.json';
+import VibeSwitcher from '../components/VibeSwitcher.astro'; // 1. Import
 import '../styles/vibe-system.css';
 
 const { title } = Astro.props;
+// Normalize the vibe name to lowercase to prevent CSS case-sensitivity bugs
+const currentVibe = data.settings.vibe.toLowerCase();
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-vibe={currentVibe}>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title || data.brand.name}</title>
-</head>
-<body data-vibe={data.settings.vibe} class="bg-[var(--bg-color)] text-[var(--text-primary)] font-[var(--font-main)] flex flex-col min-h-screen">
     
+    <style is:global>
+        html { scroll-behavior: smooth; }
+        body { transition: background-color 0.3s ease, color 0.3s ease; }
+    </style>
+</head>
+<body class="bg-[var(--bg-color)] text-[var(--text-primary)] font-[var(--font-main)] flex flex-col min-h-screen">
+    <div id="top"></div>
     <Navbar brand={data.brand} settings={data.settings} />
 
     <main class="flex-grow">
         <slot />
     </main>
 
-    <Footer /> </body>
+    <Footer brand={data.brand} settings={data.settings} contact={data.contact} /> 
+    <VibeSwitcher />
+</body>
 </html>
