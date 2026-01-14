@@ -1,67 +1,105 @@
 ---
+// 1. STABLE IMPORTS
 import Layout from '../layouts/Layout.astro';
+import data from '../data/business.json';
+
+import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
-import Gallery from '../components/Gallery.astro';
 import Features from '../components/Features.astro';
-import Process from '../components/Process.astro';
-import Testimonials from '../components/Testimonials.astro';
-import Comparison from '../components/Comparison.astro';
 import BentoAbout from '../components/BentoAbout.astro';
+import Comparison from '../components/Comparison.astro';
+import Process from '../components/Process.astro';
 import Investment from '../components/Investment.astro';
+import Gallery from '../components/Gallery.astro';
 import FAQ from '../components/FAQ.astro';
 import Contact from '../components/Contact.astro';
-import data from '../data/business.json';
+import Footer from '../components/Footer.astro';
+import VibeSwitcher from '../components/VibeSwitcher.astro';
+
+// 2. DEFENSIVE DATA MAPPING (The Safety Net)
+const settings = data?.settings || {};
+const brand = data?.brand || {};
+const hero = data?.hero || {};
+const features = data?.features || [];
+const comparison = data?.comparison || null;
+const processSteps = data?.processSteps || [];
+const investment = data?.investment || [];
+const gallery = data?.gallery || [];
+const faqs = data?.faqs || [];
+const contact = data?.contact || {};
+
+// 3. TITLE LOGIC
+const siteTitle = brand?.name 
+  ? `${brand.name}${brand.tagline ? ' | ' + brand.tagline : ''}`
+  : 'Premium Service Site';
 ---
 
-<Layout title={`${data.brand.name} | ${data.brand.tagline}`}>
+<Layout title={siteTitle}>
   
-  <Hero 
-    brand={data.brand} 
-    hero={data.hero} 
-    settings={data.settings} 
-  />
-
-  <BentoAbout brand={data.brand} hero={data.hero} /> 
-
-  <div id="comparison">
-    <Comparison comparison={data.comparison} brand={data.brand} />
-  </div>
-
-  <div id="features">
-    <Features features={data.features} />
-  </div>
-
-  <div id="process">
-    <Process steps={data.processSteps} />
-  </div>
-
-  <div id="gallery">
-    <Gallery gallery={data.gallery} />
-  </div>
-
-  <div id="testimonials">
-    <Testimonials 
-      testimonials={data.testimonials} 
-      headline={data.brand.testimonial_headline || "What Our Clients Say"} 
+  {/* NAVBAR: Only render if settings exists */}
+  {settings?.menu && (
+    <Navbar 
+      brand={brand} 
+      menu={settings.menu} 
+      cta_text={settings.cta_text} 
+      cta_link={settings.cta_link} 
     />
-  </div>
+  )}
+  
+  <main>
+    {/* HERO: Guarded by headline existence */}
+    {hero?.headline && (
+      <Hero id="home" hero={hero} settings={settings} brand={brand} />
+    )}
 
-  <div id="investment">
-    <Investment investment={data.investment} />
-  </div>
+    {/* ABOUT: Guarded by brand name */}
+    {brand?.name && (
+      <BentoAbout id="about" brand={brand} hero={hero} />
+    )}
 
-  <div id="faqs">
-    <FAQ 
-      faqs={data.faqs} 
-      headline={data.brand.faq_headline || "Frequently Asked Questions"} 
-    />
-  </div>
+    {/* FEATURES: Guarded by array length */}
+    {features.length > 0 && (
+      <Features id="features" features={features} />
+    )}
 
-  <Contact 
-    id="contact" 
-    brand={data.brand} 
-    contact={data.contact} 
-    settings={data.settings} 
-  />
+    {/* COMPARISON: Guarded by object existence */}
+    {comparison && (
+      <Comparison id="comparison" comparison={comparison} brand={brand} />
+    )}
+
+    {/* PROCESS: Guarded by array length */}
+    {processSteps.length > 0 && (
+      <Process id="process" steps={processSteps} />
+    )}
+
+    {/* GALLERY: Guarded by array length */}
+    {gallery.length > 0 && (
+      <Gallery id="gallery" gallery={gallery} />
+    )}
+
+    {/* Use id="pricing" to match what the AI puts in menu paths */}
+    {investment && investment.length > 0 && (
+      <Investment 
+        id="pricing" 
+        tiers={investment} 
+        brand={brand} 
+      />
+    )}
+
+    {/* FAQ: Guarded by array length */}
+    {faqs.length > 0 && (
+      <FAQ id="faqs" faqs={faqs} />
+    )}
+
+    {/* CONTACT: Guarded by email existence */}
+    {contact?.email && (
+      <Contact id="contact" brand={brand} contact={contact} settings={settings} />
+    )}
+  </main>
+
+  <Footer brand={brand} />
+  
+  {/* Dev Tool: Persistent Vibe Switcher */}
+  <VibeSwitcher />
 
 </Layout>

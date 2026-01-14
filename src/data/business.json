@@ -1,152 +1,80 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "settings": {
-    "vibe": "Rugged Industrial",
-    "primary_color": "#1F2933",
-    "cta_text": "Get a Quote",
-    "cta_link": "tel:215-555-5555",
+    "vibe": "Zenith Earth",
+    "primary_color": "#4F7942",
+    "cta_text": "Schedule Site Review",
+    "cta_link": "#contact",
     "menu": [
-      { "label": "Services", "path": "#features" },
-      { "label": "How It Works", "path": "#process" },
-      { "label": "Pricing", "path": "#investment" },
+      { "label": "Features", "path": "#features" },
+      { "label": "Process", "path": "#process" },
+      { "label": "Pricing", "path": "#pricing" },
       { "label": "Contact", "path": "#contact" }
     ]
   },
   "brand": {
-  "name": "Joe's Junk Removal",
-  "logo_text": "JJR",
-  "tagline": "Fast. Fair. Gone.",
-  "objection_handle": "Fully insured, honest pricing, and on-time service—your junk removed the right way, with no surprises.",
-  "testimonial_headline": "What Your Neighbors Are Saying",
-  "faq_headline": "Clearing the Air (FAQ)",
-  "contact_headline": "Ready to clear the clutter?",
-  "investment_headline": "Transparent Pricing",
-  "availability_status": "Accepting junk removal routes for Monday-Friday."
+    "name": "Elite Local Lawns",
+    "logo_text": "ELL",
+    "tagline": "You can tell by the way I mow.",
+    "objection_handle": "The Zero-Debris Guarantee: I bag and haul it all away.",
+    "availability_status": "Taking on 5 new 1/4 acre lots",
+    "contact_headline": "Ready for a Spotless Yard?"
   },
   "hero": {
-    "headline": "Junk Gone. No Excuses. No Surprises.",
-    "subtext": "On-time, insured junk removal with honest answers and careful handling—exactly as promised.",
+    "headline": "Warminster’s Premium Small-Lot Specialist",
+    "subtext": "Professional lawn care for 1/4 acre lots. I don't just mow; I leave your property spotless.",
     "image": {
-      "src": "/images/hero-junk-removal.jpg",
-      "alt": "Joe standing next to his pickup truck ready for junk removal"
+      "src": "https://images.unsplash.com/photo-1558905619-17254261bc67?q=80&w=2000",
+      "alt": "Manicured green lawn"
     }
-  },
-  "comparison": {
-    "headline": "The Difference Between a Pro and \"Some Guy With a Truck\"",
-    "features": [
-      { "label": "Fully insured & legitimate", "us": true, "them": false },
-      { "label": "Honest, upfront answers", "us": true, "them": false },
-      { "label": "Shows up when scheduled", "us": true, "them": false }
-    ]
   },
   "features": [
     {
-      "title": "Honest Pricing",
-      "description": "Clear pricing before the job starts—no surprise charges, no pressure.",
-      "icon_slug": "dollar-sign"
+      "title": "Precision Mowing",
+      "description": "Tailored for 1/4 acre lots using pro-grade equipment.",
+      "icon_slug": "scissors"
     },
     {
-      "title": "On-Time Service",
-      "description": "We show up when we say we will, ready to work.",
-      "icon_slug": "clock"
+      "title": "Bagging & Hauling",
+      "description": "I take the grass clippings with me—no messy clumps left behind.",
+      "icon_slug": "truck"
     },
     {
-      "title": "Careful Removal",
-      "description": "Items are removed cleanly with respect for your home or property.",
-      "icon_slug": "shield"
+      "title": "Detail Finishing",
+      "description": "Full trimming and sidewalk blowing included with every visit.",
+      "icon_slug": "wind"
     }
   ],
   "processSteps": [
     {
-      "title": "Call or Text for a Quote",
-      "description": "Tell us what needs to go and get an honest answer upfront."
+      "title": "Site Review",
+      "description": "I meet you at your property to walk the lawn and discuss your needs."
     },
     {
-      "title": "We Arrive On Time",
-      "description": "Fully insured and ready to work—exactly when scheduled."
+      "title": "Trailer-to-Turf",
+      "description": "I arrive with specialized equipment, ready to transform your yard."
     },
     {
-      "title": "Junk Is Removed Cleanly",
-      "description": "Items are hauled away quickly with no mess and no mistakes."
-    }
-  ],
-  "testimonials": [
-    {
-      "quote": "The personalized service ensured that the items I needed to 'go away' were removed quickly and cleanly.",
-      "author": "Satisfied Customer",
-      "role": "Homeowner"
+      "title": "The Clean Sweep",
+      "description": "After mowing, I blow the walkways and haul away all debris."
     }
   ],
   "investment": [
     {
-      "name": "Single Item Pickup",
-      "price": "$100",
-      "description": "Ideal for large appliances or single bulky items.",
-      "features": [
-        "Large appliances and electronics",
-        "Item must be fully disconnected and ready for removal",
-        "Careful handling with no property damage",
-        "Honest confirmation before removal"
-      ]
-    },
-    {
-      "name": "Full Pickup Truck Load",
-      "price": "$250",
-      "description": "Perfect for garages or multiple bulky items.",
-      "features": [
-        "One full pickup truck load",
-        "All items must be ready and accessible",
-        "Efficient, on-time service",
-        "No surprise fees"
-      ]
-    },
-    {
-      "name": "Pickup Truck + Trailer",
-      "price": "$400",
-      "description": "Maximum hauling capacity for large cleanouts.",
-      "features": [
-        "Pickup truck plus trailer",
-        "Ideal for renovations or estate cleanouts",
-        "No unhooking or disassembly of appliances",
-        "Fully insured professional service"
-      ]
+      "name": "Standard Mow",
+      "price": "$50",
+      "description": "per visit",
+      "features": ["1/4 acre lots", "Bagging included", "Blowing included"]
     }
   ],
   "faqs": [
     {
-      "question": "Do you take TVs and electronic equipment?",
-      "answer": "Yes, we remove TVs and most electronic equipment as long as they are ready for pickup."
-    },
-    {
-      "question": "Are you insured?",
-      "answer": "Yes, Joe’s Junk Removal is fully insured for your peace of mind."
-    },
-    {
-      "question": "Do you unhook or disconnect appliances?",
-      "answer": "No. All appliances must be fully disconnected and ready for removal before arrival."
+      "question": "Do you leave the grass bags on the curb?",
+      "answer": "No. I take all clippings and small branches with me in my trailer."
     }
   ],
   "contact": {
     "phone": "215-555-5555",
-    "location": "Bucks County and Eastern Montgomery County",
-    "email": "joe@example.com"
-  },
-  "gallery": [
-    {
-      "src": "/images/hauling-refrigerator.jpg",
-      "alt": "Joe hauling a refrigerator from a garage"
-    },
-    {
-      "src": "/images/truck-loaded.jpg",
-      "alt": "Pickup truck loaded with junk"
-    },
-    {
-      "src": "/images/before-after-garage.jpg",
-      "alt": "Before-and-after garage cleanout"
-    },
-    {
-      "src": "/images/joe-with-truck.jpg",
-      "alt": "Joe standing next to his truck in work gear"
-    }
-  ]
+    "location": "Warminster, PA",
+    "email": "george@gmail.com"
+  }
 }

@@ -1,22 +1,29 @@
 ---
-const { brand, settings } = Astro.props;
+/**
+ * Navbar Component - Vibe-Engine Edition
+ * Receives individual props from index.astro to prevent "Prop Drift"
+ */
+ const { brand, menu, cta_text, cta_link } = Astro.props;
 ---
 
 <nav class="sticky top-0 z-[100] w-full border-b border-[var(--border)] bg-[var(--bg-color)]/80 backdrop-blur-md transition-all duration-300">
   <div class="container mx-auto px-6 py-4 flex items-center justify-between relative z-[120]">
     
+    {/* BRAND LOGO - Uses logo_text if available, falls back to name */}
     <a href="#top" class="text-xl font-black uppercase tracking-tighter text-[var(--text-primary)] hover:opacity-70 transition-opacity">
-      {brand.logo_text}
+      {brand?.logo_text || brand?.name || "Agency"}
     </a>
 
+    {/* MOBILE MENU TOGGLE */}
     <button id="menu-toggle" class="md:hidden text-[var(--text-primary)] relative z-[130] p-2 focus:outline-none" aria-label="Toggle Menu">
       <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path id="menu-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
       </svg>
     </button>
 
+    {/* DESKTOP NAVIGATION */}
     <div class="hidden md:flex items-center gap-8">
-      {settings.menu.map((item) => (
+      {menu && menu.map((item) => (
         <a 
           href={item.path} 
           class="nav-link text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
@@ -24,12 +31,17 @@ const { brand, settings } = Astro.props;
           {item.label}
         </a>
       ))}
-      <a href={settings.cta_link} class="px-6 py-2 text-[10px] font-bold uppercase tracking-[0.2em] border border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg-color)] transition-all rounded-[var(--radius)]">
-        {settings.cta_text}
-      </a>
+      
+      {/* CTA Button - Only renders if cta_text is present in JSON */}
+      {cta_text && (
+        <a href={cta_link || "#contact"} class="px-6 py-2 text-[10px] font-bold uppercase tracking-[0.2em] border border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg-color)] transition-all rounded-[var(--radius)]">
+          {cta_text}
+        </a>
+      )}
     </div>
   </div>
 
+  {/* MOBILE MENU OVERLAY */}
   <div 
     id="mobile-menu" 
     class="fixed inset-0 w-full h-screen bg-[var(--bg-color)] hidden flex-col justify-center items-center z-[110]"
@@ -37,7 +49,7 @@ const { brand, settings } = Astro.props;
     <div class="absolute inset-0 bg-[var(--bg-color)] z-[-1]"></div>
 
     <div class="flex flex-col gap-0 text-center relative z-[125] w-full px-12">
-      {settings.menu.map((item) => (
+      {menu && menu.map((item) => (
         <a 
           href={item.path} 
           class="mobile-link py-6 text-xl font-bold uppercase tracking-[0.3em] text-[var(--text-primary)] border-b border-[var(--border)] last:border-0 hover:text-[var(--accent)] transition-colors"
@@ -46,26 +58,32 @@ const { brand, settings } = Astro.props;
         </a>
       ))}
       
-      <div class="mt-12">
-        <a 
-          href={settings.cta_link} 
-          class="mobile-link inline-block px-10 py-5 bg-[var(--accent)] text-[var(--bg-color)] text-[10px] font-bold uppercase tracking-[0.4em] rounded-[var(--radius)] shadow-lg active:scale-95 transition-transform"
-        >
-          {settings.cta_text}
-        </a>
-      </div>
+      {cta_text && (
+        <div class="mt-12">
+          <a 
+            href={cta_link || "#contact"} 
+            class="mobile-link inline-block px-10 py-5 bg-[var(--accent)] text-[var(--bg-color)] text-[10px] font-bold uppercase tracking-[0.4em] rounded-[var(--radius)] shadow-lg active:scale-95 transition-transform"
+          >
+            {cta_text}
+          </a>
+        </div>
+      )}
     </div>
   </div>
 </nav>
 
 <script>
+  /**
+   * INTERACTIVE LOGIC
+   * Handles both the mobile toggle and the high-performance IntersectionObserver
+   */
   const btn = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');
   const iconPath = document.getElementById('menu-path');
   const links = document.querySelectorAll('.mobile-link');
   const navLinks = document.querySelectorAll('.nav-link');
 
-  // 1. MENU TOGGLE LOGIC
+  // 1. MOBILE TOGGLE LOGIC
   function toggleMenu() {
     const isHidden = menu?.classList.contains('hidden');
     if (isHidden) {
@@ -84,10 +102,11 @@ const { brand, settings } = Astro.props;
   btn?.addEventListener('click', toggleMenu);
   links.forEach(link => link.addEventListener('click', toggleMenu));
 
-  // 2. ACTIVE SECTION OBSERVER (The SPA Secret Sauce)
+  // 2. ACTIVE SECTION OBSERVER (Scroll Spy)
+  // Ensures 100/100 scores by using native browser APIs rather than scroll listeners
   const observerOptions = {
     root: null,
-    rootMargin: '-20% 0px -70% 0px', // Trigger when section is in the upper middle of view
+    rootMargin: '-20% 0px -70% 0px', 
     threshold: 0
   };
 
@@ -108,7 +127,7 @@ const { brand, settings } = Astro.props;
     });
   }, observerOptions);
 
-  // Watch every section on the index page
+  // Watch every section on the index page for active states
   document.querySelectorAll('section[id]').forEach((section) => {
     observer.observe(section);
   });

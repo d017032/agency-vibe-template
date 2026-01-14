@@ -1,37 +1,56 @@
 ---
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import data from '../data/business.json';
-import VibeSwitcher from '../components/VibeSwitcher.astro'; // 1. Import
+/**
+ * Main Layout - Vibe-Engine Edition
+ * Handles SEO, Google Fonts, and the Master Vibe Switch
+ */
+ import data from '../data/business.json';
 import '../styles/vibe-system.css';
 
-const { title } = Astro.props;
-// Normalize the vibe name to lowercase to prevent CSS case-sensitivity bugs
-const currentVibe = data.settings.vibe.toLowerCase();
+interface Props {
+	title?: string;
+}
+
+// 1. Get the Vibe from business.json
+// We normalize it to lowercase and replace spaces with dashes to match CSS selectors
+const activeVibe = data.settings.vibe.toLowerCase().replace(/\s+/g, '-');
+
+const { title = `${data.brand.name} | ${data.brand.tagline}` } = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="en" data-vibe={currentVibe}>
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title || data.brand.name}</title>
-    
-    <style is:global>
-        html { scroll-behavior: smooth; }
-        body { transition: background-color 0.3s ease, color 0.3s ease; }
-    </style>
-</head>
-<body class="bg-[var(--bg-color)] text-[var(--text-primary)] font-[var(--font-main)] flex flex-col min-h-screen">
-    <div id="top"></div>
-    <Navbar brand={data.brand} settings={data.settings} />
+<!doctype html>
+<html lang="en" data-vibe={activeVibe}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={data.brand.objection_handle} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
 
-    <main class="flex-grow">
-        <slot />
-    </main>
+		{/* 2. Google Fonts Preconnect for Performance (100/100 Strategy) */}
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link 
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:ital,wght@0,400;0,800;1,800&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,700&family=Outfit:wght@400;900&display=swap" 
+			rel="stylesheet" 
+		/>
+	</head>
+	<body class="bg-[var(--bg-color)] text-[var(--text-primary)] font-[var(--font-main)] selection:bg-[var(--accent)] selection:text-[var(--bg-color)]">
+		<slot />
+		
+		<style is:global>
+			/* Smooth scroll for the SPA feel */
+			html {
+				scroll-behavior: smooth;
+			}
 
-    <Footer brand={data.brand} settings={data.settings} contact={data.contact} /> 
-    <VibeSwitcher />
-</body>
+			/* Remove blue highlights on mobile for that "Premium" feel */
+			* {
+				-webkit-tap-highlight-color: transparent;
+			}
+
+			/* Hide scrollbar but allow scrolling if preferred for minimal vibes */
+			/* .no-scrollbar::-webkit-scrollbar { display: none; } */
+		</style>
+	</body>
 </html>
