@@ -1,22 +1,35 @@
 ---
+import { iconLibrary } from '../lib/icons.js';
 const { id, features } = Astro.props;
 ---
-<section id={id} class="py-24 px-6 bg-[var(--bg-color)] scroll-mt-24">
-  <div class="container mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-      {features && features.map((feature) => (
-        <div class="group border-l border-[var(--border)] pl-6 hover:border-[var(--accent)] transition-colors duration-500">
-          <div class="text-[var(--accent)] text-[10px] font-mono mb-4 tracking-widest uppercase">
-            // {feature.icon_slug || "SERVICE_MODULE"}
+
+<section id={id} class="py-24 px-6 bg-[var(--bg-color)] scroll-mt-24 border-t border-[var(--border)]">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-y-20">
+      {features && features.map((feature: any) => {
+        // Look up the icon from our central library
+        const path = iconLibrary[feature.icon_slug.toLowerCase()] || iconLibrary.star;
+
+        return (
+          <div class="group border-l-2 border-[var(--border)] pl-8 hover:border-[var(--accent)] transition-all duration-500 py-2">
+            
+            {/* ICON WRAPPER: Inherits vibe-based shadows/radius */}
+            <div class="inline-flex items-center justify-center w-10 h-10 mb-6 text-[var(--accent)] bg-[var(--bg-color)] border border-[var(--border)] feature-icon-wrapper group-hover:scale-110 transition-transform">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d={path} />
+              </svg>
+            </div>
+
+            <h3 class="text-xl font-black uppercase tracking-tight mb-4 text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
+              {feature.title}
+            </h3>
+            
+            <p class="text-[var(--text-secondary)] text-sm leading-relaxed max-w-sm">
+              {feature.description}
+            </p>
           </div>
-          <h3 class="text-xl font-bold uppercase tracking-tight mb-4 text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
-            {feature.title}
-          </h3>
-          <p class="text-[var(--text-secondary)] text-sm leading-relaxed max-w-sm">
-            {feature.description}
-          </p>
-        </div>
-      ))}
+        )
+      })}
     </div>
   </div>
 </section>

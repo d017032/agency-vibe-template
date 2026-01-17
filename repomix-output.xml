@@ -50,6 +50,7 @@ src/
     BentoAbout.astro
     Comparison.astro
     Contact.astro
+    Events.astro
     FAQ.astro
     FeatureImage.astro
     Features.astro
@@ -60,7 +61,9 @@ src/
     Investment.astro
     Navbar.astro
     Process.astro
+    ServiceArea.astro
     Testimonials.astro
+    TrustBar.astro
     VibeSwitcher.astro
   content/
     services/
@@ -72,9 +75,12 @@ src/
     business.jso3
     business.jso4
     business.jso5
+    business.jso6
     business.json
   layouts/
     Layout.astro
+  lib/
+    icons.js
   pages/
     services/
       [...slug].astro
@@ -97,159 +103,255 @@ tsconfig.json
 <files>
 This section contains the contents of the repository's files.
 
-<file path="src/data/business.jso5">
+<file path="src/components/Events.astro">
+---
+const { events, headline = "Upcoming Shows" } = Astro.props;
+---
+
+<section id="events" class="py-24 px-6 bg-[var(--bg-color)]">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-4xl font-bold mb-12 text-center tracking-tight text-[var(--text-primary)]">
+      {headline}
+    </h2>
+    
+    <div class="space-y-4">
+      {events.map((event) => (
+        <div class="flex flex-col md:flex-row items-center justify-between p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--bg-card)] hover:border-[var(--accent)] transition-colors group">
+          <div class="flex items-center gap-8 text-center md:text-left">
+            <div class="text-2xl font-black text-[var(--accent)] uppercase w-20">
+              {event.date}
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-[var(--text-primary)]">{event.venue}</h3>
+              <p class="text-[var(--text-secondary)]">{event.location}</p>
+            </div>
+          </div>
+          
+          <a href={event.link} class="mt-4 md:mt-0 px-6 py-2 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full font-bold hover:scale-105 transition-transform">
+            Tickets & Info
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+</file>
+
+<file path="src/components/ServiceArea.astro">
+---
+const { data } = Astro.props;
+---
+<section class="py-20 bg-[var(--bg-card)] border-y border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-4xl font-bold text-[var(--text-primary)] mb-4">{data.headline}</h2>
+        <p class="text-[var(--text-secondary)] mb-8 text-lg">{data.subtext}</p>
+        <div class="grid grid-cols-2 gap-4">
+          {data.locations.map((place) => (
+            <div class="flex items-center gap-2 text-[var(--text-primary)]">
+              <span class="text-[var(--accent)]">📍</span> {place}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="bg-[var(--bg-color)] p-8 rounded-3xl border border-[var(--border)] text-center">
+        <p class="text-sm uppercase tracking-widest text-[var(--text-secondary)] mb-2">Outside these areas?</p>
+        <p class="text-xl font-bold mb-6">Contact us for custom quotes on distance travel.</p>
+        <a href="#contact" class="px-8 py-3 bg-[var(--accent)] text-white rounded-full font-bold">Inquire Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+</file>
+
+<file path="src/components/TrustBar.astro">
+---
+const { data } = Astro.props;
+
+/*
+Expected data shape:
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  headline?: string,
+  items: Array<{
+    label: string,
+    sublabel?: string,
+    icon?: string
+  }>
+}
+*/
+---
+
+<section class="py-8 bg-[var(--bg-color)] border-b border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6">
+    
+    {data?.headline && (
+      <p class="text-center text-sm uppercase tracking-widest text-[var(--text-secondary)] mb-6">
+        {data.headline}
+      </p>
+    )}
+
+    <ul class="grid grid-cols-2 md:grid-cols-4 gap-6 items-center text-center">
+      {data.items.map((item) => (
+        <li class="flex flex-col items-center gap-2">
+          
+          {item.icon && (
+            <span class="text-2xl text-[var(--accent)]" aria-hidden="true">
+              {item.icon}
+            </span>
+          )}
+
+          <span class="font-bold text-[var(--text-primary)]">
+            {item.label}
+          </span>
+
+          {item.sublabel && (
+            <span class="text-sm text-[var(--text-secondary)]">
+              {item.sublabel}
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
+
+  </div>
+</section>
+</file>
+
+<file path="src/data/business.jso6">
+{
   "settings": {
-    "vibe": "Rugged Industrial",
-    "primary_color": "#1F2933",
-    "cta_text": "Get a Quote",
-    "cta_link": "tel:215-555-5555",
+    "vibe": "Zenith Earth",
+    "primary_color": "#4f7942",
+    "cta_text": "Claim Your Free Estimate",
+    "cta_link": "#contact",
     "menu": [
+      { "label": "The Story", "path": "#about" },
       { "label": "Services", "path": "#features" },
-      { "label": "How It Works", "path": "#process" },
-      { "label": "Pricing", "path": "#investment" },
-      { "label": "Contact", "path": "#contact" }
+      { "label": "Process", "path": "#process" },
+      { "label": "Investment", "path": "#pricing" }
     ]
   },
   "brand": {
-  "name": "Joe's Junk Removal",
-  "logo_text": "JJR",
-  "tagline": "Fast. Fair. Gone.",
-  "objection_handle": "Fully insured, honest pricing, and on-time service—your junk removed the right way, with no surprises.",
-  "testimonial_headline": "What Your Neighbors Are Saying",
-  "faq_headline": "Clearing the Air (FAQ)",
-  "contact_headline": "Ready to clear the clutter?",
-  "investment_headline": "Transparent Pricing",
-  "availability_status": "Accepting junk removal routes for Monday-Friday."
+    "name": "Elite Lawns",
+    "logo_text": "EL",
+    "tagline": "Austin's Premier Organic Turf Care",
+    "objection_handle": "100% Pet-Safe. Fully Insured. No Contracts.",
+    "availability_status": "Now booking for Spring aeration and seasonal cleanup.",
+    "contact_headline": "Ready for a Greener View?",
+    "process_headline": "Our Restoration Path",
+    "process_icon": "sprout",
+    "investment_headline": "Seasonal Care Packages",
+    "investment_icon": "tag"
   },
   "hero": {
-    "headline": "Junk Gone. No Excuses. No Surprises.",
-    "subtext": "On-time, insured junk removal with honest answers and careful handling—exactly as promised.",
+    "headline": "Transform Your Lawn Into a Private Oasis",
+    "subtext": "Luxury landscaping and organic maintenance for Austin homeowners who value precision over price.",
     "image": {
-      "src": "/images/hero-junk-removal.jpg",
-      "alt": "Joe standing next to his pickup truck ready for junk removal"
+      "src": "/images/hero-landscaping.jpg",
+      "alt": "Manicured lawn with sharp edging and healthy green turf"
     }
   },
-  "comparison": {
-    "headline": "The Difference Between a Pro and \"Some Guy With a Truck\"",
-    "features": [
-      { "label": "Fully insured & legitimate", "us": true, "them": false },
-      { "label": "Honest, upfront answers", "us": true, "them": false },
-      { "label": "Shows up when scheduled", "us": true, "them": false }
+  "about": {
+    "story_headline": "From One Mower to a Managed Fleet",
+    "story_text": "George started Elite Lawns with a single goal: to treat every yard like his own backyard. Today, we bring that same meticulous, owner-operated attention to over 400 properties across Austin.",
+    "founder_note": "We don't just cut grass; we architect outdoor environments that increase your home's value.",
+    "years_experience": "12+",
+    "stats": [
+      { "value": "450+", "label": "\\leaf Lawns Restored" },
+      { "value": "100%", "label": "\\shield Organic Products" }
     ]
   },
   "features": [
     {
-      "title": "Honest Pricing",
-      "description": "Clear pricing before the job starts—no surprise charges, no pressure.",
-      "icon_slug": "dollar-sign"
+      "title": "Precision Edging",
+      "description": "Diamond-blade technology for sidewalk lines that look like they were cut with a ruler.",
+      "icon_slug": "scissors"
     },
     {
-      "title": "On-Time Service",
-      "description": "We show up when we say we will, ready to work.",
-      "icon_slug": "clock"
+      "title": "Soil Nutrition",
+      "description": "Customized organic fertilizer blends tailored specifically for the Central Texas climate.",
+      "icon_slug": "leaf"
     },
     {
-      "title": "Careful Removal",
-      "description": "Items are removed cleanly with respect for your home or property.",
-      "icon_slug": "shield"
+      "title": "On-Demand Scheduling",
+      "description": "Our mobile app lets you skip a mow or add a service with a single tap.",
+      "icon_slug": "phone"
     }
   ],
   "processSteps": [
     {
-      "title": "Call or Text for a Quote",
-      "description": "Tell us what needs to go and get an honest answer upfront."
+      "title": "Ground Audit",
+      "description": "We analyze your soil pH and grass health before the first blade touches the turf."
     },
     {
-      "title": "We Arrive On Time",
-      "description": "Fully insured and ready to work—exactly when scheduled."
+      "title": "The Deep Cut",
+      "description": "Precision mowing and edging performed by our vetted, long-term crew members."
     },
     {
-      "title": "Junk Is Removed Cleanly",
-      "description": "Items are hauled away quickly with no mess and no mistakes."
-    }
-  ],
-  "testimonials": [
-    {
-      "quote": "The personalized service ensured that the items I needed to 'go away' were removed quickly and cleanly.",
-      "author": "Satisfied Customer",
-      "role": "Homeowner"
+      "title": "Final Walkthrough",
+      "description": "Every service ends with a clean-up and a final quality check by the foreman."
     }
   ],
   "investment": [
     {
-      "name": "Single Item Pickup",
-      "price": "$100",
-      "description": "Ideal for large appliances or single bulky items.",
+      "name": "Estate Maintenance",
+      "price": "$199",
+      "description": "per month",
       "features": [
-        "Large appliances and electronics",
-        "Item must be fully disconnected and ready for removal",
-        "Careful handling with no property damage",
-        "Honest confirmation before removal"
+        "\\leaf Bi-Weekly Mowing",
+        "\\scissors Precision Edging",
+        "\\check Seasonal Fertilizer",
+        "\\check Priority Support"
       ]
     },
     {
-      "name": "Full Pickup Truck Load",
-      "price": "$250",
-      "description": "Perfect for garages or multiple bulky items.",
+      "name": "Elite Restoration",
+      "price": "$349",
+      "description": "one-time service",
       "features": [
-        "One full pickup truck load",
-        "All items must be ready and accessible",
-        "Efficient, on-time service",
-        "No surprise fees"
+        "\\sprout Aeration & Seeding",
+        "\\leaf Soil Treatment",
+        "\\check Mulch Refresh",
+        "\\shield Irrigation Audit"
       ]
-    },
-    {
-      "name": "Pickup Truck + Trailer",
-      "price": "$400",
-      "description": "Maximum hauling capacity for large cleanouts.",
-      "features": [
-        "Pickup truck plus trailer",
-        "Ideal for renovations or estate cleanouts",
-        "No unhooking or disassembly of appliances",
-        "Fully insured professional service"
-      ]
-    }
-  ],
-  "faqs": [
-    {
-      "question": "Do you take TVs and electronic equipment?",
-      "answer": "Yes, we remove TVs and most electronic equipment as long as they are ready for pickup."
-    },
-    {
-      "question": "Are you insured?",
-      "answer": "Yes, Joe’s Junk Removal is fully insured for your peace of mind."
-    },
-    {
-      "question": "Do you unhook or disconnect appliances?",
-      "answer": "No. All appliances must be fully disconnected and ready for removal before arrival."
     }
   ],
   "contact": {
-    "phone": "215-555-5555",
-    "location": "Bucks County and Eastern Montgomery County",
-    "email": "joe@example.com"
-  },
-  "gallery": [
-    {
-      "src": "/images/hauling-refrigerator.jpg",
-      "alt": "Joe hauling a refrigerator from a garage"
-    },
-    {
-      "src": "/images/truck-loaded.jpg",
-      "alt": "Pickup truck loaded with junk"
-    },
-    {
-      "src": "/images/before-after-garage.jpg",
-      "alt": "Before-and-after garage cleanout"
-    },
-    {
-      "src": "/images/joe-with-truck.jpg",
-      "alt": "Joe standing next to his truck in work gear"
-    }
-  ]
+    "phone": "512-555-0199",
+    "location": "Austin, Texas",
+    "email": "hello@elitelawns.com"
+  }
 }
+</file>
+
+<file path="src/lib/icons.js">
+/* ICON DICTIONARY 
+  High-performance, single-path SVGs for the Vibe System.
+*/
+
+export const iconLibrary = {
+    // --- Nature & Garden (Elite Lawns) ---
+    leaf: "M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z M2 21c0-3 1.85-5.36 5.08-6",
+    sprout: "M12 22V8M5 12c0-3.3 2.7-6 6-6s6 2.7 6 6M5 12a6 6 0 0 1 0-12",
+    sun: "M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0 M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41",
+    scissors: "M3 7l8.445 8.5a2.5 2.5 0 1 1-3.5 3.5L3 14 M21 7l-8.445 8.5a2.5 2.5 0 1 0 3.5 3.5L21 14 M12 12v.01",
+  
+    // --- Trades & Logistics (Joe's Junk / Construction) ---
+    truck: "M1 14h15V4H1v10zm15 0h3l3 3v2h-6v-5zm-2 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm10 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0z",
+    hammer: "M14.5 12.5L21 6l-4.5-4.5L10 8l4.5 4.5zm-4 4l-4 4L2 16l4-4 4 4z",
+    wrench: "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z",
+    trash: "M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2",
+  
+    // --- Business & Trust ---
+    shield: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+    star: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
+    check: "M20 6L9 17l-5-5",
+    coins: "M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6",
+    briefcase: "M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16",
+    clock: "M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-16v6l4 2",
+    phone: "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+  };
 </file>
 
 <file path="public/favicon.svg">
@@ -367,66 +469,26 @@ const fontURL = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ita
 <link href={fontURL} rel="stylesheet">
 </file>
 
-<file path="src/components/Gallery.astro">
----
-const { gallery } = Astro.props;
-import data from '../data/business.json';
-
-const headline = data.brand.gallery_headline || "Our Work in Action";
----
-
-<section id="gallery" class="py-24 px-6 bg-[var(--bg-color)]">
-  <div class="max-w-6xl mx-auto">
-    
-    <div class="mb-16">
-      <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">// THE_VISUALS</span>
-      <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
-        {headline}
-      </h2>
-    </div>
-
-    <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-      {gallery && gallery.map((item: any) => (
-        <div class="break-inside-avoid rounded-[var(--radius)] overflow-hidden border border-[var(--border)] group bg-[var(--border)] bg-opacity-10">
-          <img 
-            src={item.src} 
-            alt={item.alt} 
-            loading="lazy"
-            class="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0 grayscale-[0.5]"
-          />
-          {item.caption && (
-            <div class="p-4 bg-[var(--bg-color)]">
-              <p class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)]">
-                {item.caption}
-              </p>
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-</file>
-
 <file path="src/components/VibeSwitcher.astro">
 ---
-/* VibeSwitcher: A hidden-ish floating tool for live demos */
+/* VibeSwitcher: Updated to the Full 8-Vibe Catalog */
 const vibes = [
   { id: 'zenith-earth', label: 'Zenith Earth', icon: '🌿' },
-  { id: 'classic-heritage', label: 'Classic Heritage', icon: '⚖️' },
-  { id: 'dark-neo', label: 'Dark Neo', icon: '💎' },
-  { id: 'studio-mono', label: 'Studio Mono', icon: '🏁' },
+  { id: 'midnight-tech', label: 'Midnight Tech', icon: '💎' },
   { id: 'rugged-industrial', label: 'Rugged Industrial', icon: '🚧' },
   { id: 'maestro-classic', label: 'Maestro Classic', icon: '🎻' },
-  { id: 'clean-light', label: 'Clean Light', icon: '☁️' }
+  { id: 'neon-cyber', label: 'Neon Cyber', icon: '🕹️' },
+  { id: 'clinical-minimal', label: 'Clinical Minimal', icon: '🏥' },
+  { id: 'solar-flare', label: 'Solar Flare', icon: '⚡' },
+  { id: 'vintage-boutique', label: 'Vintage Boutique', icon: '🏺' }
 ];
 ---
 
-<div id="vibe-switcher-container" class="fixed bottom-6 left-6 z-[9999] group">
+<div id="vibe-switcher-container" class="fixed bottom-6 left-6 z-[9999] group print:hidden">
   <button 
     id="vibe-master-btn" 
-    class="w-14 h-14 bg-black text-white rounded-full shadow-[0_0_20px_rgba(0,0,0,0.3)] flex items-center justify-center hover:scale-110 transition-all duration-300 border border-white/20 active:scale-90"
-    title="Switch Vibe"
+    class="w-14 h-14 bg-black text-white rounded-full shadow-[0_0_20px_rgba(0,0,0,0.5)] flex items-center justify-center hover:scale-110 transition-all duration-300 border border-white/20 active:scale-90"
+    title="Switch Brand Vibe"
   >
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
@@ -435,22 +497,26 @@ const vibes = [
 
   <div 
     id="vibe-menu" 
-    class="absolute bottom-16 left-0 flex flex-col gap-2 p-3 bg-black/90 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl scale-90 opacity-0 pointer-events-none transition-all duration-300 origin-bottom-left"
+    class="absolute bottom-16 left-0 flex flex-col gap-1 p-2 bg-black/95 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl scale-90 opacity-0 pointer-events-none transition-all duration-300 origin-bottom-left max-h-[70vh] overflow-y-auto"
   >
-    <p class="text-[9px] font-black uppercase tracking-[0.2em] text-white/40 px-2 pb-1 border-b border-white/5 mb-1">Select Vibe</p>
+    <p class="text-[9px] font-black uppercase tracking-[0.2em] text-white/40 px-3 py-2 border-b border-white/5 mb-1">Brand Catalog</p>
     {vibes.map((vibe) => (
       <button 
-        class="vibe-option flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 text-white transition-colors text-left group/opt"
+        class="vibe-option flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-white/10 text-white transition-colors text-left whitespace-nowrap"
         data-vibe-id={vibe.id}
       >
-        <span class="text-lg">{vibe.icon}</span>
-        <span class="text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">{vibe.label}</span>
+        <span class="text-base">{vibe.icon}</span>
+        <span class="text-[10px] font-bold uppercase tracking-widest">{vibe.label}</span>
       </button>
     ))}
   </div>
 </div>
 
 <style>
+  /* Custom scrollbar for the menu if it gets too tall */
+  #vibe-menu::-webkit-scrollbar { width: 4px; }
+  #vibe-menu::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
   #vibe-switcher-container.active #vibe-menu {
     scale: 1;
     opacity: 1;
@@ -469,30 +535,27 @@ const vibes = [
   const options = document.querySelectorAll('.vibe-option');
   const html = document.documentElement;
 
-  // Toggle Menu
   masterBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
     container?.classList.toggle('active');
   });
 
-  // Close menu when clicking outside
   document.addEventListener('click', () => {
     container?.classList.remove('active');
   });
 
-  // Switch Logic
   options.forEach(button => {
     button.addEventListener('click', () => {
       const selectedVibe = button.getAttribute('data-vibe-id');
       if (selectedVibe) {
         html.setAttribute('data-vibe', selectedVibe);
-        // Persist the vibe for the session so it stays on page reload
+        // This persists the demo choice across local sessions
         localStorage.setItem('preferred-vibe', selectedVibe);
       }
     });
   });
 
-  // Initialize from LocalStorage if user previously picked a vibe
+  // Load saved vibe on boot
   const savedVibe = localStorage.getItem('preferred-vibe');
   if (savedVibe) {
     html.setAttribute('data-vibe', savedVibe);
@@ -904,6 +967,161 @@ export const collections = { services };
 }
 </file>
 
+<file path="src/data/business.jso5">
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "settings": {
+    "vibe": "Rugged Industrial",
+    "primary_color": "#1F2933",
+    "cta_text": "Get a Quote",
+    "cta_link": "tel:215-555-5555",
+    "menu": [
+      { "label": "Services", "path": "#features" },
+      { "label": "How It Works", "path": "#process" },
+      { "label": "Pricing", "path": "#investment" },
+      { "label": "Contact", "path": "#contact" }
+    ]
+  },
+  "brand": {
+  "name": "Joe's Junk Removal",
+  "logo_text": "JJR",
+  "tagline": "Fast. Fair. Gone.",
+  "objection_handle": "Fully insured, honest pricing, and on-time service—your junk removed the right way, with no surprises.",
+  "testimonial_headline": "What Your Neighbors Are Saying",
+  "faq_headline": "Clearing the Air (FAQ)",
+  "contact_headline": "Ready to clear the clutter?",
+  "investment_headline": "Transparent Pricing",
+  "availability_status": "Accepting junk removal routes for Monday-Friday."
+  },
+  "hero": {
+    "headline": "Junk Gone. No Excuses. No Surprises.",
+    "subtext": "On-time, insured junk removal with honest answers and careful handling—exactly as promised.",
+    "image": {
+      "src": "/images/hero-junk-removal.jpg",
+      "alt": "Joe standing next to his pickup truck ready for junk removal"
+    }
+  },
+  "comparison": {
+    "headline": "The Difference Between a Pro and \"Some Guy With a Truck\"",
+    "features": [
+      { "label": "Fully insured & legitimate", "us": true, "them": false },
+      { "label": "Honest, upfront answers", "us": true, "them": false },
+      { "label": "Shows up when scheduled", "us": true, "them": false }
+    ]
+  },
+  "features": [
+    {
+      "title": "Honest Pricing",
+      "description": "Clear pricing before the job starts—no surprise charges, no pressure.",
+      "icon_slug": "dollar-sign"
+    },
+    {
+      "title": "On-Time Service",
+      "description": "We show up when we say we will, ready to work.",
+      "icon_slug": "clock"
+    },
+    {
+      "title": "Careful Removal",
+      "description": "Items are removed cleanly with respect for your home or property.",
+      "icon_slug": "shield"
+    }
+  ],
+  "processSteps": [
+    {
+      "title": "Call or Text for a Quote",
+      "description": "Tell us what needs to go and get an honest answer upfront."
+    },
+    {
+      "title": "We Arrive On Time",
+      "description": "Fully insured and ready to work—exactly when scheduled."
+    },
+    {
+      "title": "Junk Is Removed Cleanly",
+      "description": "Items are hauled away quickly with no mess and no mistakes."
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "The personalized service ensured that the items I needed to 'go away' were removed quickly and cleanly.",
+      "author": "Satisfied Customer",
+      "role": "Homeowner"
+    }
+  ],
+  "investment": [
+    {
+      "name": "Single Item Pickup",
+      "price": "$100",
+      "description": "Ideal for large appliances or single bulky items.",
+      "features": [
+        "Large appliances and electronics",
+        "Item must be fully disconnected and ready for removal",
+        "Careful handling with no property damage",
+        "Honest confirmation before removal"
+      ]
+    },
+    {
+      "name": "Full Pickup Truck Load",
+      "price": "$250",
+      "description": "Perfect for garages or multiple bulky items.",
+      "features": [
+        "One full pickup truck load",
+        "All items must be ready and accessible",
+        "Efficient, on-time service",
+        "No surprise fees"
+      ]
+    },
+    {
+      "name": "Pickup Truck + Trailer",
+      "price": "$400",
+      "description": "Maximum hauling capacity for large cleanouts.",
+      "features": [
+        "Pickup truck plus trailer",
+        "Ideal for renovations or estate cleanouts",
+        "No unhooking or disassembly of appliances",
+        "Fully insured professional service"
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Do you take TVs and electronic equipment?",
+      "answer": "Yes, we remove TVs and most electronic equipment as long as they are ready for pickup."
+    },
+    {
+      "question": "Are you insured?",
+      "answer": "Yes, Joe’s Junk Removal is fully insured for your peace of mind."
+    },
+    {
+      "question": "Do you unhook or disconnect appliances?",
+      "answer": "No. All appliances must be fully disconnected and ready for removal before arrival."
+    }
+  ],
+  "contact": {
+    "phone": "215-555-5555",
+    "location": "Bucks County and Eastern Montgomery County",
+    "email": "joe@example.com"
+  },
+  "gallery": [
+    {
+      "src": "/images/hauling-refrigerator.jpg",
+      "alt": "Joe hauling a refrigerator from a garage"
+    },
+    {
+      "src": "/images/truck-loaded.jpg",
+      "alt": "Pickup truck loaded with junk"
+    },
+    {
+      "src": "/images/before-after-garage.jpg",
+      "alt": "Before-and-after garage cleanout"
+    },
+    {
+      "src": "/images/joe-with-truck.jpg",
+      "alt": "Joe standing next to his truck in work gear"
+    }
+  ]
+}
+</file>
+
 <file path="src/pages/services/[...slug].astro">
 ---
 import { getCollection } from 'astro:content';
@@ -961,9 +1179,12 @@ const { Content } = await entry.render();
 ---
 import Layout from '../layouts/Layout.astro';
 import data from '../data/business.json';
+
+// Use optional chaining to prevent crashes
+const brandName = data?.brand?.name || "Your Request";
 ---
 
-<Layout title={`Message Received | ${data.brand.name}`}>
+<Layout title={`Message Received | ${brandName}`}>
   <main class="flex items-center justify-center min-h-[70vh] px-6">
     <div class="max-w-md w-full text-center">
       
@@ -986,7 +1207,7 @@ import data from '../data/business.json';
 
       <a 
         href="/" 
-        class="inline-block bg-[var(--accent)] text-[var(--bg-color)] px-10 py-4 rounded-[var(--radius)] text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:scale-105"
+        class="inline-block bg-[var(--accent)] text-[var(--bg-color)] px-10 py-4 rounded-[var(--radius)] text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:scale-105 active:scale-95"
       >
         Return to Homebase
       </a>
@@ -1183,61 +1404,43 @@ export default {
 
 <file path="src/components/BentoAbout.astro">
 ---
-const { brand, hero } = Astro.props;
+// Destructure the new 'about' prop
+const { brand, hero, about } = Astro.props; 
 
-// Determine if objection handle is long to adjust font size dynamically
-const isLongHandle = brand.objection_handle.length > 100;
+const isLongHandle = brand.objection_handle?.length > 100;
 ---
 
 <section id="about" class="py-24 px-6 bg-[var(--bg-color)]">
   <div class="max-w-6xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
       
-      <div class="md:col-span-8 md:row-span-2 min-h-[400px] p-8 md:p-12 bg-[var(--border)] bg-opacity-20 rounded-[var(--radius)] flex flex-col justify-end relative overflow-hidden group border border-[var(--border)]">
+      <div class="md:col-span-8 md:row-span-2 min-h-[400px] p-8 bg-[var(--border)] bg-opacity-20 rounded-[var(--radius)] flex flex-col justify-end relative border border-[var(--border)]">
         <div class="relative z-10">
             <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">// THE_ORIGIN</span>
             <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[var(--text-primary)] mb-6 leading-[0.9]">
                 {brand.name}
             </h2>
             <p class="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed max-w-xl">
-                {hero.subtext}
+                {about?.story_text}
             </p>
         </div>
-        <span class="absolute -bottom-10 -right-10 text-[12rem] md:text-[18rem] font-black opacity-[0.03] select-none pointer-events-none text-[var(--text-primary)]">
-            {brand.name.charAt(0)}
-        </span>
       </div>
 
-      <div class="md:col-span-4 p-8 bg-[var(--accent)] text-[var(--bg-color)] rounded-[var(--radius)] flex flex-col justify-center text-center shadow-xl">
-        <span class="text-[10px] uppercase tracking-widest font-bold opacity-70 mb-3">Our Promise</span>
-        <p class={`${isLongHandle ? 'text-sm' : 'text-lg'} font-bold uppercase tracking-tight leading-snug`}>
-            {brand.objection_handle}
+      <div class="md:col-span-4 p-8 border border-[var(--border)] rounded-[var(--radius)] flex flex-col justify-center bg-[var(--bg-color)] relative">
+        <span class="text-4xl absolute top-2 left-4 text-[var(--accent)] opacity-20 font-serif">“</span>
+        <p class="text-[var(--text-secondary)] text-xs italic relative z-10 pt-4">
+            {about?.founder_note || "Precision in every detail."}
         </p>
-      </div>
-
-      <div class="md:col-span-4 md:row-span-2 min-h-[300px] bg-[var(--border)] rounded-[var(--radius)] overflow-hidden relative border border-[var(--border)]">
-        <img 
-            src={hero.image.src} 
-            alt={hero.image.alt} 
-            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 hover:scale-100"
-        />
-        <div class="absolute bottom-4 left-4">
-             <span class="bg-[var(--bg-color)] text-[var(--text-primary)] px-3 py-1 text-[8px] font-bold uppercase tracking-widest rounded-full">Authenticity Verified</span>
-        </div>
-      </div>
-
-      <div class="md:col-span-4 p-8 border border-[var(--border)] rounded-[var(--radius)] flex items-center justify-center bg-[var(--bg-color)]">
-        <div class="text-center">
-            <p class="text-5xl font-black text-[var(--text-primary)] tracking-tighter mb-1">2026</p>
-            <p class="text-[10px] uppercase tracking-widest text-[var(--text-secondary)] font-bold opacity-60">Standard Set</p>
+        <div class="mt-4 text-[10px] font-bold uppercase tracking-widest text-[var(--text-primary)]">
+            — {brand.name} Founder
         </div>
       </div>
 
       <div class="md:col-span-4 p-8 border border-[var(--border)] rounded-[var(--radius)] flex flex-col justify-center bg-[var(--text-primary)] text-[var(--bg-color)]">
-         <span class="text-[10px] uppercase tracking-widest font-bold opacity-40 mb-2">Availability</span>
-         <p class="text-xs md:text-sm font-bold uppercase tracking-widest italic">
-           {brand.availability_status || "Currently accepting new commissions for Q1/Q2."}
-         </p>
+         <div class="flex items-baseline gap-2">
+            <span class="text-3xl font-black">{about?.years_experience || "10+"}</span>
+            <span class="text-[10px] uppercase tracking-widest font-bold opacity-40">Years</span>
+         </div>
       </div>
 
     </div>
@@ -1399,6 +1602,47 @@ const { id, faqs, headline = "Common Questions" } = Astro.props;
 </section>
 </file>
 
+<file path="src/components/Gallery.astro">
+---
+const { gallery } = Astro.props;
+import data from '../data/business.json';
+
+const headline = data.brand.gallery_headline || "Our Work in Action";
+---
+
+<section id="gallery" class="py-24 px-6 bg-[var(--bg-color)]">
+  <div class="max-w-6xl mx-auto">
+    
+    <div class="mb-16">
+      <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">// THE_VISUALS</span>
+      <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
+        {headline}
+      </h2>
+    </div>
+
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+      {gallery && gallery.map((item: any) => (
+        <div class="break-inside-avoid rounded-[var(--radius)] overflow-hidden border border-[var(--border)] group bg-[var(--border)] bg-opacity-10">
+          <img 
+            src={item.src} 
+            alt={item.alt} 
+            loading="lazy"
+            class="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0 grayscale-[0.5]"
+          />
+          {item.caption && (
+            <div class="p-4 bg-[var(--bg-color)]">
+              <p class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)]">
+                {item.caption}
+              </p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+</file>
+
 <file path="src/components/Hero.astro">
 ---
 const { brand, hero, settings } = Astro.props;
@@ -1447,104 +1691,49 @@ const hasImage = hero.image && hero.image.src && hero.image.src !== "hero-main.j
 </section>
 </file>
 
-<file path="src/components/Investment.astro">
----
-// 1. Accept props from index.astro
-// We use 'tiers' to match the index call: <Investment tiers={investment} />
-const { tiers, id, brand } = Astro.props;
-
-// 2. Defensive Headline: Use brand data if available, fallback to a professional default
-const headline = brand?.investment_headline || "Strategic Investment";
----
-
-{/* Use the passed ID (pricing) so the Navbar can find this section */}
-<section id={id} class="py-24 px-6 bg-[var(--bg-color)] border-t border-[var(--border)] relative overflow-hidden">
-  <div class="max-w-6xl mx-auto relative z-10">
-    
-    <div class="text-center mb-16">
-      <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">
-        // THE_INVESTMENT
-      </span>
-      <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
-        {headline}
-      </h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {tiers && tiers.map((tier: any) => (
-        <div class="flex flex-col p-8 border border-[var(--border)] rounded-[var(--radius)] bg-[var(--bg-color)] hover:border-[var(--accent)] transition-all duration-300 group hover:-translate-y-1">
-          <h3 class="text-xs font-bold uppercase tracking-widest text-[var(--accent)] mb-2">
-            {tier.name}
-          </h3>
-          
-          <div class="text-4xl font-black text-[var(--text-primary)] mb-6 tracking-tighter">
-            {tier.price}
-            <span class="text-sm font-normal opacity-40"> 
-              / {tier.description || tier.unit || ""}
-            </span>
-          </div>
-          
-          <ul class="flex-grow space-y-4 mb-10">
-            {tier.features && tier.features.map((feature: string) => (
-              <li class="text-sm text-[var(--text-secondary)] flex items-start gap-3">
-                <span class="text-[var(--accent)] mt-1 text-xs">→</span>
-                {feature}
-              </li>
-            ))}
-          </ul>
-
-          <a 
-            href="#contact" 
-            class="w-full text-center py-4 border border-[var(--text-primary)] text-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] text-[10px] font-bold uppercase tracking-[0.2em] rounded-[var(--radius)] transition-all"
-          >
-            {tier.cta || "Inquire Now"}
-          </a>
-        </div>
-      ))}
-    </div>
-  </div>
-
-  {/* Vibe-based background detail for that 'Agency' polish */}
-  <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[var(--accent)] to-transparent opacity-[0.03] pointer-events-none"></div>
-</section>
-</file>
-
 <file path="src/components/Process.astro">
 ---
-// Destructure 'id' along with 'steps' from Astro.props
-const { id, steps } = Astro.props;
+import { iconLibrary } from '../lib/icons.js';
+const { steps, id, brand } = Astro.props;
+
+// Default to 'sprout' for landscaping, but AI can override in JSON
+const sectionIconPath = iconLibrary[brand?.process_icon] || iconLibrary.sprout;
 ---
 
-<section id={id} class="py-24 bg-[var(--bg-color)] border-t border-[var(--border)] scroll-mt-24">
-  <div class="container px-6 mx-auto">
-    
-    <div class="mb-16">
-      <h2 class="text-3xl md:text-5xl font-light uppercase tracking-tighter text-[var(--text-primary)]">
-        The <span class="text-[var(--accent)] font-bold">Process</span>
+<section id={id} class="py-24 px-6 bg-[var(--bg-color)] scroll-mt-24">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-20">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-full border border-[var(--border)] mb-6 text-[var(--accent)] bg-[var(--bg-color)] feature-icon-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d={sectionIconPath} />
+        </svg>
+      </div>
+      
+      <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
+        {brand?.process_headline || "How it Works"}
       </h2>
     </div>
 
-    <div class="grid gap-12 md:grid-cols-3">
-      {steps && steps.map((step, index) => (
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20">
+      {steps && steps.map((step: any, index: number) => (
         <div class="relative group">
-          <div class="flex items-center gap-4 mb-6">
-            <span class="text-4xl font-black text-[var(--accent)] opacity-20 group-hover:opacity-100 transition-opacity duration-500">
-              0{index + 1}
-            </span>
-            <div class="h-px w-full bg-[var(--border)] group-hover:bg-[var(--accent)] transition-colors duration-500"></div>
+          <div class="text-7xl md:text-8xl font-black text-[var(--accent)] opacity-10 mb-[-1.5rem] select-none group-hover:opacity-25 transition-opacity duration-500">
+            0{index + 1}
           </div>
           
-          <h3 class="mb-4 text-xl font-bold uppercase tracking-widest text-[var(--text-primary)]">
-            {step.title}
-          </h3>
-          
-          <p class="text-[var(--text-secondary)] leading-relaxed text-sm max-w-xs">
-            {step.description}
-          </p>
-          
-          <div class="mt-8 text-[9px] font-mono tracking-[0.4em] text-[var(--text-secondary)] opacity-30">
-            // STATUS: OPTIMIZED
+          <div class="relative pt-4">
+            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-4 uppercase tracking-tight">
+              {step.title}
+            </h3>
+            <p class="text-[var(--text-secondary)] leading-relaxed text-sm md:text-base">
+              {step.description}
+            </p>
           </div>
+          
+          {/* Subtle connecting line for desktop */}
+          {index < steps.length - 1 && (
+            <div class="hidden md:block absolute top-1/2 -right-10 w-20 border-t border-dashed border-[var(--border)] opacity-30" />
+          )}
         </div>
       ))}
     </div>
@@ -1616,24 +1805,37 @@ const { id, testimonials, headline } = Astro.props;
 
 <file path="src/components/Features.astro">
 ---
+import { iconLibrary } from '../lib/icons.js';
 const { id, features } = Astro.props;
 ---
-<section id={id} class="py-24 px-6 bg-[var(--bg-color)] scroll-mt-24">
-  <div class="container mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-      {features && features.map((feature) => (
-        <div class="group border-l border-[var(--border)] pl-6 hover:border-[var(--accent)] transition-colors duration-500">
-          <div class="text-[var(--accent)] text-[10px] font-mono mb-4 tracking-widest uppercase">
-            // {feature.icon_slug || "SERVICE_MODULE"}
+
+<section id={id} class="py-24 px-6 bg-[var(--bg-color)] scroll-mt-24 border-t border-[var(--border)]">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-y-20">
+      {features && features.map((feature: any) => {
+        // Look up the icon from our central library
+        const path = iconLibrary[feature.icon_slug.toLowerCase()] || iconLibrary.star;
+
+        return (
+          <div class="group border-l-2 border-[var(--border)] pl-8 hover:border-[var(--accent)] transition-all duration-500 py-2">
+            
+            {/* ICON WRAPPER: Inherits vibe-based shadows/radius */}
+            <div class="inline-flex items-center justify-center w-10 h-10 mb-6 text-[var(--accent)] bg-[var(--bg-color)] border border-[var(--border)] feature-icon-wrapper group-hover:scale-110 transition-transform">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d={path} />
+              </svg>
+            </div>
+
+            <h3 class="text-xl font-black uppercase tracking-tight mb-4 text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
+              {feature.title}
+            </h3>
+            
+            <p class="text-[var(--text-secondary)] text-sm leading-relaxed max-w-sm">
+              {feature.description}
+            </p>
           </div>
-          <h3 class="text-xl font-bold uppercase tracking-tight mb-4 text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
-            {feature.title}
-          </h3>
-          <p class="text-[var(--text-secondary)] text-sm leading-relaxed max-w-sm">
-            {feature.description}
-          </p>
-        </div>
-      ))}
+        )
+      })}
     </div>
   </div>
 </section>
@@ -1700,6 +1902,74 @@ const year = new Date().getFullYear();
 </footer>
 </file>
 
+<file path="src/components/Investment.astro">
+---
+import { iconLibrary } from '../lib/icons.js';
+const { tiers, id, brand } = Astro.props;
+
+// Get the main section icon from the library
+const sectionIconPath = iconLibrary[brand?.investment_icon] || iconLibrary.coins;
+---
+
+<section id={id} class="py-24 px-6 bg-[var(--bg-color)] border-t border-[var(--border)] scroll-mt-24">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-full border border-[var(--border)] mb-6 text-[var(--accent)] bg-[var(--bg-color)] feature-icon-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d={sectionIconPath} />
+        </svg>
+      </div>
+      
+      <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
+        {brand?.investment_headline || "Pricing"}
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {tiers && tiers.map((tier: any) => (
+        <div class="flex flex-col p-8 border border-[var(--border)] rounded-[var(--radius)] bg-[var(--bg-color)] hover:border-[var(--accent)] transition-all duration-300 group shadow-sm">
+          <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent)] mb-2">{tier.name}</h3>
+          <div class="text-5xl font-black text-[var(--text-primary)] mb-6 tracking-tighter">
+            {tier.price}
+          </div>
+          
+          <ul class="flex-grow space-y-4 mb-10">
+            {tier.features && tier.features.map((feature: string) => {
+              // DETECT \ICON PATTERN
+              const match = feature.match(/^\\(\w+)\s*(.*)/);
+              const iconKey = match ? match[1].toLowerCase() : null;
+              const cleanText = match ? match[2] : feature;
+              const path = iconLibrary[iconKey];
+
+              return (
+                <li class="text-sm text-[var(--text-secondary)] flex items-start gap-3">
+                  <span class="text-[var(--accent)] mt-1 shrink-0">
+                    {path ? (
+                      /* Renders the specific icon from our library */
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d={path}/>
+                      </svg>
+                    ) : (
+                      /* Fallback to arrow if no backslash or icon not found */
+                      "→"
+                    )}
+                  </span>
+                  <span class="leading-tight">{cleanText}</span>
+                </li>
+              );
+            })}
+          </ul>
+
+          <a href="#contact" class="w-full text-center py-4 border border-[var(--text-primary)] text-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] text-[10px] font-bold uppercase tracking-[0.2em] rounded-[var(--radius)] transition-all active:scale-95">
+            {tier.cta || "Get Started"}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+</file>
+
 <file path="src/layouts/Layout.astro">
 ---
 /**
@@ -1757,6 +2027,175 @@ const { title = `${data.brand.name} | ${data.brand.tagline}` } = Astro.props;
 		</style>
 	</body>
 </html>
+</file>
+
+<file path="src/styles/vibe-system.css">
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- GLOBAL SPA POLISH --- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Perfect Section Alignment for Sticky Nav */
+section[id], main[id], div[id] {
+  scroll-margin-top: 5rem;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-main, sans-serif);
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.menu-open {
+  overflow: hidden !important;
+}
+
+/* --- 1. ZENITH EARTH (Organic/Premium Landscape) --- */
+[data-vibe="zenith-earth"] {
+  --bg-color: #fdfdfb;       
+  --text-primary: #1a2e1a;   
+  --text-secondary: #4a5d4a; 
+  --accent: #4f7942;         
+  --border: #e8ede4;         
+  --radius: 40px;            
+  --font-main: 'Outfit', sans-serif; 
+}
+[data-vibe="zenith-earth"] { line-height: 1.7; }
+[data-vibe="zenith-earth"] h1, [data-vibe="zenith-earth"] h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  color: #1a2e1a;
+}
+[data-vibe="zenith-earth"] .bg-\[var\(--accent\)\],
+[data-vibe="zenith-earth"] .feature-icon-wrapper { 
+  border-radius: 100px;      
+  color: #ffffff; 
+  box-shadow: 0 4px 20px rgba(79, 121, 66, 0.15);
+}
+
+/* --- 2. MIDNIGHT TECH (SaaS/AI/Security) --- */
+[data-vibe="midnight-tech"] {
+  --bg-color: #050505;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --accent: #6366f1;
+  --border: rgba(255, 255, 255, 0.05);
+  --radius: 12px;
+  --font-main: 'Inter', sans-serif;
+}
+[data-vibe="midnight-tech"] h1 { font-weight: 800; letter-spacing: -0.04em; }
+[data-vibe="midnight-tech"] .bg-\[var\(--accent\)\],
+[data-vibe="midnight-tech"] .feature-icon-wrapper { 
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.4); 
+}
+
+/* --- 3. RUGGED INDUSTRIAL (Trade Services/Construction) --- */
+[data-vibe="rugged-industrial"] {
+  --bg-color: #111111;
+  --text-primary: #f4f4f4;
+  --text-secondary: #a1a1aa;
+  --accent: #ff5f1f;
+  --border: #27272a;
+  --radius: 4px;
+  --font-main: 'JetBrains Mono', monospace;
+}
+[data-vibe="rugged-industrial"] h1, [data-vibe="rugged-industrial"] h2 {
+  font-weight: 900; text-transform: uppercase; font-style: italic; letter-spacing: -0.05em;
+}
+/* The "Sticker" Effect */
+[data-vibe="rugged-industrial"] .bg-\[var\(--accent\)\], 
+[data-vibe="rugged-industrial"] .feature-icon-wrapper,
+[data-vibe="rugged-industrial"] .custom-icon-box {
+  box-shadow: 4px 4px 0px 0px #000000;
+  border: 1px solid #000;
+}
+
+/* --- 4. MAESTRO CLASSIC (High-End Professional/Legal) --- */
+[data-vibe="maestro-classic"] {
+  --bg-color: #fcfcfc;
+  --text-primary: #1a1a1a;
+  --text-secondary: #5e5e5e;
+  --accent: #8b0000;
+  --border: #d1d1d1;
+  --radius: 0px;
+  --font-main: 'Cormorant Garamond', serif;
+}
+[data-vibe="maestro-classic"] h1, [data-vibe="maestro-classic"] h2 {
+  font-weight: 300; text-transform: uppercase; letter-spacing: 0.15em;
+}
+
+/* --- 5. NEON CYBER (Creative/Nightlife) --- */
+[data-vibe="neon-cyber"] {
+  --bg-color: #050505;
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+  --accent: #00f0ff;
+  --border: #1a1a1a;
+  --radius: 0px;
+  --font-main: 'JetBrains Mono', monospace;
+}
+[data-vibe="neon-cyber"] .bg-\[var\(--accent\)\],
+[data-vibe="neon-cyber"] .feature-icon-wrapper {
+  color: #000;
+  box-shadow: 0 0 15px var(--accent);
+}
+
+/* --- 6. CLINICAL MINIMAL (Medical/Dental/Health) --- */
+[data-vibe="clinical-minimal"] {
+  --bg-color: #f8fafc;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --accent: #0ea5e9;
+  --border: #e2e8f0;
+  --radius: 12px;
+  --font-main: 'Outfit', sans-serif;
+}
+[data-vibe="clinical-minimal"] .feature-icon-wrapper {
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+}
+
+/* --- 7. SOLAR FLARE (Solar/Energy/Electricians) --- */
+[data-vibe="solar-flare"] {
+  --bg-color: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --accent: #fbbf24;
+  --border: #27272a;
+  --radius: 0px;
+  --font-main: 'Outfit', sans-serif;
+}
+[data-vibe="solar-flare"] h1, [data-vibe="solar-flare"] h2 { 
+  font-weight: 900; text-transform: uppercase; font-style: italic; 
+}
+[data-vibe="solar-flare"] .bg-\[var\(--accent\)\],
+[data-vibe="solar-flare"] .feature-icon-wrapper { color: #000; }
+
+/* --- 8. VINTAGE BOUTIQUE (Artisan/Retail/Heritage) --- */
+[data-vibe="vintage-boutique"] {
+  --bg-color: #fdfaf3;
+  --text-primary: #2d241e;
+  --text-secondary: #6b5a4d;
+  --accent: #c2410c;
+  --border: #e7e0d0;
+  --radius: 2px;
+  --font-main: 'Cormorant Garam
+  ond', serif;
+}
+[data-vibe="vintage-boutique"] h1, [data-vibe="vintage-boutique"] h2 { font-style: italic; font-weight: 400; }
+[data-vibe="vintage-boutique"] p { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; }
+
+/* --- MOBILE MENU RECOVERY --- */
+#mobile-menu.flex {
+  display: flex !important;
+  background-color: var(--bg-color) !important;
+}
+.mobile-link { color: var(--text-primary) !important; }
 </file>
 
 <file path="src/components/Navbar.astro">
@@ -1898,110 +2337,179 @@ const { title = `${data.brand.name} | ${data.brand.tagline}` } = Astro.props;
 
 <file path="src/data/business.json">
 {
+  "intelligence": {
+    "industry": "Beauty & Wellness",
+    "target_persona": "Premium clients seeking expert hair care and relaxation",
+    "tone_of_voice": "Sophisticated & Welcoming"
+  },
+  "layout_strategy": {
+    "show_events": false,
+    "show_testimonials": true,
+    "show_comparison": false,
+    "show_gallery": true,
+    "show_faqs": true,
+    "show_process": true,
+    "show_investment": true,
+    "show_bento_about": true,
+    "show_service_area": true,
+    "show_trustbar": true
+  },
   "settings": {
-    "vibe": "Zenith Earth",
-    "primary_color": "#4F7942",
-    "cta_text": "Schedule Site Review",
+    "vibe": "Vintage Boutique",
+    "primary_color": "#D4AF37",
+    "cta_text": "Book Your Transformation",
     "cta_link": "#contact",
     "menu": [
-      { "label": "Features", "path": "#features" },
-      { "label": "Process", "path": "#process" },
-      { "label": "Pricing", "path": "#investment" },
-      { "label": "Contact", "path": "#contact" }
+      { "label": "The Experience", "path": "#about" },
+      { "label": "Our Process", "path": "#process" },
+      { "label": "Investment", "path": "#pricing" },
+      { "label": "Gallery", "path": "#gallery" }
     ]
   },
   "brand": {
-    "name": "Elite Local Lawns",
-    "logo_text": "ELL",
-    "tagline": "You can tell by the way I mow.",
-    "objection_handle": "The Zero-Debris Guarantee: I bag and haul it all away.",
-    "availability_status": "Taking on 5 new 1/4 acre lots",
-    "contact_headline": "Ready for a Spotless Yard?"
+    "name": "Carol’s Salon",
+    "logo_text": "C.S.",
+    "tagline": "27 Years of Mastery. Modern Artistry.",
+    "objection_handle": "Personalized hair transformation in a contemporary, relaxing environment.",
+    "availability_status": "Accepting new clients in Doylestown",
+    "testimonial_headline": "The Client Experience"
   },
   "hero": {
-    "headline": "Warminster’s Premium Small-Lot Specialist",
-    "subtext": "Professional lawn care for 1/4 acre lots. I don't just mow; I leave your property spotless.",
+    "headline": "Elevate Your Look, Calm Your Mind.",
+    "subtext": "Expert color, precision cuts, and a glass of wine. Discover why Carol has been Doylestown's trusted stylist for nearly three decades.",
     "image": {
-      "src": "https://images.unsplash.com/photo-1558905619-17254261bc67?q=80&w=2000",
-      "alt": "Manicured green lawn"
+      "src": "/images/salon-hero.jpg",
+      "alt": "Modern salon interior with vintage gold accents"
     }
   },
-  "features": [
-    {
-      "title": "Precision Mowing",
-      "description": "Tailored for 1/4 acre lots using pro-grade equipment.",
-      "icon_slug": "scissors"
-    },
-    {
-      "title": "Bagging & Hauling",
-      "description": "I take the grass clippings with me—no messy clumps left behind.",
-      "icon_slug": "truck"
-    },
-    {
-      "title": "Detail Finishing",
-      "description": "Full trimming and sidewalk blowing included with every visit.",
-      "icon_slug": "wind"
-    }
-  ],
+  "trustbar": {
+    "headline": "Trusted in Doylestown for Nearly Three Decades",
+    "items": [
+      {
+        "icon": "⭐",
+        "label": "5-Star Reputation",
+        "sublabel": "Loved by Local Clients"
+      },
+      {
+        "icon": "✂️",
+        "label": "27+ Years Experience",
+        "sublabel": "Master Stylist"
+      },
+      {
+        "icon": "📍",
+        "label": "Doylestown, PA",
+        "sublabel": "Locally Owned"
+      },
+      {
+        "icon": "🍷",
+        "label": "Relaxed Luxury",
+        "sublabel": "Private Boutique Studio"
+      }
+    ]
+  },
+  "about": {
+    "story_headline": "Mastery Meets Connection",
+    "story_text": "Carol doesn't just cut hair; she knows her clients. With 27 years of experience, we focus on the art of personalized transformation and the science of healthy hair.",
+    "founder_note": "Your hair is the crown you never take off.",
+    "years_experience": "27",
+    "stats": [
+      { "value": "27", "label": "Years Active" },
+      { "value": "15k+", "label": "Styles Created" }
+    ]
+  },
+  "service_area": {
+    "headline": "Conveniently Located in Doylestown",
+    "subtext": "Serving premium clients across the heart of Bucks and Montgomery Counties.",
+    "locations": ["Doylestown", "New Hope", "Bucks County", "Montgomery County"]
+  },
   "processSteps": [
     {
-      "title": "Site Review",
-      "description": "I meet you at your property to walk the lawn and discuss your needs."
+      "title": "The Consult",
+      "description": "A modern welcome and objective review to tailor the look to your vision."
     },
     {
-      "title": "Trailer-to-Turf",
-      "description": "I arrive with specialized equipment, ready to transform your yard."
+      "title": "Immersive Relaxation",
+      "description": "Enjoy a smoothie or a glass of wine while we begin your treatment."
     },
     {
-      "title": "The Clean Sweep",
-      "description": "After mowing, I blow the walkways and haul away all debris."
+      "title": "The Transformation",
+      "description": "Expert wash, color, and precision cut using premium products."
+    },
+    {
+      "title": "The Reveal",
+      "description": "Leave feeling refreshed, confident, and ready for the world."
+    }
+  ],
+  "features": [
+    {
+      "title": "Color Mastery",
+      "description": "Specializing in balayage and corrective color techniques.",
+      "icon_slug": "sparkles"
+    },
+    {
+      "title": "Relaxation First",
+      "description": "A high-end, quiet environment designed for your comfort.",
+      "icon_slug": "coffee"
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Carol is a genius with color. I've been coming here for 10 years and wouldn't go anywhere else.",
+      "author": "Sarah J.",
+      "role": "Doylestown Local"
     }
   ],
   "investment": [
     {
-      "name": "Standard Mow",
-      "price": "$50",
-      "description": "per visit",
-      "features": ["1/4 acre lots", "Bagging included", "Blowing included"]
-    }
-  ],
-  "faqs": [
+      "name": "Master Cut & Style",
+      "price": "95+",
+      "features": ["Full Consultation", "Scalp Massage", "Precision Cut", "Blowout"],
+      "popular": true
+    },
     {
-      "question": "Do you leave the grass bags on the curb?",
-      "answer": "No. I take all clippings and small branches with me in my trailer."
+      "name": "Full Color Service",
+      "price": "150+",
+      "features": ["Custom Color Blend", "Deep Conditioning", "Trim", "Style"],
+      "popular": false
     }
   ],
   "contact": {
-    "phone": "215-555-5555",
-    "location": "Warminster, PA",
-    "email": "george@gmail.com"
+    "phone": "215-555-HAIR",
+    "email": "appointments@carolssalon.com",
+    "location": "Doylestown, PA"
   }
 }
 </file>
 
 <file path="src/pages/index.astro">
 ---
-// 1. STABLE IMPORTS
+/* 1. STABLE IMPORTS */
 import Layout from '../layouts/Layout.astro';
-import data from '../data/business.json';
+import data from '../data/business.json'; 
 
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro'; // NEW
 import Features from '../components/Features.astro';
 import BentoAbout from '../components/BentoAbout.astro';
+import Testimonials from '../components/Testimonials.astro';
 import Comparison from '../components/Comparison.astro';
 import Process from '../components/Process.astro';
-import Investment from '../components/Investment.astro';
+import Events from '../components/Events.astro';
+import ServiceArea from '../components/ServiceArea.astro';
 import Gallery from '../components/Gallery.astro';
+import Investment from '../components/Investment.astro';
 import FAQ from '../components/FAQ.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import VibeSwitcher from '../components/VibeSwitcher.astro';
 
-// 2. DEFENSIVE DATA MAPPING (The Safety Net)
+/* 2. DATA MAPPING */
 const settings = data?.settings || {};
+const strategy = data?.layout_strategy || {}; 
 const brand = data?.brand || {};
 const hero = data?.hero || {};
+const about = data?.about || {}; 
 const features = data?.features || [];
 const comparison = data?.comparison || null;
 const processSteps = data?.processSteps || [];
@@ -2009,8 +2517,12 @@ const investment = data?.investment || [];
 const gallery = data?.gallery || [];
 const faqs = data?.faqs || [];
 const contact = data?.contact || {};
+const testimonials = data?.testimonials || [];
+const events = data?.events || [];
+const serviceArea = data?.service_area || null;
+const trustbar = data?.trustbar || null; // NEW
 
-// 3. TITLE LOGIC
+/* 3. TITLE LOGIC */
 const siteTitle = brand?.name 
   ? `${brand.name}${brand.tagline ? ' | ' + brand.tagline : ''}`
   : 'Premium Service Site';
@@ -2018,7 +2530,6 @@ const siteTitle = brand?.name
 
 <Layout title={siteTitle}>
   
-  {/* NAVBAR: Only render if settings exists */}
   {settings?.menu && (
     <Navbar 
       brand={brand} 
@@ -2027,238 +2538,81 @@ const siteTitle = brand?.name
       cta_link={settings.cta_link} 
     />
   )}
-  
+
   <main>
-    {/* HERO: Guarded by headline existence */}
+    {/* HERO */}
     {hero?.headline && (
       <Hero id="home" hero={hero} settings={settings} brand={brand} />
     )}
 
-    {/* ABOUT: Guarded by brand name */}
-    {brand?.name && (
-      <BentoAbout id="about" brand={brand} hero={hero} />
+    {/* TRUST BAR (NEW – EARLY PROOF) */}
+    {strategy.show_trustbar !== false && trustbar && (
+      <TrustBar data={trustbar} />
     )}
 
-    {/* FEATURES: Guarded by array length */}
+    {/* EVENTS (TIME-SENSITIVE CONTENT) */}
+    {strategy.show_events && events.length > 0 && (
+      <Events events={events} />
+    )}
+
+    {/* ABOUT / STORY */}
+    {strategy.show_bento_about !== false && about?.story_text && (
+      <BentoAbout id="about" brand={brand} hero={hero} about={about} />
+    )}
+
+    {/* CORE VALUE PROPS */}
     {features.length > 0 && (
       <Features id="features" features={features} />
     )}
 
-    {/* COMPARISON: Guarded by object existence */}
-    {comparison && (
+    {/* SERVICE AREA (LOCAL SEO EARLY) */}
+    {strategy.show_service_area && serviceArea && (
+      <ServiceArea data={serviceArea} />
+    )}
+
+    {/* SOCIAL PROOF */}
+    {strategy.show_testimonials && testimonials.length > 0 && (
+      <Testimonials 
+        id="testimonials" 
+        testimonials={testimonials} 
+        headline={brand?.testimonial_headline || "Voices of Trust"} 
+      />
+    )}
+
+    {/* DIFFERENTIATION */}
+    {strategy.show_comparison && comparison && (
       <Comparison id="comparison" comparison={comparison} brand={brand} />
     )}
 
-    {/* PROCESS: Guarded by array length */}
-    {processSteps.length > 0 && (
+    {/* PROCESS / HOW IT WORKS */}
+    {strategy.show_process !== false && processSteps.length > 0 && (
       <Process id="process" steps={processSteps} />
     )}
 
-    {/* GALLERY: Guarded by array length */}
-    {gallery.length > 0 && (
+    {/* VISUAL PROOF */}
+    {strategy.show_gallery && gallery.length > 0 && (
       <Gallery id="gallery" gallery={gallery} />
     )}
 
-{investment.length > 0 && (
-  <Investment 
-    id="pricing" 
-    tiers={investment} 
-    brand={brand} 
-  />
-)}
+    {/* PRICING / INVESTMENT */}
+    {strategy.show_investment !== false && investment.length > 0 && (
+      <Investment id="pricing" tiers={investment} brand={brand} />
+    )}
 
-    {/* FAQ: Guarded by array length */}
-    {faqs.length > 0 && (
+    {/* OBJECTION HANDLING */}
+    {strategy.show_faqs && faqs.length > 0 && (
       <FAQ id="faqs" faqs={faqs} />
     )}
 
-    {/* CONTACT: Guarded by email existence */}
+    {/* FINAL CONVERSION */}
     {contact?.email && (
       <Contact id="contact" brand={brand} contact={contact} settings={settings} />
     )}
   </main>
 
   <Footer brand={brand} />
-  
-  {/* Dev Tool: Persistent Vibe Switcher */}
   <VibeSwitcher />
-
 </Layout>
-</file>
-
-<file path="src/styles/vibe-system.css">
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* --- GLOBAL SPA POLISH --- */
-/* --- PERFECT SCROLL ALIGNMENT --- */
-html {
-  scroll-behavior: smooth;
-}
-
-/* This creates a 'buffer' at the top of every section with an ID */
-section[id], main[id], div[id] {
-  scroll-margin-top: 5rem; /* Matches the approximate height of your Navbar (80px) */
-}
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  font-family: var(--font-main, sans-serif);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Prevents background scroll when mobile menu is open */
-body.menu-open {
-  overflow: hidden !important;
-}
-
-/* --- 1. ZENITH EARTH (Organic/Wellness) --- */
-[data-vibe="zenith-earth"] {
-  --bg-color: #F9F7F2;
-  --text-primary: #2D2926;
-  --text-secondary: #6B665E;
-  --accent: #7D8471;
-  --border: #E5E1D8;
-  --radius: 40px;
-  --font-main: 'Outfit', sans-serif; 
-}
-
-[data-vibe="zenith-earth"] h1, 
-[data-vibe="zenith-earth"] h2 {
-  font-family: 'Fraunces', serif;
-  font-weight: 300;
-  text-transform: none;
-}
-
-[data-vibe="zenith-earth"] .bg-\[var\(--accent\)\] {
-  border-radius: 100px;
-}
-
-/* --- 2. CLASSIC HERITAGE (Professional/Law/Luxury) --- */
-[data-vibe="classic-heritage"] {
-  --bg-color: #ffffff;
-  --text-primary: #1a2a3a;
-  --text-secondary: #5a6a7a;
-  --accent: #c5a059;
-  --border: #d1d5db;
-  --radius: 2px;
-  --font-main: 'Libre Baskerville', serif;
-}
-
-[data-vibe="classic-heritage"] h1, 
-[data-vibe="classic-heritage"] h2 {
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-/* --- 3. DARK NEO (Tech Startup/SaaS) --- */
-[data-vibe="dark-neo"] {
-  --bg-color: #050505;
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --accent: #6366f1;
-  --border: rgba(255, 255, 255, 0.08);
-  --radius: 12px;
-  --font-main: 'Inter', sans-serif;
-}
-
-[data-vibe="dark-neo"] h1 {
-  font-weight: 800;
-  letter-spacing: -0.04em;
-}
-
-[data-vibe="dark-neo"] .bg-\[var\(--accent\)\] {
-  box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
-}
-
-/* --- 4. STUDIO MONO (Creative/Industrial Tech) --- */
-[data-vibe="studio-mono"] {
-  --bg-color: #050505;
-  --text-primary: #ffffff;
-  --text-secondary: #888888;
-  --accent: #00f0ff;
-  --border: #1a1a1a;
-  --radius: 0px;
-  --font-main: 'JetBrains Mono', monospace;
-}
-
-[data-vibe="studio-mono"] h1, 
-[data-vibe="studio-mono"] h2 {
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.04em;
-}
-
-[data-vibe="studio-mono"] .bg-\[var\(--accent\)\] {
-  border: 1px solid var(--accent);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
-}
-
-/* --- 5. RUGGED INDUSTRIAL (Trade Services/Gyms) --- */
-[data-vibe="rugged-industrial"] {
-  --bg-color: #111111;
-  --text-primary: #f4f4f4;
-  --text-secondary: #a1a1aa;
-  --accent: #ff5f1f;
-  --border: #27272a;
-  --radius: 4px;
-  --font-main: 'JetBrains Mono', monospace;
-}
-
-[data-vibe="rugged-industrial"] h1, 
-[data-vibe="rugged-industrial"] h2 {
-  font-weight: 900;
-  text-transform: uppercase;
-  font-style: italic;
-  letter-spacing: -0.05em;
-}
-
-[data-vibe="rugged-industrial"] .bg-\[var\(--accent\)\] {
-  box-shadow: 4px 4px 0px 0px #ffffff;
-  border: 1px solid #000000;
-}
-
-/* --- 6. MAESTRO CLASSIC (High Art/Fine Dining) --- */
-[data-vibe="maestro-classic"] {
-  --bg-color: #fcfcfc;
-  --text-primary: #1a1a1a;
-  --text-secondary: #5e5e5e;
-  --accent: #8b0000;
-  --border: #d1d1d1;
-  --radius: 0px;
-  --font-main: 'Cormorant Garamond', serif;
-}
-
-[data-vibe="maestro-classic"] h1, 
-[data-vibe="maestro-classic"] h2 {
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-/* --- 7. CLEAN LIGHT (Lifestyle/Modern Minimalist) --- */
-[data-vibe="clean-light"] {
-  --bg-color: #ffffff;
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
-  --accent: #0ea5e9;
-  --border: #e5e7eb;
-  --radius: 0.375rem;
-  --font-main: 'Playfair Display', serif;
-}
-
-/* --- MOBILE MENU RECOVERY --- */
-/* Ensures links are visible regardless of vibe-specific text colors */
-#mobile-menu.flex {
-  display: flex !important;
-  background-color: var(--bg-color) !important;
-}
-
-.mobile-link {
-  color: var(--text-primary) !important;
-}
 </file>
 
 </files>

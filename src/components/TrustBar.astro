@@ -1,0 +1,58 @@
+---
+import { iconLibrary } from '../lib/icons';
+const { data } = Astro.props;
+
+/*
+  Smart Icon Logic: 
+  Checks if the icon string exists in our SVG library. 
+  If not, it renders the raw string (ideal for Emojis).
+*/
+---
+
+<section class="py-8 bg-[var(--bg-color)] border-b border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6">
+    
+    {data?.headline && (
+      <p class="text-center text-sm uppercase tracking-widest text-[var(--text-secondary)] mb-6">
+        {data.headline}
+      </p>
+    )}
+
+    <ul class="grid grid-cols-2 md:grid-cols-4 gap-6 items-center text-center">
+      {data.items.map((item) => (
+        <li class="flex flex-col items-center gap-2 group">
+          
+          <div class="w-10 h-10 flex items-center justify-center">
+            {item.icon && iconLibrary[item.icon] ? (
+              /* SVG PATH FOUND */
+              <svg 
+                class="w-8 h-8 text-[var(--accent)]" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"
+              >
+                <path d={iconLibrary[item.icon]} />
+              </svg>
+            ) : (
+              /* NO SVG FOUND - FALLBACK TO EMOJI */
+              <span class="text-2xl">{item.icon}</span>
+            )}
+          </div>
+
+          <span class="font-bold text-[var(--text-primary)]">
+            {item.label}
+          </span>
+
+          {item.sublabel && (
+            <span class="text-sm text-[var(--text-secondary)]">
+              {item.sublabel}
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

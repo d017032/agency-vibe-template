@@ -1,0 +1,104 @@
+{
+  "settings": {
+    "vibe": "Zenith Earth",
+    "primary_color": "#4f7942",
+    "cta_text": "Claim Your Free Estimate",
+    "cta_link": "#contact",
+    "menu": [
+      { "label": "The Story", "path": "#about" },
+      { "label": "Services", "path": "#features" },
+      { "label": "Process", "path": "#process" },
+      { "label": "Investment", "path": "#pricing" }
+    ]
+  },
+  "brand": {
+    "name": "Elite Lawns",
+    "logo_text": "EL",
+    "tagline": "Austin's Premier Organic Turf Care",
+    "objection_handle": "100% Pet-Safe. Fully Insured. No Contracts.",
+    "availability_status": "Now booking for Spring aeration and seasonal cleanup.",
+    "contact_headline": "Ready for a Greener View?",
+    "process_headline": "Our Restoration Path",
+    "process_icon": "sprout",
+    "investment_headline": "Seasonal Care Packages",
+    "investment_icon": "tag"
+  },
+  "hero": {
+    "headline": "Transform Your Lawn Into a Private Oasis",
+    "subtext": "Luxury landscaping and organic maintenance for Austin homeowners who value precision over price.",
+    "image": {
+      "src": "/images/hero-landscaping.jpg",
+      "alt": "Manicured lawn with sharp edging and healthy green turf"
+    }
+  },
+  "about": {
+    "story_headline": "From One Mower to a Managed Fleet",
+    "story_text": "George started Elite Lawns with a single goal: to treat every yard like his own backyard. Today, we bring that same meticulous, owner-operated attention to over 400 properties across Austin.",
+    "founder_note": "We don't just cut grass; we architect outdoor environments that increase your home's value.",
+    "years_experience": "12+",
+    "stats": [
+      { "value": "450+", "label": "\\leaf Lawns Restored" },
+      { "value": "100%", "label": "\\shield Organic Products" }
+    ]
+  },
+  "features": [
+    {
+      "title": "Precision Edging",
+      "description": "Diamond-blade technology for sidewalk lines that look like they were cut with a ruler.",
+      "icon_slug": "scissors"
+    },
+    {
+      "title": "Soil Nutrition",
+      "description": "Customized organic fertilizer blends tailored specifically for the Central Texas climate.",
+      "icon_slug": "leaf"
+    },
+    {
+      "title": "On-Demand Scheduling",
+      "description": "Our mobile app lets you skip a mow or add a service with a single tap.",
+      "icon_slug": "phone"
+    }
+  ],
+  "processSteps": [
+    {
+      "title": "Ground Audit",
+      "description": "We analyze your soil pH and grass health before the first blade touches the turf."
+    },
+    {
+      "title": "The Deep Cut",
+      "description": "Precision mowing and edging performed by our vetted, long-term crew members."
+    },
+    {
+      "title": "Final Walkthrough",
+      "description": "Every service ends with a clean-up and a final quality check by the foreman."
+    }
+  ],
+  "investment": [
+    {
+      "name": "Estate Maintenance",
+      "price": "$199",
+      "description": "per month",
+      "features": [
+        "\\leaf Bi-Weekly Mowing",
+        "\\scissors Precision Edging",
+        "\\check Seasonal Fertilizer",
+        "\\check Priority Support"
+      ]
+    },
+    {
+      "name": "Elite Restoration",
+      "price": "$349",
+      "description": "one-time service",
+      "features": [
+        "\\sprout Aeration & Seeding",
+        "\\leaf Soil Treatment",
+        "\\check Mulch Refresh",
+        "\\shield Irrigation Audit"
+      ]
+    }
+  ],
+  "contact": {
+    "phone": "512-555-0199",
+    "location": "Austin, Texas",
+    "email": "hello@elitelawns.com"
+  }
+}

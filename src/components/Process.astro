@@ -1,38 +1,45 @@
 ---
-// Destructure 'id' along with 'steps' from Astro.props
-const { id, steps } = Astro.props;
+import { iconLibrary } from '../lib/icons.js';
+const { steps, id, brand } = Astro.props;
+
+// Default to 'sprout' for landscaping, but AI can override in JSON
+const sectionIconPath = iconLibrary[brand?.process_icon] || iconLibrary.sprout;
 ---
 
-<section id={id} class="py-24 bg-[var(--bg-color)] border-t border-[var(--border)] scroll-mt-24">
-  <div class="container px-6 mx-auto">
-    
-    <div class="mb-16">
-      <h2 class="text-3xl md:text-5xl font-light uppercase tracking-tighter text-[var(--text-primary)]">
-        The <span class="text-[var(--accent)] font-bold">Process</span>
+<section id={id} class="py-24 px-6 bg-[var(--bg-color)] scroll-mt-24">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-20">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-full border border-[var(--border)] mb-6 text-[var(--accent)] bg-[var(--bg-color)] feature-icon-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d={sectionIconPath} />
+        </svg>
+      </div>
+      
+      <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
+        {brand?.process_headline || "How it Works"}
       </h2>
     </div>
 
-    <div class="grid gap-12 md:grid-cols-3">
-      {steps && steps.map((step, index) => (
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20">
+      {steps && steps.map((step: any, index: number) => (
         <div class="relative group">
-          <div class="flex items-center gap-4 mb-6">
-            <span class="text-4xl font-black text-[var(--accent)] opacity-20 group-hover:opacity-100 transition-opacity duration-500">
-              0{index + 1}
-            </span>
-            <div class="h-px w-full bg-[var(--border)] group-hover:bg-[var(--accent)] transition-colors duration-500"></div>
+          <div class="text-7xl md:text-8xl font-black text-[var(--accent)] opacity-10 mb-[-1.5rem] select-none group-hover:opacity-25 transition-opacity duration-500">
+            0{index + 1}
           </div>
           
-          <h3 class="mb-4 text-xl font-bold uppercase tracking-widest text-[var(--text-primary)]">
-            {step.title}
-          </h3>
-          
-          <p class="text-[var(--text-secondary)] leading-relaxed text-sm max-w-xs">
-            {step.description}
-          </p>
-          
-          <div class="mt-8 text-[9px] font-mono tracking-[0.4em] text-[var(--text-secondary)] opacity-30">
-            // STATUS: OPTIMIZED
+          <div class="relative pt-4">
+            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-4 uppercase tracking-tight">
+              {step.title}
+            </h3>
+            <p class="text-[var(--text-secondary)] leading-relaxed text-sm md:text-base">
+              {step.description}
+            </p>
           </div>
+          
+          {/* Subtle connecting line for desktop */}
+          {index < steps.length - 1 && (
+            <div class="hidden md:block absolute top-1/2 -right-10 w-20 border-t border-dashed border-[var(--border)] opacity-30" />
+          )}
         </div>
       ))}
     </div>

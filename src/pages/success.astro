@@ -1,9 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import data from '../data/business.json';
+
+// Use optional chaining to prevent crashes
+const brandName = data?.brand?.name || "Your Request";
 ---
 
-<Layout title={`Message Received | ${data.brand.name}`}>
+<Layout title={`Message Received | ${brandName}`}>
   <main class="flex items-center justify-center min-h-[70vh] px-6">
     <div class="max-w-md w-full text-center">
       
@@ -26,7 +29,7 @@ import data from '../data/business.json';
 
       <a 
         href="/" 
-        class="inline-block bg-[var(--accent)] text-[var(--bg-color)] px-10 py-4 rounded-[var(--radius)] text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:scale-105"
+        class="inline-block bg-[var(--accent)] text-[var(--bg-color)] px-10 py-4 rounded-[var(--radius)] text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:scale-105 active:scale-95"
       >
         Return to Homebase
       </a>

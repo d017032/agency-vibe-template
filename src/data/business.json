@@ -1,80 +1,143 @@
 {
+  "intelligence": {
+    "industry": "Beauty & Wellness",
+    "target_persona": "Premium clients seeking expert hair care and relaxation",
+    "tone_of_voice": "Sophisticated & Welcoming"
+  },
+  "layout_strategy": {
+    "show_events": false,
+    "show_testimonials": true,
+    "show_comparison": false,
+    "show_gallery": true,
+    "show_faqs": true,
+    "show_process": true,
+    "show_investment": true,
+    "show_bento_about": true,
+    "show_service_area": true,
+    "show_trustbar": true
+  },
   "settings": {
-    "vibe": "Zenith Earth",
-    "primary_color": "#4F7942",
-    "cta_text": "Schedule Site Review",
+    "vibe": "Vintage Boutique",
+    "primary_color": "#D4AF37",
+    "cta_text": "Book Your Transformation",
     "cta_link": "#contact",
     "menu": [
-      { "label": "Features", "path": "#features" },
-      { "label": "Process", "path": "#process" },
-      { "label": "Pricing", "path": "#pricing" },
-      { "label": "Contact", "path": "#contact" }
+      { "label": "The Experience", "path": "#about" },
+      { "label": "Our Process", "path": "#process" },
+      { "label": "Investment", "path": "#pricing" },
+      { "label": "Gallery", "path": "#gallery" }
     ]
   },
   "brand": {
-    "name": "Elite Local Lawns",
-    "logo_text": "ELL",
-    "tagline": "You can tell by the way I mow.",
-    "objection_handle": "The Zero-Debris Guarantee: I bag and haul it all away.",
-    "availability_status": "Taking on 5 new 1/4 acre lots",
-    "contact_headline": "Ready for a Spotless Yard?"
+    "name": "Carol’s Salon",
+    "logo_text": "C.S.",
+    "tagline": "27 Years of Mastery. Modern Artistry.",
+    "objection_handle": "Personalized hair transformation in a contemporary, relaxing environment.",
+    "availability_status": "Accepting new clients in Doylestown",
+    "testimonial_headline": "The Client Experience"
   },
   "hero": {
-    "headline": "Warminster’s Premium Small-Lot Specialist",
-    "subtext": "Professional lawn care for 1/4 acre lots. I don't just mow; I leave your property spotless.",
+    "headline": "Elevate Your Look, Calm Your Mind.",
+    "subtext": "Expert color, precision cuts, and a glass of wine. Discover why Carol has been Doylestown's trusted stylist for nearly three decades.",
     "image": {
-      "src": "https://images.unsplash.com/photo-1558905619-17254261bc67?q=80&w=2000",
-      "alt": "Manicured green lawn"
+      "src": "/images/salon-hero.jpg",
+      "alt": "Modern salon interior with vintage gold accents"
     }
   },
-  "features": [
-    {
-      "title": "Precision Mowing",
-      "description": "Tailored for 1/4 acre lots using pro-grade equipment.",
-      "icon_slug": "scissors"
-    },
-    {
-      "title": "Bagging & Hauling",
-      "description": "I take the grass clippings with me—no messy clumps left behind.",
-      "icon_slug": "truck"
-    },
-    {
-      "title": "Detail Finishing",
-      "description": "Full trimming and sidewalk blowing included with every visit.",
-      "icon_slug": "wind"
-    }
-  ],
+  "trustbar": {
+    "headline": "Trusted in Doylestown for Nearly Three Decades",
+    "items": [
+      {
+        "icon": "⭐",
+        "label": "5-Star Reputation",
+        "sublabel": "Loved by Local Clients"
+      },
+      {
+        "icon": "✂️",
+        "label": "27+ Years Experience",
+        "sublabel": "Master Stylist"
+      },
+      {
+        "icon": "📍",
+        "label": "Doylestown, PA",
+        "sublabel": "Locally Owned"
+      },
+      {
+        "icon": "🍷",
+        "label": "Relaxed Luxury",
+        "sublabel": "Private Boutique Studio"
+      }
+    ]
+  },
+  "about": {
+    "story_headline": "Mastery Meets Connection",
+    "story_text": "Carol doesn't just cut hair; she knows her clients. With 27 years of experience, we focus on the art of personalized transformation and the science of healthy hair.",
+    "founder_note": "Your hair is the crown you never take off.",
+    "years_experience": "27",
+    "stats": [
+      { "value": "27", "label": "Years Active" },
+      { "value": "15k+", "label": "Styles Created" }
+    ]
+  },
+  "service_area": {
+    "headline": "Conveniently Located in Doylestown",
+    "subtext": "Serving premium clients across the heart of Bucks and Montgomery Counties.",
+    "locations": ["Doylestown", "New Hope", "Bucks County", "Montgomery County"]
+  },
   "processSteps": [
     {
-      "title": "Site Review",
-      "description": "I meet you at your property to walk the lawn and discuss your needs."
+      "title": "The Consult",
+      "description": "A modern welcome and objective review to tailor the look to your vision."
     },
     {
-      "title": "Trailer-to-Turf",
-      "description": "I arrive with specialized equipment, ready to transform your yard."
+      "title": "Immersive Relaxation",
+      "description": "Enjoy a smoothie or a glass of wine while we begin your treatment."
     },
     {
-      "title": "The Clean Sweep",
-      "description": "After mowing, I blow the walkways and haul away all debris."
+      "title": "The Transformation",
+      "description": "Expert wash, color, and precision cut using premium products."
+    },
+    {
+      "title": "The Reveal",
+      "description": "Leave feeling refreshed, confident, and ready for the world."
+    }
+  ],
+  "features": [
+    {
+      "title": "Color Mastery",
+      "description": "Specializing in balayage and corrective color techniques.",
+      "icon_slug": "sparkles"
+    },
+    {
+      "title": "Relaxation First",
+      "description": "A high-end, quiet environment designed for your comfort.",
+      "icon_slug": "coffee"
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Carol is a genius with color. I've been coming here for 10 years and wouldn't go anywhere else.",
+      "author": "Sarah J.",
+      "role": "Doylestown Local"
     }
   ],
   "investment": [
     {
-      "name": "Standard Mow",
-      "price": "$50",
-      "description": "per visit",
-      "features": ["1/4 acre lots", "Bagging included", "Blowing included"]
-    }
-  ],
-  "faqs": [
+      "name": "Master Cut & Style",
+      "price": "95+",
+      "features": ["Full Consultation", "Scalp Massage", "Precision Cut", "Blowout"],
+      "popular": true
+    },
     {
-      "question": "Do you leave the grass bags on the curb?",
-      "answer": "No. I take all clippings and small branches with me in my trailer."
+      "name": "Full Color Service",
+      "price": "150+",
+      "features": ["Custom Color Blend", "Deep Conditioning", "Trim", "Style"],
+      "popular": false
     }
   ],
   "contact": {
-    "phone": "215-555-5555",
-    "location": "Warminster, PA",
-    "email": "george@gmail.com"
+    "phone": "215-555-HAIR",
+    "email": "appointments@carolssalon.com",
+    "location": "Doylestown, PA"
   }
 }
