@@ -1,17 +1,45 @@
 ---
+import { Image } from 'astro:assets';
+
 const { brand, hero, settings } = Astro.props;
 
-// Use a fallback if the image is the placeholder "hero-main.jpg" or missing
-const hasImage = hero.image && hero.image.src && hero.image.src !== "hero-main.jpg";
+// 1. Grab all images from the optimized assets folder
+const images = import.meta.glob('/src/assets/images/*.{jpeg,jpg,png,gif,webp}');
+
+// 2. SELF-HEALING LOGIC: Generate the filename to match the script's output
+// This removes apostrophes and replaces spaces/special chars with dashes
+const slug = brand.name.toLowerCase()
+    .replace(/'/g, '') 
+    .replace(/[^a-z0-9]/g, '-');
+
+const expectedFilename = `${slug}-hero.jpg`;
+const cleanPath = `/src/assets/images/${expectedFilename}`;
+
+// 3. Check if the image exists in the assets folder
+const hasImage = images[cleanPath];
+
+// DEBUG: Shows in your terminal if the match fails
+if (!hasImage) {
+  console.log(`🔎 Hero component searching for: ${cleanPath}`);
+  console.log(`📂 Files actually in folder:`, Object.keys(images));
+}
 ---
 
 <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[var(--bg-color)]">
   
   <div class="absolute inset-0 z-0">
     {hasImage ? (
-      <img src={hero.image.src} alt={hero.image.alt} class="w-full h-full object-cover opacity-30" />
+      <Image 
+        src={images[cleanPath]()} 
+        alt={hero.image.alt || brand.name} 
+        width={1600} 
+        height={900} 
+        class="w-full h-full object-cover opacity-30"
+        loading="eager"
+      />
     ) : (
-      <div class="w-full h-full opacity-10 bg-gradient-to-br from-[var(--accent)] to-transparent"></div>
+      /* Fallback Gradient if image is missing */
+      <div class="w-full h-full opacity-20 bg-gradient-to-br from-[var(--accent)] to-transparent"></div>
     )}
   </div>
 
@@ -22,14 +50,14 @@ const hasImage = hero.image && hero.image.src && hero.image.src !== "hero-main.j
     
     <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9] text-[var(--text-primary)] mb-6">
         {hero.headline}
-      </h1>
+    </h1>
 
     <p class="max-w-2xl mx-auto mb-12 text-xl md:text-2xl text-[var(--text-secondary)] leading-relaxed">
       {hero.subtext}
     </p>
 
     <div class="flex flex-col items-center gap-8">
-      <a href={settings.cta_link} class="bg-[var(--accent)] px-12 py-5 text-xs font-bold uppercase tracking-[0.2em] transition-all rounded-[var(--radius)] inline-block">
+      <a href={settings.cta_link} class="bg-[var(--accent)] px-12 py-5 text-xs font-bold uppercase tracking-[0.2em] transition-all hover:scale-105 rounded-[var(--radius)] inline-block text-black">
         {settings.cta_text}
       </a>
       

@@ -1,36 +1,54 @@
 ---
-const { gallery } = Astro.props;
-import data from '../data/business.json';
+import { Image } from 'astro:assets';
+const { brand, gallery } = Astro.props;
 
-const headline = data.brand.gallery_headline || "Our Work in Action";
+// 1. Grab all images from the assets folder
+const images = import.meta.glob('/src/assets/images/*.{jpeg,jpg,png,gif,webp}');
+
+// 2. Map the gallery data to actual optimized assets
+const galleryItems = gallery.map((item) => {
+  // Extract filename just in case AI added paths
+  const filename = item.src.split('/').pop();
+  const cleanPath = `/src/assets/images/${filename}`;
+  return {
+    ...item,
+    asset: images[cleanPath],
+    exists: !!images[cleanPath]
+  };
+});
 ---
 
-<section id="gallery" class="py-24 px-6 bg-[var(--bg-color)]">
-  <div class="max-w-6xl mx-auto">
-    
-    <div class="mb-16">
-      <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mb-4 block">// THE_VISUALS</span>
-      <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
-        {headline}
+<section id="gallery" class="py-24 bg-[var(--bg-color)]">
+  <div class="container px-6 mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-[var(--accent)] mb-4">
+        Portfolio
       </h2>
+      <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[var(--text-primary)]">
+        The {brand.name} Experience
+      </h3>
     </div>
 
-    <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-      {gallery && gallery.map((item: any) => (
-        <div class="break-inside-avoid rounded-[var(--radius)] overflow-hidden border border-[var(--border)] group bg-[var(--border)] bg-opacity-10">
-          <img 
-            src={item.src} 
-            alt={item.alt} 
-            loading="lazy"
-            class="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0 grayscale-[0.5]"
-          />
-          {item.caption && (
-            <div class="p-4 bg-[var(--bg-color)]">
-              <p class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)]">
-                {item.caption}
-              </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {galleryItems.map((item) => (
+        <div class="group relative aspect-square overflow-hidden bg-zinc-900 rounded-[var(--radius)]">
+          {item.exists ? (
+            <Image 
+              src={item.asset()} 
+              alt={item.alt} 
+              width={800} 
+              height={800} 
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+            />
+          ) : (
+            <div class="w-full h-full flex items-center justify-center border border-dashed border-zinc-700">
+              <span class="text-[10px] uppercase opacity-30">Image Pending</span>
             </div>
           )}
+          
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+            <p class="text-xs font-bold uppercase tracking-widest text-white">{item.alt}</p>
+          </div>
         </div>
       ))}
     </div>

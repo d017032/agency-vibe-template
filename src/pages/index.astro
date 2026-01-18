@@ -106,8 +106,11 @@ const siteTitle = brand?.name
     )}
 
     {/* VISUAL PROOF */}
-    {strategy.show_gallery && gallery.length > 0 && (
-      <Gallery id="gallery" gallery={gallery} />
+    {strategy.show_gallery && (
+      <Gallery 
+        brand={brand} 
+        gallery={gallery} 
+      />
     )}
 
     {/* PRICING / INVESTMENT */}
