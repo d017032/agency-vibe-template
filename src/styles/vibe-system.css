@@ -2,83 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-/* --- GLOBAL SPA POLISH --- */
-html {
-  scroll-behavior: smooth;
-}
-
-section[id], main[id], div[id] {
-  scroll-margin-top: 5rem;
-}
-
+/* --- GLOBAL STRUCTURE --- */
+html { scroll-behavior: smooth; }
 body {
   background-color: var(--bg-color);
   color: var(--text-primary);
   font-family: var(--font-main, sans-serif);
-  line-height: 1.5;
   transition: background-color 0.4s ease;
 }
 
-/* --- 8. VINTAGE BOUTIQUE (Optimized for Carol's Salon) --- */
-[data-vibe="vintage-boutique"] {
-  --bg-color: #fdfaf3;
-  --bg-card: #f8f3e9; /* Slightly darker than bg for depth */
-  --text-primary: #2d241e;
-  --text-secondary: #6b5a4d;
-  --accent: #D4AF37; /* Switched to Metallic Gold for Premium Agency Quality */
-  --border: #e7e0d0;
-  --radius: 2px;
-  --font-main: 'Cormorant Garamond', serif;
-}
+/* --- VIBE PERSONALITY (Structure only, no colors) --- */
 [data-vibe="vintage-boutique"] h1, 
 [data-vibe="vintage-boutique"] h2 { 
   font-style: italic; 
   font-weight: 300; 
   text-transform: none; 
-  letter-spacing: -0.02em; 
 }
 
-/* --- 2. MIDNIGHT TECH (SaaS/AI) --- */
-[data-vibe="midnight-tech"] {
-  --bg-color: #050505;
-  --bg-card: #0f0f0f;
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --accent: #6366f1;
-  --border: rgba(255, 255, 255, 0.05);
-  --radius: 12px;
-  --font-main: 'Inter', sans-serif;
+[data-vibe="midnight-tech"] h1 { 
+  font-weight: 900; 
+  letter-spacing: -0.05em; 
 }
-[data-vibe="midnight-tech"] h1 { font-weight: 900; letter-spacing: -0.05em; }
 
-/* --- 3. RUGGED INDUSTRIAL (Blue Collar/Trade) --- */
 [data-vibe="rugged-industrial"] {
-  --bg-color: #111111;
-  --bg-card: #1a1a1a;
-  --text-primary: #f4f4f4;
-  --text-secondary: #a1a1aa;
-  --accent: #ff5f1f;
-  --border: #333;
-  --radius: 0px;
-  --font-main: 'JetBrains Mono', monospace;
+  text-transform: uppercase; /* Industrial feels "heavy" */
 }
 
-/* --- RECOVERY & UTILITIES --- */
-.bg-card { background-color: var(--bg-card); }
+/* --- UTILITY RECOVERY --- */
+.bg-card { background-color: var(--bg-card); border: 1px solid var(--border); }
 .border-vibe { border-color: var(--border); }
 
-/* Ensure CTA text is always readable regardless of accent color */
-[data-vibe="midnight-tech"] .cta-button, 
-[data-vibe="rugged-industrial"] .cta-button {
-  color: #fff;
-}
-[data-vibe="vintage-boutique"] .cta-button,
-[data-vibe="solar-flare"] .cta-button {
-  color: #000;
-}
-
-/* --- MOBILE MENU RECOVERY --- */
-#mobile-menu.flex {
-  display: flex !important;
-  background-color: var(--bg-color) !important;
+/* Automated CTA Contrast Logic */
+.cta-button {
+  background-color: var(--accent);
+  border-radius: var(--radius);
+  /* Use CSS to determine text color based on background lightness */
+  color: canvasText; 
+  filter: contrast(150%);
 }

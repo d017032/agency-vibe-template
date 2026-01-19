@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
+import BentoAbout from '../components/BentoAbout.astro'; // NEW IMPORT
 import Features from '../components/Features.astro';
 import Process from '../components/Process.astro';
 import Testimonials from '../components/Testimonials.astro';
@@ -14,13 +15,13 @@ import Contact from '../components/Contact.astro';
 import data from '../data/business.json';
 
 /** * 2026 DATA DESTRUCTURING - SAFE FALLBACKS
- * This ensures the site never crashes even if the AI generates a partial JSON.
  */
 const {
   intelligence = {},
   strategy = {},
   settings = {},
   brand = {},
+  about = {}, // ADDED ABOUT
   menu = [],
   hero = {},
   features = [],
@@ -33,81 +34,62 @@ const {
   contact = {}
 } = data;
 
-// SEO Title logic
 const siteTitle = brand.name ? `${brand.name} | ${brand.tagline || 'Professional Services'}` : "Vibe-Engine Production";
 ---
 
 <Layout title={siteTitle} settings={settings}>
   
-  <Navbar 
-    brand={brand} 
-    menu={menu} 
-    settings={settings} 
-  />  
+  <Navbar brand={brand} menu={menu} settings={settings} />  
 
   <main>
     {/* 1. HERO SECTION */}
     <Hero hero={hero} brand={brand} settings={settings} />
 
+    {/* 1.5 THE BENTO ABOUT (Strategically placed for trust) */}
+    {strategy.show_about !== false && (brand.name || about.story_text) && (
+      <BentoAbout 
+        brand={brand} 
+        about={about} 
+        intelligence={intelligence}
+      />
+    )}
+
     {/* 2. FEATURES / SERVICES */}
     {strategy.show_features && features.length > 0 && (
-      <Features 
-        features={features} 
-        intelligence={intelligence} 
-      />
+      <Features features={features} intelligence={intelligence} />
     )}
 
     {/* 3. METHODOLOGY / PROCESS */}
     {strategy.show_process && processSteps.length > 0 && (
-      <Process 
-        steps={processSteps} 
-        intelligence={intelligence} 
-      />
+      <Process steps={processSteps} intelligence={intelligence} />
     )}
 
     {/* 4. SOCIAL PROOF */}
     {strategy.show_testimonials && testimonials.length > 0 && (
-      <Testimonials 
-        testimonials={testimonials} 
-      />
+      <Testimonials testimonials={testimonials} />
     )}
 
     {/* 5. VALUE COMPARISON */}
     {strategy.show_comparison && comparison && (
-      <Comparison 
-        comparison={comparison} 
-        intelligence={intelligence} 
-      />
+      <Comparison comparison={comparison} intelligence={intelligence} />
     )}
 
     {/* 6. PORTFOLIO / GALLERY */}
     {strategy.show_gallery && gallery.length > 0 && (
-      <Gallery 
-        gallery={gallery} 
-      />
+      <Gallery gallery={gallery} />
     )}
 
     {/* 7. PRICING / INVESTMENT */}
     {strategy.show_investment && investment.length > 0 && (
-      <Investment 
-        tiers={investment} 
-        brand={brand}
-      />
+      <Investment tiers={investment} brand={brand} />
     )}
 
     {/* 8. OBJECTION HANDLING */}
     {strategy.show_faqs && faqs.length > 0 && (
-      <FAQ 
-        faqs={faqs} 
-      />
+      <FAQ faqs={faqs} />
     )}
 
-    {/* 9. FINAL CONVERSION / NETLIFY FORM */}
-    <Contact 
-      contact={contact} 
-      intelligence={intelligence} 
-      brand={brand} 
-      settings={settings} 
-    />
+    {/* 9. FINAL CONVERSION */}
+    <Contact contact={contact} intelligence={intelligence} brand={brand} settings={settings} />
   </main>
 </Layout>
