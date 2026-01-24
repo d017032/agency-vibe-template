@@ -29,7 +29,7 @@ const {
   processSteps = [],
   testimonials = [],
   comparison = null,
-  gallery = [],
+  gallery = null,
   investment = [],
   faqs = [],
   service_area = [],
@@ -80,9 +80,10 @@ const siteTitle = brand.name ? `${brand.name} | ${brand.tagline || 'Professional
     )}
 
     {/* 6. PORTFOLIO / GALLERY */}
-    {strategy.show_gallery && gallery.length > 0 && (
+    {strategy.show_gallery && gallery?.enabled !== false && gallery?.items?.length > 0 && (
       <Gallery gallery={gallery} brand={brand} />
     )}
+    
 
     {/* 7. PRICING / INVESTMENT */}
     {strategy.show_investment && investment.length > 0 && (

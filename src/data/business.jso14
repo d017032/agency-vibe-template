@@ -1,0 +1,115 @@
+{
+  "intelligence": {
+  "industry": "Concert Photography",
+  "target_persona": "Rock music fans, Grateful Dead enthusiasts, promoters, and collectors",
+  "tone_of_voice": "casual and fan-focused"
+  },
+  "strategy": {
+  "show_trustbar": false,
+  "show_about": true,
+  "show_features": true,
+  "show_process": false,
+  "show_testimonials": false,
+  "show_comparison": false,
+  "show_gallery": true,
+  "show_investment": false,
+  "show_faqs": false,
+  "show_service_area": false
+  },
+  "settings": {
+  "vibe": "Vintage Boutique",
+  "cta_text": "Inquire About Prints or Licensing",
+  "cta_link": "#contact",
+  "cta_type": "anchor",
+  "secondary_cta_text": "View Gallery",
+  "secondary_cta_link": "#gallery",
+  "menu": [
+  { "label": "Home", "path": "#home" },
+  { "label": "Gallery", "path": "#gallery" },
+  { "label": "About", "path": "#about" },
+  { "label": "Contact", "path": "#contact" }
+  ]
+  },
+  "brand": {
+  "name": "Dead Head Photography",
+  "slug": "dead-head-photography",
+  "tagline": "Capturing the Spirit of the Dead — Live Since 1981",
+  "email": "joe@compuserve.com",
+  "phone": "",
+  "office_address": "Remote / Global",
+  "objection_handle": "Authentic concert photography capturing the true vibe of Grateful Dead shows and rock culture."
+  },
+  "hero": {
+  "headline": "Grateful Dead & Rock Concert Photography Since 1981",
+  "subtext": "Authentic moments from the crowd, the stage, and the soul of the show — captured by a lifelong Dead Head.",
+  "image": {
+  "alt": "Crowd at a Grateful Dead concert with stage lights and fans dancing",
+  "image_search_query": "Grateful Dead concert crowd photography vintage"
+  }
+  },
+  "about": {
+  "story_text": "I’ve been photographing Grateful Dead shows and rock concerts since 1981, drawn to the energy, community, and once-in-a-lifetime moments that happen in the crowd as much as on stage.",
+  "founder_note": "I’m Dave, a lifelong Dead Head who believes the real magic of a show lives in the people and the shared experience.",
+  "years_experience": "Since 1981"
+  },
+  "features": [
+  {
+  "title": "Authentic Crowd Moments",
+  "description": "Candid photography capturing the fans, dancers, and shared energy that define a Dead show.",
+  "icon_slug": "users"
+  },
+  {
+  "title": "Live Concert Archives",
+  "description": "Decades of rock and Grateful Dead concert photography preserved from the pit and the floor.",
+  "icon_slug": "camera"
+  },
+  {
+  "title": "Prints & Licensing",
+  "description": "High-quality prints and licensing available for collectors, publications, and promoters.",
+  "icon_slug": "image"
+  }
+  ],
+  "gallery": {
+    "enabled": true,
+    "title": "The Lab",
+    "layout": null,
+    "show_titles": true,
+    "strategy": {
+      "primary_goal": "visual_storytelling",
+      "show_gallery": true
+    },
+    "image_source": {
+      "provider": "unsplash",
+      "image_search_query": "Grateful Dead concert crowd deadheads vintage photography",
+      "filename_pattern": "{brandSlug}-project-{index}.jpg",
+      "target_folder": "/src/assets/images/"
+    },
+    "computed_count": 12,
+    "computed_layout": "masonry",
+    "items": [
+      { "title": "Deadheads in Motion", "caption": "Dancers and spinners mid-set", "tag": "crowd", "image_search_query": "Grateful Dead fans dancing crowd" },
+      { "title": "Tie-Dye Horizon", "caption": "Color, light, and community", "tag": "fans", "image_search_query": "tie dye crowd at concert vintage" },
+      { "title": "Before the First Note", "caption": "Anticipation in the lot", "tag": "scene", "image_search_query": "concert parking lot fans vintage photography" },
+      { "title": "Hands in the Air", "caption": "The moment the chorus hits", "tag": "crowd", "image_search_query": "concert crowd hands in air stage lights" },
+      { "title": "Front Row Faces", "caption": "Expressions you can’t fake", "tag": "portraits", "image_search_query": "concert crowd close up candid faces" },
+      { "title": "Lights & Haze", "caption": "Stage glow through the smoke", "tag": "stage", "image_search_query": "rock concert stage lights haze photography" },
+      { "title": "The Long Strange Night", "caption": "Silhouettes and sound", "tag": "vibe", "image_search_query": "concert silhouette crowd night vintage" },
+      { "title": "Community Moment", "caption": "Friends, strangers, family", "tag": "fans", "image_search_query": "friends at concert candid documentary" },
+      { "title": "Mid-Set Magic", "caption": "Pure flow in the crowd", "tag": "crowd", "image_search_query": "psychedelic concert crowd dancing photography" },
+      { "title": "Stage Meets Audience", "caption": "Energy crossing the barrier", "tag": "connection", "image_search_query": "concert audience connection stage lights" },
+      { "title": "Encore Afterglow", "caption": "The last song lingers", "tag": "vibe", "image_search_query": "concert encore crowd glow photography" },
+      { "title": "Icons & Details", "caption": "Stickers, patches, and relics", "tag": "details", "image_search_query": "concert fan jacket patches stickers vintage" }
+    ]
+  },
+
+  "contact": {
+    "headline": "Ready to Capture the Magic",
+    "subheadline": "Interested in prints, licensing, or collaborations? Let’s talk.",
+    "email": "joe@compuserve.com",
+    "phone": "",
+    "email_recipient": "joe@compuserve.com",
+    "button_text": "Send Inquiry",
+    "office_address": "Remote / Global"
+  }
+  }
+  

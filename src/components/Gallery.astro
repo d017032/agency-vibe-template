@@ -5,48 +5,113 @@ const { gallery, brand } = Astro.props;
 // 1. ASSET DISCOVERY
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif,webp}');
 
-// 2. THE SLUG HANDSHAKE (Uses 'brand' prop, not 'data')
-const brandSlug = brand?.slug || 
-                 (brand?.name || 'brand')
-                    .toLowerCase()
-                    .replace(/'/g, '') 
-                    .replace(/[^a-z0-9]/g, '-');
+// 2. THE SLUG HANDSHAKE
+const brandSlug =
+  brand?.slug ||
+  (brand?.name || 'brand')
+    .toLowerCase()
+    .replace(/'/g, '')
+    .replace(/[^a-z0-9]/g, '-');
 
-if (!gallery || gallery.length === 0) return null;
+// 3. ELITE MODE GUARD
+if (!gallery || !gallery.enabled || !gallery.items || gallery.items.length === 0) return null;
+
+// 4. ELITE MODE OUTPUTS
+const items = gallery.items;
+const title = gallery.title || 'The Lab';
+const layout = gallery.computed_layout || gallery.layout || 'grid';
+const showTitles = gallery.show_titles !== false;
+
+// Optional: honor computed_count if provided
+const maxItems = typeof gallery.computed_count === 'number' ? gallery.computed_count : items.length;
+const visibleItems = items.slice(0, Math.max(0, maxItems));
+
+// Layout class helpers (no Tailwind plugins required)
+const wrapperClass =
+  layout === 'masonry'
+    ? 'columns-1 md:columns-2 gap-8 [column-fill:_balance]'
+    : layout === 'bento'
+      ? 'grid grid-cols-1 md:grid-cols-6 gap-8'
+      : 'grid grid-cols-1 md:grid-cols-2 gap-8';
+
+const cardBase =
+  'group relative overflow-hidden rounded-[var(--radius)] bg-[var(--bg-card)] border border-[var(--border)]';
+
+// Bento: a simple pattern that feels designed without needing client decisions
+function bentoSpan(i: number) {
+  // repeats every 6 items
+  const k = i % 6;
+  if (k === 0) return 'md:col-span-4 md:row-span-2';
+  if (k === 1) return 'md:col-span-2 md:row-span-1';
+  if (k === 2) return 'md:col-span-2 md:row-span-1';
+  if (k === 3) return 'md:col-span-3 md:row-span-1';
+  if (k === 4) return 'md:col-span-3 md:row-span-1';
+  return 'md:col-span-6 md:row-span-1';
+}
+
+// Height/aspect per layout
+function aspectClass(i: number) {
+  if (layout === 'bento') {
+    // Let spans create variety; keep minimum height stable
+    const k = i % 6;
+    return k === 0 ? 'min-h-[420px]' : 'min-h-[220px]';
+  }
+  if (layout === 'masonry') {
+    // Vary heights subtly to create masonry feel without needing image metadata
+    return i % 3 === 0 ? 'min-h-[360px]' : i % 3 === 1 ? 'min-h-[260px]' : 'min-h-[300px]';
+  }
+  // grid default
+  return 'aspect-video';
+}
 ---
 
 <section id="gallery" class="py-24 bg-[var(--bg-color)]">
   <div class="container mx-auto px-6 mb-12 text-center">
     <h2 class="text-4xl font-black uppercase text-[var(--text-primary)]">
-      The <span class="text-[var(--accent)]">Lab</span>
+      {title.split(' ').slice(0, -1).join(' ') || title}{' '}
+      <span class="text-[var(--accent)]">{title.split(' ').slice(-1)[0]}</span>
     </h2>
   </div>
 
-  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8">
-    {gallery.map((item: any, index: number) => {
-      // 3. GENERATE FILENAME TO MATCH YOUR LS OUTPUT
+  <div class={`container mx-auto px-6 ${wrapperClass}`}>
+    {visibleItems.map((item: any, index: number) => {
+      // Generate filename to match your external pipeline output
       const expectedFilename = `${brandSlug}-project-${index}.jpg`;
       const imagePath = `/src/assets/images/${expectedFilename}`;
       const hasImage = images[imagePath];
 
+      const bentoClass = layout === 'bento' ? bentoSpan(index) : '';
+      const sizeClass = aspectClass(index);
+
+      // Masonry needs inline-block + break-inside avoidance
+      const masonryCardExtras =
+        layout === 'masonry' ? 'mb-8 inline-block w-full break-inside-avoid' : '';
+
       return (
-        <div class="group relative aspect-video overflow-hidden rounded-[var(--radius)] bg-[var(--bg-card)] border border-[var(--border)]">
-          {hasImage ? (
-            <Image 
-              src={images[imagePath]()} 
-              alt={item.title || "Gallery Image"}
-              width={1200}
-              height={800}
-              class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
-            />
-          ) : (
-            <div class="flex flex-col items-center justify-center h-full bg-slate-900 p-4">
-              <span class="text-red-500 font-mono text-xs mb-2">Missing: {expectedFilename}</span>
-              <span class="text-[10px] text-white/30 uppercase">Check src/assets/images/</span>
-            </div>
-          )}
-          <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
-            <p class="text-white font-bold uppercase tracking-widest text-sm">{item.title}</p>
+        <div class={`${layout === 'bento' ? bentoClass : ''} ${masonryCardExtras}`}>
+          <div class={`${cardBase} ${sizeClass}`}>
+            {hasImage ? (
+              <Image
+                src={images[imagePath]()}
+                alt={item.title || 'Gallery Image'}
+                width={1200}
+                height={800}
+                class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+              />
+            ) : (
+              <div class="flex flex-col items-center justify-center h-full bg-slate-900 p-4">
+                <span class="text-red-500 font-mono text-xs mb-2">Missing: {expectedFilename}</span>
+                <span class="text-[10px] text-white/30 uppercase">Check src/assets/images/</span>
+              </div>
+            )}
+
+            {showTitles && (
+              <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                <p class="text-white font-bold uppercase tracking-widest text-sm">
+                  {item.title}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       );
